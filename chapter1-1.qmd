@@ -1,0 +1,156 @@
+---
+title: "Connecting to the Cluster"
+---
+
+To use the Linux-based computer Cluster housed at Juniata College, you
+have to connect remotely to the supercomputer. This can be done through
+any computer running MacOS or Windows using a secure shell session,
+also called **ssh**. Many bioinformatics pipelines are built for a
+Linux environment because of its power and flexibility when working
+with large amounts of data. Linux is an operating system much like
+Unix, but unlike Windows and MacOS operating systems, it runs primarily
+through a command line interface rather than the visible desktop to
+which many of us are accustomed. Through this interface of the Cluster
+users are able to select many options and parameters in running its
+installed programs.
+
+## Via SSH on Windows
+If you have a PC running a windows operating system, you will need to
+download [PuTTY](http://www.chiark.greenend.org.uk/\~sgtatham/putty/download.html).
+
+Upon opening PuTTY, this a window should appear.
+
+
+
+::: {.callout-note}
+## PuTTY Configuration
+
+::: {.grid}
+::: {.g-col-7}
+
+* Type the Cluster's IP address `147.73.20.123` into the "Host Name" box
+
+* Ensure that "SSH" is selected for "Connection Type."
+
+* Press "Open"
+
+* Type your username (then enter) and password in the terminal window.
+  
+  * Password: `4gcatRocks!`
+
+:::
+
+::: {.g-col-5}
+
+![PuTTY Configuration](/images/tutorial-images/PuTTY_Config.png)
+
+:::
+:::
+:::
+
+:::{.callout-warning}
+## Warning
+
+As you type your password, it will not show anything at all (not even
+asterisks or dots as you type). There is a password there even if you
+cannot see it! Be brave! If the password is typed incorrectly, press
+enter to again reveal the password prompt and start over.
+:::
+
+## Via SSH on MacOs
+
+Open the terminal application to bring up the command line interface
+that will allow you to connect to the Cluster. Type `ssh 
+your_username_here@147.73.20.123` followed by enter, then your
+password.
+
+:::{.callout-warning}
+## Warning
+
+As you type your password, it will not show anything at all (not even
+asterisks or dots as you type). There is a password there even if you
+cannot see it! Be brave! If the password is typed incorrectly, press
+enter to again reveal the password prompt and start over.
+:::
+
+## Via Cyberduck
+
+To help view and edit files on the Cluster, both Mac and Windows users
+can install the program “Cyberduck” on their computer:
+
+::: {.callout-note}
+## Cyberduck Setup
+
+::: {.grid}
+::: {.g-col-6}
+
+![Cyberduck Configuration 1](/images/tutorial-images/Cyberduck1.png)
+
+:::
+
+::: {.g-col-6}
+
+![Cyberduck Configuration 2](/images/tutorial-images/Cyberduck2.png)
+
+:::
+:::
+
+1. Download [Cyberduck](http://cyberduck.io/?1=en)
+
+2. Click the box on the left to select the download appropriate for
+your operating system
+
+3. Follow the onscreen instructions to install the program to your
+device
+
+4. Open the Cyberduck application
+
+5. In Cyberduck, click "Open Connection" in the upper left hand
+section of the window.
+
+   - Change FTP (File Transfer Protocol) to SFTP (SSH File Transfer
+     Protocol)
+
+   - In the "Server" box type `147.73.20.123` to connect to Juniata's
+     new Cluster
+
+   - Put in your username and password
+
+   - Click "Connect"
+
+6. Go to the preferences 
+
+   - *Windows: Edit -> Preferences*
+   - *Mac: Cyberduck -> Preferences*
+
+7. Under the General tab, select:
+
+   * "Save Workspace"
+
+   * "Use Keychain"
+
+   * "Info window always shows current selection" (Mac users: in the
+     Browser tab)
+
+   * For PC users: also select "double click opens file in external
+     editor"
+
+   * Select: "Editor," select your text editor ([Notepad++](https:/
+     notepad-plus-plus.org/) is a good one for Windows users, if you
+     want to download that), then check the box "Always use this
+     application" to set it as the default.
+
+8. Under the Bookmark tab, select:
+
+   * "New Bookmark"
+
+   * Enter a name for the bookmark in the box next to "Nickname:"
+
+   * Enter your password in the box next to "Password:"
+
+   * Then close out of the window (the little red X)
+:::
+
+You can now launch Cyberduck and connect to the Cluster. If at any
+point you need to reconnect to the Cluster, you can go to “Bookmark”
+and select your bookmark.

@@ -1,0 +1,48 @@
+project:
+  type: website
+
+website:
+  title: "Wright Lab Tutorials"
+  favicon: images/favicon.ico
+  sidebar:
+    style: "docked"
+    logo: images/WLABS_light.webp
+    search: true
+    contents:
+      - href: index.qmd
+        text: Home
+      - section: Using the Cluster
+        contents:
+          - href: chapter1-0.qmd
+            text: Overview
+          - href: chapter1-1.qmd
+            text: Connecting to the Cluster
+          - href: chapter1-2.qmd
+            text: Unix Shell Basics
+          - href: chapter1-3.qmd
+            text: Cluster Basics
+      - section: 16s Tutorial
+        contents:
+          - href: chapter2-0.qmd
+            text: Overview
+      - section: Shotgun MT/MG Tutorial
+        contents:
+          - href: chapter3-0.qmd
+            text: Overview
+
+format:
+  html:
+    theme:
+      - cosmo
+      - r4ds.scss
+    code-link: true
+    toc: true
+    toc-location: right
+    toc-title: ""
+    page-navigation: true
+    lightbox: true
+    author-meta: "Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund"
+    include-in-header: "plausible.html"
+    callout-appearance: simple
+
+editor: source

@@ -1,0 +1,580 @@
+---
+title: "Unix Shell Basics"
+---
+
+After logging into a secure shell session, you will now have a command
+line prompt from which you can navigate a Linux system. To familiarize
+yourself with how to do so, the following short tutorial will introduce
+you to the general syntax of command line structure, as well as the
+function of several commonly-used commands. Most of these commands
+involve working with files and folders. We will dive into data analysis
+later.
+
+## Using `ls` (and general command structure)
+
+The command ls will list the contents of your current directory
+(folder). Folders and directories are the same thing. In commands
+“directory” is often shortened to “dir” Once you have logged in to your
+Cluster account, type `ls` now to show the contents of your home
+directory:
+
+``` bash
+ls
+```
+
+Commands such as `ls` have options that modify their function. These
+options are indicated by a dash and are termed flags. So `-a` may
+be called “the a flag.” Try running `ls` with this flags (shown below).
+
+``` bash
+ls -a
+```
+
+<details>
+<summary>Output for `ls -a`</summary>
+
+Where as `ls` shows all normal files in your directory, `ls -a` will
+show you all the files in a directory/folder, including **hidden
+files** (these files and folders will have a period before there
+name, for example `.config` or `.local`)
+
+```{.no-copy}
+.config .local Documents Downloads Pictures
+```
+</details>
+
+```bash
+ls -l
+```
+
+<details>
+<summary>Output for `ls -l`</summary>
+
+`ls -l` will show you more information about those files in a long list.
+
+```{.no-copy}
+drwxr-xr-x 6 user user 4096 Sep 26 13:31 Documents/
+drwxr-xr-x 4 user user 4096 Sep 25 00:49 Downloads/
+drwxr-xr-x 3 user user 4096 Sep 26 13:46 Pictures/
+```
+</details>
+
+:::{.callout-tip}
+## How would you list all files (hidden ones included) with additional information?
+
+<details>
+<summary>Answer</summary>
+
+Combining both flag in the commands `ls -l -a` or `ls -a -l` (order 
+does not matter) will give you the desired output. Note that you 
+can also combine these flags and run `ls -la` or `ls -al`, though 
+you will not be able to do this with all flags you use in the Linux 
+terminal.
+
+```{.no-copy}
+drwxr-xr-x 6 user user 4096 Sep 26 13:31 .local/
+drwxr-xr-x 6 user user 4096 Sep 26 13:31 .config/
+drwxr-xr-x 6 user user 4096 Sep 26 13:31 Documents/
+drwxr-xr-x 4 user user 4096 Sep 25 00:49 Downloads/
+drwxr-xr-x 3 user user 4096 Sep 26 13:46 Pictures/
+```
+</details>
+:::
+
+The `ls` command also has a help function. To see it, type:
+
+``` bash
+ls --help
+```
+
+:::{.callout-note}
+## Note
+
+There are two dashed before help.
+:::
+
+From this help menu, you can see all the available options for the `ls`
+command. Run this, then scroll to the top of the output where you will
+find a line that starts with `Usage: ...`. You should see
+
+```{.no-copy}
+ls [OPTION] ... [FILE] ...
+```
+
+<div class="code-explanation">
+
+- `ls` is simply the command name
+
+- `OPTION` is where you put your options or flags. You can think of
+options as modifiers of the command. In this case, `-a` and `-l` are
+both flags that modify the performance of the `ls` command. Options
+are often a dash followed by a single letter, if a command has a lot
+of possible options, they can be two dashes followed by a word.
+
+- `FILE` is the folder that you are running `ls` on. You can think of
+it as the target of `ls`. So, running: `ls /home` will list all files
+in `/home` instead of listing files in your current directory.
+
+- `[]` (the brackets) show that the `OPTION` flags and the `FILE`
+specification are optional. Basically, you do not have to include `-a`
+or even a folder to use `ls`. So the command `ls` alone is legal even
+though it has no flags or files.
+
+- `. . .` (the dots) show that you can list several `OPTION`'s or
+`FILE`'s, as in: `ls -a -h - l` or that you can list all flags
+together as in: `ls -ahl`. This is convenient when using a lot of
+options.
+
+</div>
+
+Let’s quickly read through the options for `ls` to see what else we can do with it.
+
+:::{.callout-tip}
+## What command would you run to sort the files in `/home` by their creation time?
+
+<details>
+<summary>Hint</summary>
+
+Use the `--help` flag to find the correct flag for this situation.
+</details>
+:::
+
+:::{.callout-tip}
+## What does the `-h` option of `ls` do?
+:::
+
+## Using `pwd` and `cd`
+
+While `ls` lets us view the contents of our current directory, `pwd`
+tells us where that directory is located. Typing `pwd` will print the
+working directory, whereas `cd` will change our directory to the
+location of our choosing (by default, to work within your home folder).
+
+Before we start exploring the Cluster using `cd` and `ls`, let's take a
+moment to describe the file structure of a Linux machine. Though you
+cannot see it all at once, this is how some of the directory structure
+looks inside the Cluster. For example, notice how user accounts are all
+inside of `/home/`.
+
+```{.no-copy}
+/  <------------------------ "root directory"
+  bin/
+  dev/
+  home/  <------------------ "home directory"
+    399group1/
+    299group2/
+    username/  <------------ "YOUR home directory"
+      yourfiles/
+    sabey/
+      16S_tutorial/
+        data/
+        jc_qime_pipeline/
+    otheruseraccounts/
+  share/
+```
+
+:::{.callout-note}
+## Note
+
+When the term "your home directory" is used in this tutorial, we
+are referring to the directory created according to your account
+username, NOT the encompassing directory named `/home` (see diagram
+above).
+:::
+
+To list your current location within this structure, try typing:
+
+``` bash
+pwd
+```
+
+:::{.callout-tip}
+## Based on the results, where are you currently located in the file directory?
+:::
+
+Now let’s go to the root directory, at the very top of the diagram
+above:
+
+```bash
+cd /
+```
+
+Use `ls` to see the contents of this directory, then move into the
+`share` folder, then into the `apps` directory within it:
+
+``` bash
+cd home/share
+cd apps
+```
+
+:::{.callout-tip}
+## What is the full path of the directory we are in now?
+
+<details>
+<summary>Hint</summary>
+
+Use `pwd`.
+</details>
+:::
+
+:::{.callout-tip}
+## What are the contents of the apps directory?
+
+<details>
+<summary>Hint</summary>
+
+Use `ls`.
+</details>
+:::
+
+:::{.callout-tip}
+## How could we have moved into the apps folder with a single command (instead of three)?
+:::
+
+Now that we have moved all the way into `/home/share/apps`, let’s move back into `/home/share`. There are two ways to do this:
+
+Go ‘up one directory’ by typing:
+
+```bash
+cd ..
+```
+
+Use an absolute path by typing:
+
+```bash
+cd /home/share
+```
+
+This will take you directly to the `/share` directory regardless of
+your position beforehand. It is called an absolute path because it
+starts all the way back at the root of all directories. Notice how this
+path starts with a forward slash (`/`), since that is the root of the
+file structure.
+
+Explore other directories using `cd foldername` to move into a folder,
+`ls` to list the files inside, and `cd ..` to go up and out of that
+directory. If you ever get lost, you can type `pwd` to print your current
+location. You can also type `cd` all by itself to return to your home
+directory.
+
+:::{.callout-tip}
+## What is the location of your home folder?
+
+<details>
+<summary>Hint</summary>
+
+Use `cd` then `pwd`.
+</details>
+:::
+
+Another very convenient feature of Linux that is especially useful for
+typing long file name, is auto-completion. When you are typing the name
+of a file or folder, you can press <kbd>TAB</kbd> to autocomplete the rest. 
+
+For example, if the only directory within `/home/` that begins with
+“sa” is “sabey”, typing `cd /home/sa` followed by pressing <kbd>TAB</kbd> will
+autocomplete the path to `/home/sabey`. Try this to change into your
+own directory.
+
+## Using `mkdir` to make a directory
+
+Return to your home folder using `cd` then make a new folder named
+`/linux_practice`:
+
+``` bash
+mkdir linux_practice
+```
+
+The command `mkdir` also has a help command. To view it, type:
+
+``` bash
+mkdir --help
+```
+
+:::{.callout-tip}
+## Write down the first two lines as you did for `ls`. Once you have finished this, move into your newly created directory and write the command you used to do so:
+:::
+
+
+## Using `wget` to download a file
+
+The `wget` command also has a help file. As with `ls` and `mkdir`, open
+this file and focus on the first two lines, then skim the options
+below. Type:
+
+```bash
+wget --help
+```
+
+:::{.callout-tip}
+## Once again, write down the first two lines. Interpret the first line in simple language; what does `wget` do? Write your answer in the chart on the first page of this section.
+
+You will notice that `wget` has even more options than `ls`. Are you
+required to use any of them? 
+
+What happends when you run the following command, and why does that
+make sense?
+
+``` bash
+wget
+```
+:::
+After your PCR amplicons are sequenced, the sequencing core will upload
+the data to a website from which it can be downloaded. In a web
+browser, you can click on various files to download them, but in a
+terminal, you instead use `wget`. Let’s practice with some sample data:
+
+Downloading files through the terminal
+- Open this [link](http://www.drive5.com/uchime/uchime_download.html) in a web browser.
+
+- Scroll to the bottom and find the file called `simm.tar.gz`.
+
+- Right-click that link.
+
+- Choose "copy link" or "copy link address."
+
+- In your folder, type `wget` followed by a space, then paste the link
+  you just copied (If you are using PuTTY, you will have to right
+  click to paste instead of using <kbd>Ctrl</kbd> + <kbd>V</kbd> )
+
+``` bash
+cd linux_practice
+wget http://www.drive5.com/uchime/simm.tar.gz
+```
+
+- Press enter to run `wget` and download the indicated file
+
+## Using `gzip` to compress and decompress files
+
+Looking at the file you just downloaded, you will notice its name ends
+with `tar.gz`, which tells us two things. First, `.tar` means it is a
+whole folder inside of a single file (called a tarball). Second, `.gz`
+means the file is compressed with gzip.
+
+:::{.callout-tip}
+## How large is the file you just downloaded? (Hint: use `ls` with these two flags: `-l`, which produces a long list, and `-h` which displays the file sizes in a human-readable format). The file sizes will appear just to the left of the file names.
+
+Also, (again) write down the first two lines of `gzip --help`.
+:::
+
+To decompress the file we just downloaded, run:
+
+``` bash
+gzip -d simm.tar.gz
+```
+
+You can also use the command `gunzip` (literally "g" + "unzip").
+`gzip -d` and `gunzip` complete the same task. Remember that you can
+also use <kbd>TAB</kbd> to autocomplete file names as you type them in.
+
+:::{.callout-tip}
+## Using the same `ls -lh` command, what is the size of the file now?
+:::
+
+:::{.callout-tip}
+## What is the compression percentage of gzip on this file?
+
+<details>
+<summary>Hint</summary>
+
+Divide the `.tar.gz` file size by the `.tar` file size and do not
+forget to convert Mb to Kb, where 1 Mb = 1024 Kb
+</details>
+:::
+For practice using gzip, let’s recompress the file you just
+decompressed by using one the options from the help tab.
+
+:::{.callout-warning}
+## Warning
+
+Omit the `-d` when you run this command since we are not decompressing!
+:::
+
+:::{.callout-tip}
+## Why might gzip be useful for large data files like the genetic data in our 16S sequences?
+:::
+
+## Using `cp` to copy files
+
+There are three ways to use the `cp` command to copy files. We will
+focus on these two:
+
+```{.no-copy}
+cp [OPTION] ... [-T] SOURCE DESK
+  ### OR ###
+cp [OPTION] ... SOURCE ... DIRECTORY
+```
+
+:::{.callout-tip}
+## Which of those parameters are not optional and why does that make sense?
+:::
+
+Copy the file you downloaded into a new file called `seqs.tar.gz`:
+
+``` bash
+cp simm.tar.gz seqs.tar.gz
+```
+
+Make a new directory within your `/linux_practice` folder called
+`/downloads` by typing:
+
+``` bash
+mkdir downloads
+```
+
+Then copy `seqs.tar.gz` into it:
+
+```bash
+cp seqs.tar.gz downloads
+```
+
+Move to your new directory and make sure the file copied
+successfully:
+
+``` bash
+cd downloads
+ls
+```
+
+Go back up one directory by typing:
+
+``` bash
+cd ..
+```
+
+Then use `ls` to view the files. You should see that the `seqs.tar.gz` file is in both locations.
+
+:::{.callout-warning}
+## Warning
+
+Copying can overwrite files. When you choose a destination that
+contains a file with the same name as that you are copying, the
+original file will be replaced. To avoid this, use unique names for
+important files.
+:::
+
+
+## Using `mv` to move and rename files
+
+The process of moving files is very similar to that for copying them
+The first lines of `mv --help` read:
+
+```{.no-copy}
+mv [OPTION]… [-T] SOURCE DEST
+  ### OR  ###
+mv [OPTION]… SOURCE… DIRECTORY
+```
+
+Move the original file you downloaded in the `downloads` directory:
+
+``` bash
+mv simm.tar.gz downloads
+```
+
+You also have two copies of the `seqs.tar.gz` file, one in your current directory and one in the `/downloads` directory that you copied there previously. Use `mv` to move the remaining copy into the `/downloads` folder with:
+
+``` bash
+mv seqs.tar.gz downloads
+```
+
+:::{.callout-tip}
+## What happens when you move two files with the same name into one directory?
+:::
+
+Just like copying, moving can also overwrite files. The file you just moved into the `/downloads` directory has replaced the one you copied earlier.
+
+In Linux, renaming files is the same as moving them. Go into the `/downloads` folder:
+
+``` bash
+cd downloads
+```
+
+Then change `simm.tar.gz` to `also_simm.fastq.gz`
+
+``` bash
+mv simm.tar.gz also_simm.fastq.gz
+```
+
+:::{.callout-tip}
+## Run `ls` and write down the current contents of the `/downloads` directory.
+
+<details>
+<summary>Answer</summary>
+
+It should appear as below:
+```{.no-copy}
+also_simm.fatq.gz  seqs.tar.gz
+```
+</details>
+:::
+
+## Using `rm` to remove files
+
+The command `rm` has the same function as deleting files in Windows or
+MacOs.
+
+```{.no-copy}
+rm [OPTION]… [FILE]…
+```
+
+:::{.callout-tip}
+## Remove one of the files in your `/downloads` directory and write the command you used:
+:::
+
+Change out of your `/downloads` directory and into your lastname directory:
+
+``` bash
+cd ..
+```
+
+By default, `rm` only removes files, not directories. This is done to
+ensure that the user certainly wants to remove an entire directory. So
+use the `-r` flag to **r**ecursively remove the `/downloads` folder and
+everything within it. But use caution, as once you remove something, it
+cannot be retrieved (i.e. there is no trash directory that store
+deleted files).
+
+:::{.callout-tip}
+## Knowing this, try to remove the downloads directory and all of the files listed inside it.
+:::
+
+Use `ls` to check that `/downloads` has been successfully removed.
+
+## Using `top` to view system resources
+
+Every program discussed so far helps you move and change files. With
+the `top` command, you can view all of the programs running on the
+Cluster. Try typing it now and take note of what programs are running:
+
+``` bash
+top
+```
+
+This provides a summary of the amount of load your system is under, and a list of the processes that are using the most CPU and memory. It should look something like this,
+
+```{.no-copy}
+top - 13:48:46 up  1:26,  1 user,  load average: 0.31, 0.26, 0.27
+Tasks: 356 total, 1 running, 355 sleep, 0 d-sleep, 0 stopped, 0 zombie
+%Cpu(s):  0.2 us,  0.2 sy,  0.0 ni, 99.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  15910.9 total,   9179.9 free,   3924.1 used,   3129.3 buff/cache
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  11986.8 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 146309 user      20   0   45960  42156  10528 S   1.0   0.3   0:13.52 nvim
+   2136 user      20   0    7668   3632   3156 S   0.3   0.0   0:01.58 dbus
+   4798 user      20   0   33.0g 321624 203520 S   0.3   2.0   0:58.65 firefox
+   9909 user      20   0   69756  66084  13024 S   0.3   0.4   1:23.23 nvim
+  13966 user      20   0 1365696  64524  41540 S   0.3   0.4   0:02.32 ueberzug
+      1 root      20   0   22876  13784   9748 S   0.0   0.1   0:00.84 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool
+    ... ...       ...  ...     ...    ...  ... ... ...   ...   ...     ...
+```
+
+:::{.callout-tip}
+## How much RAM (memory) is the Cluster currently using?
+:::
+
+:::{.callout-tip}
+## Write what `top` shows you on the first page.
+:::

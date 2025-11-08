@@ -1,0 +1,34 @@
+---
+title: "Wright Lab Tutorials"
+page-navigation: 
+  next: false
+---
+
+Welcome to the Wright Lab Tutorials! This collection of tutorials provides step-by-step guides for bioinformatics analysis using Juniata College's Cluster computing resources.
+
+## Available Tutorials
+
+### [Using the Cluster](chapter1-0.qmd)
+
+Learn how to work with Juniata College's Cluster computing infrastructure. This tutorial covers:
+
+ - Connecting to Juniata's wifi when off campus
+ - Remotely connecting to the Cluster from your personal computer's terminal
+ - Basics of working in a Linux terminal
+ - How the Cluster operates
+
+---
+
+### [16s Tutorial](chapter2-0.qmd)
+
+Coming soon! This tutorial will cover 16S rRNA sequencing analysis workflows.
+
+[View Overview →](chapter2-0.qmd)
+
+---
+
+### [Shotgun MT/MG Tutorial](chapter3-0.qmd)
+
+Coming soon! This tutorial will cover shotgun metagenomics and metatranscriptomics analysis.
+
+[View Overview →](chapter3-0.qmd)
