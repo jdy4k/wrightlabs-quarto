@@ -30,10 +30,15 @@ Users interact with the Cluster as depicted below:
 
 ## Using Cyberduck
 
-<div class="code-explanation">
-:::{.grid}
+::: {.column-margin}
+![Click to enlarge](/images/tutorial-images/Cyberduck3.png)
+:::
 
-:::{.g-col-7}
+::: {.column-margin}
+![Click to enlarge](/images/tutorial-images/Cyberduck4.png)
+:::
+
+<div class="code-explanation">
 
  - To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown below:
 
@@ -41,39 +46,16 @@ Users interact with the Cluster as depicted below:
 
  - To download a file, right click on it and choose "Download As,"
 
-:::
-
-:::{.g-col-5}
-
-![grid_image](/images/tutorial-images/Cyberduck3.png)
-
-:::
-
-:::
-
-:::{.grid}
-
-:::{.g-col-6}
-
-![grid_image](/images/tutorial-images/Cyberduck5.png)
-
-:::
-
-:::{.g-col-6}
-
-![grid_image](/images/tutorial-images/Cyberduck4.png)
-
-:::
-
-:::
 </div>
+
+::: {.column-margin}
+![Click to enlarge](/images/tutorial-images/Cyberduck5.png)
+:::
+
+
 ## Running jobs
 
 Everything you can do on a normal Linux system, you can also do on the Cluster. But, you will want to run all of your programs off the worker nodes rather than the head node. You connect to the head node with ssh and submit jobs to the worker nodes through the command line. It is dangerous to execute programs on the head node since it may cause the supercomputer to crash. To prevent this, we run jobs on the worker nodes, which can easily be done in three steps:
-
-```{.no-copy}
-Running scripts off worker nodes
-```
 
 <div class="code-explanation">
 
@@ -99,13 +81,12 @@ Throughout this tutorial you will see how to submit scripts to a worker node usi
 
 All of the scripts that you will be using for this tutorial are already made. However, a brief description of their various components will hopefully help you better understand how they work and make your own, should the need arise.
 
-![image](/images/tutorial-images/ScriptAnnotated.png)
+![Click to enlarge](/images/tutorial-images/ScriptAnnotated.png)
 
-<details>
-<summary> Expand for plain text unannotated version </summary>
-```
-#!/bin/bash
-# PBS -l nodes=1:ppn=6
+<!--
+``` bash {.no-copy}
+#!/bin/bash # <1> <2>
+# PBS -l nodes=1:ppn=6 # <2>
 #PBS -N qiime2 import
 #PBS -j oe
 
@@ -121,9 +102,9 @@ cd $workdir
 
 source activate qiime2-2019.7
 
-## before running script make a mapping file as described in the tutorial This is
-## important because it points to the forward and reverse reads which will
-## be imported
+## before running script make a mapping file as described in the 
+##tutorial This is important because it points to the forward 
+## and reverse reads which will be imported
 
 qiime tools import \
   --type 'SampleData[PairedEndSequenceWithQuality]' \
@@ -131,10 +112,13 @@ qiime tools import \
   --output-path co_b.paired-end-demux.qza \
   --input-format PairedEndFastqManifestPhred33
 ```
-</details>
-
+1. Test
+2. Test 2
+-->
 
 There is a lot in the above image to unpack. Basically, the scripts that you will be using can be divided into three sections,
+
+<div class="code-explanation">
 
  1. The topmost (in the black rectangle) gives general information about the script itself. 
     - Things like which language the script is written in (we use BASH) and how much resources to allocate to that job are here
@@ -142,6 +126,8 @@ There is a lot in the above image to unpack. Basically, the scripts that you wil
     - This does not impact the job itself; it’s just to give the user more information about the script.
  3. The last section (in the pink rectangle) is the meat of the script, so to speak. It tells the Cluster what you actually want it to do.
     - In the above script, we are telling the Cluster to move into the folder as specified by the workdir variable, then activate the `qiime2-2019.7` environment, and finally run the qiime tools import command with a few flags
+
+</div>
 
 Two symbols that you will see a lot in our scripts are `#` and `\`.
 
@@ -184,36 +170,38 @@ I should also note that the text editor that I am using (Notepad++) applies form
 There are a couple ways to edit scripts. You can edit them through the Cluster, with Putty, the terminal, or you could edit them with Cyberduck.
 To edit through the Cluster…
 
-```{.no-copy}
-Editing through the Cluster
-```
-
 <div class="code-explanation">
 
-  - `nano [SCRIPT NAME]` when you are in the same folder as the script you want to edit
+  1. `nano [SCRIPT NAME]` when you are in the same folder as the script you want to edit
     - For example, `nano 1.2_raw_reads_import.sh`
-  - Navigate using the arrow keys
-  - Set the working directory to the location of your input (typically your data directory)
-  - Set any input/output names and desired parameters
-  - Save your changes (<kbd>CTRL</kbd> + <kbd>X</kbd>)
-  - Then press <kbd>y</kbd>
-  - Then press <kbd>ENTER</kbd>
+
+  2. Navigate using the arrow keys
+
+  3. Set the working directory to the location of your input (typically your data directory)
+
+  4. Set any input/output names and desired parameters
+
+  5. Save your changes (<kbd>CTRL</kbd> + <kbd>X</kbd>)
+
+  6. Then press <kbd>y</kbd>
+
+  7. Then press <kbd>ENTER</kbd>
 
 </div>
 
 To edit through Cyberduck…
 
-```{.no-copy}
-Editing through Cyberduck
-```
-
 <div class="code-explanation">
 
-  - Right click on the script and choose "Edit With"
-  - Then pick the program you want to use to edit it
-  - The script should now be opened
-  - Make the desired changes
-  - Go to "File" then "Save" to save the script
+  1. Right click on the script and choose "Edit With"
+
+  2. Then pick the program you want to use to edit it
+
+  3. The script should now be opened
+
+  4. Make the desired changes
+
+  5. Go to "File" then "Save" to save the script
 
 </div>
 

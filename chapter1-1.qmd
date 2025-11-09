@@ -23,11 +23,6 @@ Upon opening PuTTY, this a window should appear.
 
 
 ::: {.callout-note}
-## PuTTY Configuration
-
-::: {.grid}
-::: {.g-col-7}
-
 * Type the Cluster's IP address `147.73.20.123` into the "Host Name" box
 
 * Ensure that "SSH" is selected for "Connection Type."
@@ -37,15 +32,11 @@ Upon opening PuTTY, this a window should appear.
 * Type your username (then enter) and password in the terminal window.
   
   * Password: `4gcatRocks!`
-
 :::
+::: {.column-margin}
 
-::: {.g-col-5}
+![Click to enlarge](/images/tutorial-images/PuTTY_Config.png)
 
-![PuTTY Configuration](/images/tutorial-images/PuTTY_Config.png)
-
-:::
-:::
 :::
 
 :::{.callout-warning}
@@ -80,20 +71,6 @@ can install the program “Cyberduck” on their computer:
 
 ::: {.callout-note}
 ## Cyberduck Setup
-
-::: {.grid}
-::: {.g-col-6}
-
-![Cyberduck Configuration 1](/images/tutorial-images/Cyberduck1.png)
-
-:::
-
-::: {.g-col-6}
-
-![Cyberduck Configuration 2](/images/tutorial-images/Cyberduck2.png)
-
-:::
-:::
 
 1. Download [Cyberduck](http://cyberduck.io/?1=en)
 
@@ -149,6 +126,12 @@ section of the window.
    * Enter your password in the box next to "Password:"
 
    * Then close out of the window (the little red X)
+:::
+::: {.column-margin}
+![Click to enlarge](/images/tutorial-images/Cyberduck1.png)
+:::
+::: {.column-margin}
+![Click to enlarge](/images/tutorial-images/Cyberduck2.png)
 :::
 
 You can now launch Cyberduck and connect to the Cluster. If at any

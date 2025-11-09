@@ -5,7 +5,6 @@ website:
   title: "Wright Lab Tutorials"
   favicon: images/favicon.ico
   sidebar:
-    style: "docked"
     logo: images/WLABS_light.webp
     search: true
     contents:
@@ -34,15 +33,14 @@ format:
   html:
     theme:
       - cosmo
-      - r4ds.scss
+      - custom.scss
     code-link: true
+    page-layout: article
     toc: true
     toc-location: right
     toc-title: ""
     page-navigation: true
     lightbox: true
-    author-meta: "Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund"
-    include-in-header: "plausible.html"
     callout-appearance: simple
 
 editor: source
