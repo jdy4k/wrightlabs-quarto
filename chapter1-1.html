@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0227dd23fc87ec60072d85481e64dd60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2d66c74ef88320084c3a9eec9c52f945.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -199,8 +199,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#via-ssh-on-windows" id="toc-via-ssh-on-windows" class="nav-link active" data-scroll-target="#via-ssh-on-windows">Via SSH on Windows</a></li>
+  <li><a href="#warning" id="toc-warning" class="nav-link" data-scroll-target="#warning">Warning</a></li>
   <li><a href="#via-ssh-on-macos" id="toc-via-ssh-on-macos" class="nav-link" data-scroll-target="#via-ssh-on-macos">Via SSH on MacOs</a></li>
   <li><a href="#via-cyberduck" id="toc-via-cyberduck" class="nav-link" data-scroll-target="#via-cyberduck">Via Cyberduck</a></li>
+  <li><a href="#cyberduck-setup" id="toc-cyberduck-setup" class="nav-link" data-scroll-target="#cyberduck-setup">Cyberduck Setup</a></li>
   </ul>
 </nav>
     </div>
@@ -231,13 +233,16 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="via-ssh-on-windows">Via SSH on Windows</h2>
 <p>If you have a PC running a windows operating system, you will need to download <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a>.</p>
 <p>Upon opening PuTTY, this a window should appear.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/tutorial-images/PuTTY_Config.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="PuTTY Configuration Window (Click to enlarge)"><img src="./images/tutorial-images/PuTTY_Config.png" class="img-fluid figure-img" alt="PuTTY Configuration Window (Click to enlarge)"></a></p>
+<figcaption>PuTTY Configuration Window (Click to enlarge)</figcaption>
+</figure>
 </div>
-<div class="callout-body-container">
-<ul>
+</div></div><div class="code-explanation">
+<ol type="1">
 <li><p>Type the Cluster’s IP address <code>147.73.20.123</code> into the “Host Name” box</p></li>
 <li><p>Ensure that “SSH” is selected for “Connection Type.”</p></li>
 <li><p>Press “Open”</p></li>
@@ -245,31 +250,12 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Password: <code>4gcatRocks!</code></li>
 </ul></li>
-</ul>
+</ol>
 </div>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="./images/tutorial-images/PuTTY_Config.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Click to enlarge"><img src="./images/tutorial-images/PuTTY_Config.png" class="img-fluid figure-img" alt="Click to enlarge"></a></p>
-<figcaption>Click to enlarge</figcaption>
-</figure>
-</div>
-</div></div><div class="callout callout-style-simple callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>As you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over.</p>
-</div>
-</div>
+</section>
+<section id="warning" class="level2">
+<h2 class="anchored" data-anchor-id="warning">Warning</h2>
+<p>As you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over. :::</p>
 </section>
 <section id="via-ssh-on-macos" class="level2">
 <h2 class="anchored" data-anchor-id="via-ssh-on-macos">Via SSH on MacOs</h2>
@@ -288,19 +274,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="via-cyberduck" class="level2 page-columns page-full">
+<section id="via-cyberduck" class="level2">
 <h2 class="anchored" data-anchor-id="via-cyberduck">Via Cyberduck</h2>
 <p>To help view and edit files on the Cluster, both Mac and Windows users can install the program “Cyberduck” on their computer:</p>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Cyberduck Setup
-</div>
-</div>
-<div class="callout-body-container callout-body">
+</section>
+<section id="cyberduck-setup" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="cyberduck-setup">Cyberduck Setup</h2>
+<div class="code-explanation">
 <ol type="1">
 <li><p>Download <a href="http://cyberduck.io/?1=en">Cyberduck</a></p></li>
 <li><p>Click the box on the left to select the download appropriate for your operating system</p></li>
@@ -335,20 +315,19 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ol>
 </div>
-</div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./images/tutorial-images/Cyberduck1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Click to enlarge"><img src="./images/tutorial-images/Cyberduck1.png" class="img-fluid figure-img" alt="Click to enlarge"></a></p>
-<figcaption>Click to enlarge</figcaption>
+<p><a href="./images/tutorial-images/Cyberduck1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Open Connection (Click to enlarge)"><img src="./images/tutorial-images/Cyberduck1.png" class="img-fluid figure-img" alt="Open Connection (Click to enlarge)"></a></p>
+<figcaption>Open Connection (Click to enlarge)</figcaption>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./images/tutorial-images/Cyberduck2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Click to enlarge"><img src="./images/tutorial-images/Cyberduck2.png" class="img-fluid figure-img" alt="Click to enlarge"></a></p>
-<figcaption>Click to enlarge</figcaption>
+<p><a href="./images/tutorial-images/Cyberduck2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Credentials (Click to enlarge)"><img src="./images/tutorial-images/Cyberduck2.png" class="img-fluid figure-img" alt="Credentials (Click to enlarge)"></a></p>
+<figcaption>Credentials (Click to enlarge)</figcaption>
 </figure>
 </div>
 </div></div>

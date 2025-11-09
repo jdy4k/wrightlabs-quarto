@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0227dd23fc87ec60072d85481e64dd60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2d66c74ef88320084c3a9eec9c52f945.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -271,15 +271,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Commands such as <code>ls</code> have options that modify their function. These options are indicated by a dash and are termed flags. So <code>-a</code> may be called “the a flag.” Try running <code>ls</code> with this flags (shown below).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-a</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<details>
+<details class="output">
 <summary>
 Output for <code>ls -a</code>
 </summary>
 <p>Where as <code>ls</code> shows all normal files in your directory, <code>ls -a</code> will show you all the files in a directory/folder, including <strong>hidden files</strong> (these files and folders will have a period before there name, for example <code>.config</code> or <code>.local</code>)</p>
-<pre class="no-copy"><code>.config .local Documents Downloads Pictures</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.config</span> .local Documents Downloads Pictures</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<details>
+<details class="output">
 <summary>
 Output for <code>ls -l</code>
 </summary>
@@ -330,7 +330,7 @@ drwxr-xr-x 3 user user 4096 Sep 26 13:46 Pictures/</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... <span class="pp">[</span><span class="ss">FILE</span><span class="pp">]</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-explanation">
 <ul>
-<li><p><code>ls</code> is simply the command name</p></li>
+<li><p><code>ls</code>: simply the command name</p></li>
 <li><p><code>OPTION</code> is where you put your options or flags. You can think of options as modifiers of the command. In this case, <code>-a</code> and <code>-l</code> are both flags that modify the performance of the <code>ls</code> command. Options are often a dash followed by a single letter, if a command has a lot of possible options, they can be two dashes followed by a word.</p></li>
 <li><p><code>FILE</code> is the folder that you are running <code>ls</code> on. You can think of it as the target of <code>ls</code>. So, running: <code>ls /home</code> will list all files in <code>/home</code> instead of listing files in your current directory.</p></li>
 <li><p><code>[]</code> (the brackets) show that the <code>OPTION</code> flags and the <code>FILE</code> specification are optional. Basically, you do not have to include <code>-a</code> or even a folder to use <code>ls</code>. So the command <code>ls</code> alone is legal even though it has no flags or files.</p></li>
