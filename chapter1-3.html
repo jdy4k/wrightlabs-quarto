@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund">
 
 <title>Cluster Basics – Wright Lab Tutorials</title>
 <style>
@@ -79,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-053f3693642843aa7e048b53ebfe233e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0227dd23fc87ec60072d85481e64dd60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -276,13 +275,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="using-cyberduck" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="using-cyberduck">Using Cyberduck</h2>
-<div class="code-explanation">
-<ul>
-<li><p>To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown below:</p></li>
-<li><p>To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with.</p></li>
-<li><p>To download a file, right click on it and choose “Download As,”</p></li>
-</ul>
-</div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
@@ -298,16 +290,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Click to enlarge</figcaption>
 </figure>
 </div>
-</div><div class="">
+</div></div>
+<div class="code-explanation">
+<ul>
+<li><p>To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown below:</p></li>
+<li><p>To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with.</p></li>
+<li><p>To download a file, right click on it and choose “Download As,”</p></li>
+</ul>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./images/tutorial-images/Cyberduck5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Click to enlarge"><img src="./images/tutorial-images/Cyberduck5.png" class="img-fluid figure-img" alt="Click to enlarge"></a></p>
 <figcaption>Click to enlarge</figcaption>
 </figure>
 </div>
-</div></div>
-
-</section>
+</div></div></section>
 <section id="running-jobs" class="level2">
 <h2 class="anchored" data-anchor-id="running-jobs">Running jobs</h2>
 <p>Everything you can do on a normal Linux system, you can also do on the Cluster. But, you will want to run all of your programs off the worker nodes rather than the head node. You connect to the head node with ssh and submit jobs to the worker nodes through the command line. It is dangerous to execute programs on the head node since it may cause the supercomputer to crash. To prevent this, we run jobs on the worker nodes, which can easily be done in three steps:</p>
@@ -366,6 +365,7 @@ qiime tools import \
 2. Test 2
 -->
 <p>There is a lot in the above image to unpack. Basically, the scripts that you will be using can be divided into three sections,</p>
+<div class="code-explanation">
 <ol type="1">
 <li>The topmost (in the black rectangle) gives general information about the script itself.
 <ul>
@@ -380,6 +380,7 @@ qiime tools import \
 <li>In the above script, we are telling the Cluster to move into the folder as specified by the workdir variable, then activate the <code>qiime2-2019.7</code> environment, and finally run the qiime tools import command with a few flags</li>
 </ul></li>
 </ol>
+</div>
 <p>Two symbols that you will see a lot in our scripts are <code>#</code> and <code>\</code>.</p>
 <p>In general, <code>#</code> tells the Cluster to ignore that line and continue on with the script. These lines are referred to as comments. The exceptions to this are in the black box above. But, everywhere else, the comments, as denoted by <code>#</code>, are just skipped.</p>
 <p><code>\</code> tells the Cluster that the command is continued on the next line. So, the qiime tools import command above is equivalent to:</p>
@@ -426,28 +427,25 @@ What is the purpose of setting the workdir variable; how is it being used?
 <h2 class="anchored" data-anchor-id="editing-and-submitting-scripts">Editing and submitting scripts</h2>
 <p>There are a couple ways to edit scripts. You can edit them through the Cluster, with Putty, the terminal, or you could edit them with Cyberduck. To edit through the Cluster…</p>
 <div class="code-explanation">
-<ul>
-<li><code>nano [SCRIPT NAME]</code> when you are in the same folder as the script you want to edit
-<ul>
-<li>For example, <code>nano 1.2_raw_reads_import.sh</code></li>
-</ul></li>
-<li>Navigate using the arrow keys</li>
-<li>Set the working directory to the location of your input (typically your data directory)</li>
-<li>Set any input/output names and desired parameters</li>
-<li>Save your changes (<kbd>CTRL</kbd> + <kbd>X</kbd>)</li>
-<li>Then press <kbd>y</kbd></li>
-<li>Then press <kbd>ENTER</kbd></li>
-</ul>
+<ol type="1">
+<li><p><code>nano [SCRIPT NAME]</code> when you are in the same folder as the script you want to edit - For example, <code>nano 1.2_raw_reads_import.sh</code></p></li>
+<li><p>Navigate using the arrow keys</p></li>
+<li><p>Set the working directory to the location of your input (typically your data directory)</p></li>
+<li><p>Set any input/output names and desired parameters</p></li>
+<li><p>Save your changes (<kbd>CTRL</kbd> + <kbd>X</kbd>)</p></li>
+<li><p>Then press <kbd>y</kbd></p></li>
+<li><p>Then press <kbd>ENTER</kbd></p></li>
+</ol>
 </div>
 <p>To edit through Cyberduck…</p>
 <div class="code-explanation">
-<ul>
-<li>Right click on the script and choose “Edit With”</li>
-<li>Then pick the program you want to use to edit it</li>
-<li>The script should now be opened</li>
-<li>Make the desired changes</li>
-<li>Go to “File” then “Save” to save the script</li>
-</ul>
+<ol type="1">
+<li><p>Right click on the script and choose “Edit With”</p></li>
+<li><p>Then pick the program you want to use to edit it</p></li>
+<li><p>The script should now be opened</p></li>
+<li><p>Make the desired changes</p></li>
+<li><p>Go to “File” then “Save” to save the script</p></li>
+</ol>
 </div>
 <p>Regardless of how you edit it, you submit scripts using <code>sbatch [SCRIPT NAME]</code>. For instance, <code>sbatch 1.2_raw_reads_import.sh</code> would submit the <code>1.2_raw_reads_import.sh</code> script to the head node, which would then give it to a worker node to run.</p>
 <p>You can check the progress of scripts with <code>squeue</code>.</p>
