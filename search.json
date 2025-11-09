@@ -101,18 +101,7 @@
     "href": "chapter1-1.html#via-ssh-on-windows",
     "title": "Connecting to the Cluster",
     "section": "Via SSH on Windows",
-    "text": "Via SSH on Windows\nIf you have a PC running a windows operating system, you will need to download PuTTY.\nUpon opening PuTTY, this a window should appear.\n\n\n\n\n\nPuTTY Configuration Window (Click to enlarge)\n\n\n\n\nType the Cluster’s IP address 147.73.20.123 into the “Host Name” box\nEnsure that “SSH” is selected for “Connection Type.”\nPress “Open”\nType your username (then enter) and password in the terminal window.\n\nPassword: 4gcatRocks!",
-    "crumbs": [
-      "Using the Cluster",
-      "Connecting to the Cluster"
-    ]
-  },
-  {
-    "objectID": "chapter1-1.html#warning",
-    "href": "chapter1-1.html#warning",
-    "title": "Connecting to the Cluster",
-    "section": "Warning",
-    "text": "Warning\nAs you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over. :::",
+    "text": "Via SSH on Windows\nIf you have a PC running a windows operating system, you will need to download PuTTY.\nUpon opening PuTTY, this a window should appear.\n\n\n\n\n\nPuTTY Configuration Window (Click to enlarge)\n\n\n\n\nType the Cluster’s IP address 147.73.20.123 into the “Host Name” box\nEnsure that “SSH” is selected for “Connection Type.”\nPress “Open”\nType your username (then enter) and password in the terminal window.\n\nPassword: 4gcatRocks!\n\n\n\n\n\n\n\n\n\nWarningWarning\n\n\n\nAs you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over.",
     "crumbs": [
       "Using the Cluster",
       "Connecting to the Cluster"
