@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dcb091ff044d1d51b2c80b1a76c321a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-053f3693642843aa7e048b53ebfe233e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./images/WLABS_light.webp" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
@@ -206,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter1-0.html">Using the Cluster</a></li><li class="breadcrumb-item"><a href="./chapter1-1.html">Connecting to the Cluster</a></li></ol></nav>
 <div class="quarto-title">
@@ -228,22 +228,16 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>To use the Linux-based computer Cluster housed at Juniata College, you have to connect remotely to the supercomputer. This can be done through any computer running MacOS or Windows using a secure shell session, also called <strong>ssh</strong>. Many bioinformatics pipelines are built for a Linux environment because of its power and flexibility when working with large amounts of data. Linux is an operating system much like Unix, but unlike Windows and MacOS operating systems, it runs primarily through a command line interface rather than the visible desktop to which many of us are accustomed. Through this interface of the Cluster users are able to select many options and parameters in running its installed programs.</p>
-<section id="via-ssh-on-windows" class="level2">
+<section id="via-ssh-on-windows" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="via-ssh-on-windows">Via SSH on Windows</h2>
 <p>If you have a PC running a windows operating system, you will need to download <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a>.</p>
 <p>Upon opening PuTTY, this a window should appear.</p>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>PuTTY Configuration
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="grid">
-<div class="g-col-7">
+<div class="callout-body-container">
 <ul>
 <li><p>Type the Cluster’s IP address <code>147.73.20.123</code> into the “Host Name” box</p></li>
 <li><p>Ensure that “SSH” is selected for “Connection Type.”</p></li>
@@ -254,18 +248,17 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </div>
-<div class="g-col-5">
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./images/tutorial-images/PuTTY_Config.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="PuTTY Configuration"><img src="./images/tutorial-images/PuTTY_Config.png" class="img-fluid figure-img" alt="PuTTY Configuration"></a></p>
-<figcaption>PuTTY Configuration</figcaption>
+<p><a href="./images/tutorial-images/PuTTY_Config.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Click to enlarge"><img src="./images/tutorial-images/PuTTY_Config.png" class="img-fluid figure-img" alt="Click to enlarge"></a></p>
+<figcaption>Click to enlarge</figcaption>
 </figure>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-warning callout-titled">
+</div></div><div class="callout callout-style-simple callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -296,7 +289,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="via-cyberduck" class="level2">
+<section id="via-cyberduck" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="via-cyberduck">Via Cyberduck</h2>
 <p>To help view and edit files on the Cluster, both Mac and Windows users can install the program “Cyberduck” on their computer:</p>
 <div class="callout callout-style-simple callout-note callout-titled">
@@ -309,24 +302,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="grid">
-<div class="g-col-6">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="./images/tutorial-images/Cyberduck1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Cyberduck Configuration 1"><img src="./images/tutorial-images/Cyberduck1.png" class="img-fluid figure-img" alt="Cyberduck Configuration 1"></a></p>
-<figcaption>Cyberduck Configuration 1</figcaption>
-</figure>
-</div>
-</div>
-<div class="g-col-6">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="./images/tutorial-images/Cyberduck2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Cyberduck Configuration 2"><img src="./images/tutorial-images/Cyberduck2.png" class="img-fluid figure-img" alt="Cyberduck Configuration 2"></a></p>
-<figcaption>Cyberduck Configuration 2</figcaption>
-</figure>
-</div>
-</div>
-</div>
 <ol type="1">
 <li><p>Download <a href="http://cyberduck.io/?1=en">Cyberduck</a></p></li>
 <li><p>Click the box on the left to select the download appropriate for your operating system</p></li>
@@ -362,6 +337,22 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </div>
 </div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/tutorial-images/Cyberduck1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Click to enlarge"><img src="./images/tutorial-images/Cyberduck1.png" class="img-fluid figure-img" alt="Click to enlarge"></a></p>
+<figcaption>Click to enlarge</figcaption>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/tutorial-images/Cyberduck2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Click to enlarge"><img src="./images/tutorial-images/Cyberduck2.png" class="img-fluid figure-img" alt="Click to enlarge"></a></p>
+<figcaption>Click to enlarge</figcaption>
+</figure>
+</div>
+</div></div>
 <p>You can now launch Cyberduck and connect to the Cluster. If at any point you need to reconnect to the Cluster, you can go to “Bookmark” and select your bookmark.</p>
 
 

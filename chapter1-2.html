@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dcb091ff044d1d51b2c80b1a76c321a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-053f3693642843aa7e048b53ebfe233e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./images/WLABS_light.webp" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
@@ -328,7 +328,7 @@ drwxr-xr-x 3 user user 4096 Sep 26 13:46 Pictures/</code></pre>
 </div>
 </div>
 <p>From this help menu, you can see all the available options for the <code>ls</code> command. Run this, then scroll to the top of the output where you will find a line that starts with <code>Usage: ...</code>. You should see</p>
-<pre class="no-copy"><code>ls [OPTION] ... [FILE] ...</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... <span class="pp">[</span><span class="ss">FILE</span><span class="pp">]</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-explanation">
 <ul>
 <li><p><code>ls</code> is simply the command name</p></li>
@@ -539,13 +539,16 @@ Use <code>cd</code> then <code>pwd</code>.
 </div>
 </div>
 <p>After your PCR amplicons are sequenced, the sequencing core will upload the data to a website from which it can be downloaded. In a web browser, you can click on various files to download them, but in a terminal, you instead use <code>wget</code>. Let’s practice with some sample data:</p>
-<p>Downloading files through the terminal - Open this <a href="http://www.drive5.com/uchime/uchime_download.html">link</a> in a web browser.</p>
+<p>Downloading files through the terminal:</p>
+<div class="code-explanation">
 <ul>
+<li><p>Open this <a href="http://www.drive5.com/uchime/uchime_download.html">link</a> in a web browser.</p></li>
 <li><p>Scroll to the bottom and find the file called <code>simm.tar.gz</code>.</p></li>
 <li><p>Right-click that link.</p></li>
 <li><p>Choose “copy link” or “copy link address.”</p></li>
 <li><p>In your folder, type <code>wget</code> followed by a space, then paste the link you just copied (If you are using PuTTY, you will have to right click to paste instead of using <kbd>Ctrl</kbd> + <kbd>V</kbd> )</p></li>
 </ul>
+</div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> linux_practice</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://www.drive5.com/uchime/simm.tar.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
@@ -633,9 +636,9 @@ Divide the <code>.tar.gz</code> file size by the <code>.tar</code> file size and
 <section id="using-cp-to-copy-files" class="level2">
 <h2 class="anchored" data-anchor-id="using-cp-to-copy-files">Using <code>cp</code> to copy files</h2>
 <p>There are three ways to use the <code>cp</code> command to copy files. We will focus on these two:</p>
-<pre class="no-copy"><code>cp [OPTION] ... [-T] SOURCE DESK
-  ### OR ###
-cp [OPTION] ... SOURCE ... DIRECTORY</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... <span class="pp">[-</span><span class="ss">T</span><span class="pp">]</span> SOURCE DESK</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">### OR </span><span class="al">###</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... SOURCE ... DIRECTORY</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-tip callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -678,9 +681,9 @@ cp [OPTION] ... SOURCE ... DIRECTORY</code></pre>
 <section id="using-mv-to-move-and-rename-files" class="level2">
 <h2 class="anchored" data-anchor-id="using-mv-to-move-and-rename-files">Using <code>mv</code> to move and rename files</h2>
 <p>The process of moving files is very similar to that for copying them The first lines of <code>mv --help</code> read:</p>
-<pre class="no-copy"><code>mv [OPTION]… [-T] SOURCE DEST
-  ### OR  ###
-mv [OPTION]… SOURCE… DIRECTORY</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… <span class="pp">[-</span><span class="ss">T</span><span class="pp">]</span> SOURCE DEST</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">### OR  </span><span class="al">###</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… SOURCE… DIRECTORY</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Move the original file you downloaded in the <code>downloads</code> directory:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> simm.tar.gz downloads</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You also have two copies of the <code>seqs.tar.gz</code> file, one in your current directory and one in the <code>/downloads</code> directory that you copied there previously. Use <code>mv</code> to move the remaining copy into the <code>/downloads</code> folder with:</p>
@@ -726,7 +729,7 @@ Answer
 <section id="using-rm-to-remove-files" class="level2">
 <h2 class="anchored" data-anchor-id="using-rm-to-remove-files">Using <code>rm</code> to remove files</h2>
 <p>The command <code>rm</code> has the same function as deleting files in Windows or MacOs.</p>
-<pre class="no-copy"><code>rm [OPTION]… [FILE]…</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… <span class="pp">[</span><span class="ss">FILE</span><span class="pp">]</span>…</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-tip callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -769,16 +772,16 @@ Tasks: 356 total, 1 running, 355 sleep, 0 d-sleep, 0 stopped, 0 zombie
 MiB Mem :  15910.9 total,   9179.9 free,   3924.1 used,   3129.3 buff/cache
 MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  11986.8 avail Mem
 
-    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
- 146309 user      20   0   45960  42156  10528 S   1.0   0.3   0:13.52 nvim
-   2136 user      20   0    7668   3632   3156 S   0.3   0.0   0:01.58 dbus
-   4798 user      20   0   33.0g 321624 203520 S   0.3   2.0   0:58.65 firefox
-   9909 user      20   0   69756  66084  13024 S   0.3   0.4   1:23.23 nvim
-  13966 user      20   0 1365696  64524  41540 S   0.3   0.4   0:02.32 ueberzug
-      1 root      20   0   22876  13784   9748 S   0.0   0.1   0:00.84 systemd
-      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
-      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool
-    ... ...       ...  ...     ...    ...  ... ... ...   ...   ...     ...</code></pre>
+PID     USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+146309  user      20   0   45960  42156  10528 S   1.0   0.3   0:13.52 nvim
+2136    user      20   0    7668   3632   3156 S   0.3   0.0   0:01.58 dbus
+4798    user      20   0   33.0g 321624 203520 S   0.3   2.0   0:58.65 firefox
+9909    user      20   0   69756  66084  13024 S   0.3   0.4   1:23.23 nvim
+13966   user      20   0 1365696  64524  41540 S   0.3   0.4   0:02.32 ueberzug
+1       root      20   0   22876  13784   9748 S   0.0   0.1   0:00.84 systemd
+2       root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+3       root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool
+...     ...       ...  ...     ...    ...  ... ... ...   ...   ...     ...</code></pre>
 <div class="callout callout-style-simple callout-tip callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
