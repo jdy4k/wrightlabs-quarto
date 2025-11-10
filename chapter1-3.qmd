@@ -28,15 +28,13 @@ Users interact with the Cluster as depicted below:
     C -->|Job| G[Worker Node 4]
 ```
 
-<div class="code-explanation">
  - Using a laptop or desktop computer, you start an ssh session with the head node of the Cluster as you previously did.
 
  - Off the head node, you can get your files in order, run small programs, and prepare a job script for larger programs. However, larger programs will need to be submitted to worker nodes in order to prevent the Cluster from crashing.
 
  - To run large programs, the user will need to write a submission script (you will be using these later in the QIIME tutorial). Once your script is written on the head node, you will submit the job to a worker node which will process your request, sometimes taking minutes, hours, or weeks, and then deposit any final documents into your directory on the head node.
 
- - This allows many users to use the Cluster at the same time without fighting for resources. 
-</div>
+ - This allows many users to use the Cluster at the same time without fighting for resources.
 
 ## Using Cyberduck
 ::: {.column-margin}
@@ -50,13 +48,11 @@ Users interact with the Cluster as depicted below:
 ::: {.column-margin}
 ![(3) Download (Click to enlarge)](/images/tutorial-images/Cyberduck5.png)
 :::
-To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown in the images to the right^1^. To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with^2^. If you like to download a file, right click on it and choose `Download As` ^3^.
+To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown in the image to the right. To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with. If you like to download a file, right click on it and choose `Download As`.
 
 ## Running jobs
 
 Everything you can do on a normal Linux system, you can also do on the Cluster. But, you will want to run all of your programs off the worker nodes rather than the head node. You connect to the head node with ssh and submit jobs to the worker nodes through the command line. It is dangerous to execute programs on the head node since it may cause the supercomputer to crash. To prevent this, we run jobs on the worker nodes, which can easily be done in three steps:
-
-<div class="code-explanation">
 
  1. Create a `job.sh` script containing the commands to run our program
     (giftwrap the script)
@@ -71,8 +67,6 @@ Everything you can do on a normal Linux system, you can also do on the Cluster. 
       updated
  
     - To exit that, use <kbd>CTRL</kbd> + <kbd>c</kbd>
-
-</div>
 
 Throughout this tutorial you will see how to submit scripts to a worker node using `sbatch` and how to check the status of running scripts using watch `squeue`. It is important to remember to check the output locations of the programs you are running for later access.
 
@@ -120,18 +114,18 @@ qiime tools import \ # <8>
 7. 'Soure activate' is a command that activates an environment specified in the script. In this case, it is the qiime2-2019.7 environment.
 8. Here is the main command that we are running. We run the qiime tools import command with a few flags.
 
-*Hover over the numbers to the right of the code above to see annotations.*
+<div class="hint-text">
+Hover over the numbers to the right of the code above to see annotations.
+</div>
 
 There is a lot in the above image to unpack. Basically, the scripts that you will be using can be divided into three sections,
 
-<div class="code-explanation">
  1. The topmost (in the black rectangle) gives general information about the script itself. 
     - Things like which language the script is written in (we use BASH) and how much resources to allocate to that job are here
  2. The next section (in the gray rectangle) is just a description of what the script does.
-    - This does not impact the job itself; it’s just to give the user more information about the script.
+    - This does not impact the job itself; it's just to give the user more information about the script.
  3. The last section (in the pink rectangle) is the meat of the script, so to speak. It tells the Cluster what you actually want it to do.
     - In the above script, we are telling the Cluster to move into the folder as specified by the workdir variable, then activate the `qiime2-2019.7` environment, and finally run the qiime tools import command with a few flags
-</div>
 
 Two symbols that you will see a lot in our scripts are `#` and `\`.
 
@@ -139,11 +133,13 @@ In general, `#` tells the Cluster to ignore that line and continue on with the s
 
 `\` tells the Cluster that the command is continued on the next line. So, the qiime tools import command above is equivalent to: 
 
-*Put your cursor over the code below and scroll to the right.*
 
 ``` bash
 qiime tools import --type 'SampleData[PairedEndSequenceWithQuality]' --input-path co_b.mapping.csv.txt --output-path co_b.paired-end-demux.qza --input-format PairedEndFastqManifestPhred33
 ```
+<div class="hint-text">
+  Put your cursor over the code above and scroll to the right.
+</div>
 
 As you can see (kind of), that command gets pretty long, so we use the `\`’s to make it more viewable within our scripts.
 
@@ -176,8 +172,6 @@ I should also note that the text editor that I am using (Notepad++) applies form
 There are a couple ways to edit scripts. You can edit them through the Cluster, with Putty, the terminal, or you could edit them with Cyberduck.
 To edit through the Cluster…
 
-<div class="code-explanation">
-
   1. `nano [SCRIPT NAME]` when you are in the same folder as the script you want to edit
     - For example, `nano 1.2_raw_reads_import.sh`
 
@@ -193,11 +187,7 @@ To edit through the Cluster…
 
   7. Then press <kbd>ENTER</kbd>
 
-</div>
-
 To edit through Cyberduck…
-
-<div class="code-explanation">
 
   1. Right click on the script and choose "Edit With"
 
@@ -208,8 +198,6 @@ To edit through Cyberduck…
   4. Make the desired changes
 
   5. Go to "File" then "Save" to save the script
-
-</div>
 
 Regardless of how you edit it, you submit scripts using `sbatch [SCRIPT NAME]`. For instance, `sbatch 1.2_raw_reads_import.sh` would submit the `1.2_raw_reads_import.sh` script to the head node, which would then give it to a worker node to run. 
 

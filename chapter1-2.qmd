@@ -99,8 +99,6 @@ find a line that starts with `Usage: ...`. You should see
 ls [OPTION] ... [FILE] ...
 ```
 
-<div class="code-explanation">
-
 - `ls`: simply the command name
 
 - `OPTION` is where you put your options or flags. You can think of
@@ -123,8 +121,6 @@ though it has no flags or files.
 together as in: `ls -ahl`. This is convenient when using a lot of
 options.
 
-</div>
-
 Let’s quickly read through the options for `ls` to see what else we can do with it.
 
 :::{.callout-tip}
@@ -134,6 +130,7 @@ Let’s quickly read through the options for `ls` to see what else we can do wit
 <summary>Hint</summary>
 
 Use the `--help` flag to find the correct flag for this situation.
+
 </details>
 :::
 
@@ -310,12 +307,8 @@ wget --help
 You will notice that `wget` has even more options than `ls`. Are you
 required to use any of them? 
 
-What happends when you run the following command, and why does that
+What happends when you run the `wget`, and why does that
 make sense?
-
-``` bash
-wget
-```
 :::
 After your PCR amplicons are sequenced, the sequencing core will upload
 the data to a website from which it can be downloaded. In a web
@@ -323,8 +316,6 @@ browser, you can click on various files to download them, but in a
 terminal, you instead use `wget`. Let’s practice with some sample data:
 
 Downloading files through the terminal:
-
-<div class="code-explanation">
 
 - Open this [link](http://www.drive5.com/uchime/uchime_download.html) in a web browser.
 
@@ -337,7 +328,6 @@ Downloading files through the terminal:
 - In your folder, type `wget` followed by a space, then paste the link
   you just copied (If you are using PuTTY, you will have to right
   click to paste instead of using <kbd>Ctrl</kbd> + <kbd>V</kbd> )
-</div>
 
 
 ``` bash
@@ -345,9 +335,7 @@ cd linux_practice
 wget http://www.drive5.com/uchime/simm.tar.gz
 ```
 
-<div class="code-explanation">
 - Press enter to run `wget` and download the indicated file
-</div>
 
 ## Using `gzip` to compress and decompress files
 
@@ -523,7 +511,7 @@ rm [OPTION]… [FILE]…
 ```
 
 :::{.callout-tip}
-## Remove one of the files in your `/downloads` directory and write the command you used:
+## Remove one of the files in your `/downloads` directory and write the command you used.
 :::
 
 Change out of your `/downloads` directory and into your lastname directory:

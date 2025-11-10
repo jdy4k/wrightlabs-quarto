@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Wright Lab Tutorials"
+  title: "Wright Labs Tutorials"
   favicon: images/favicon.ico
   sidebar:
     logo: images/bar_logo_alt.png
@@ -10,10 +10,9 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - section: Using the Cluster
+      - href: chapter1-0.qmd
+        section: Using the Cluster
         contents:
-          - href: chapter1-0.qmd
-            text: Overview
           - href: chapter1-1.qmd
             text: Connecting to the Cluster
           - href: chapter1-2.qmd
@@ -28,6 +27,11 @@ website:
         contents:
           - href: chapter3-0.qmd
             text: Overview
+  page-footer:
+    left: |
+      Tutorials written by Wright Labs.
+    right: |
+      This site was built with <a href="https://quarto.org/">Quarto</a>.
 
 format:
   html:

@@ -17,7 +17,6 @@ installed programs.
 ## Via SSH on Windows
 If you have a PC running a windows operating system, you will need to
 download [PuTTY](http://www.chiark.greenend.org.uk/\~sgtatham/putty/download.html).
-
 Upon opening PuTTY, this a window should appear.
 
 ::: {.column-margin}
@@ -26,7 +25,6 @@ Upon opening PuTTY, this a window should appear.
 
 :::
 
-<div class="code-explanation">
 1. Type the Cluster's IP address `147.73.20.123` into the "Host Name" box
 
 2. Ensure that "SSH" is selected for "Connection Type."
@@ -36,7 +34,6 @@ Upon opening PuTTY, this a window should appear.
 4. Type your username (then enter) and password in the terminal window.
   
    - Password: `4gcatRocks!`
-</div>
 
 :::{.callout-warning}
 ## Warning
@@ -65,9 +62,7 @@ enter to again reveal the password prompt and start over.
 ## Via Cyberduck
 
 To help view and edit files on the Cluster, both Mac and Windows users
-can install the program “Cyberduck” on their computer:
-
-<div class="code-explanation">
+can install the program "Cyberduck" on their computer:
 
 1. Download [Cyberduck](http://cyberduck.io/?1=en)
 
@@ -94,8 +89,9 @@ section of the window.
 
 6. Go to the preferences 
 
-   - *Windows: Edit -> Preferences*
-   - *Mac: Cyberduck -> Preferences*
+   - **Windows:** Edit -> Preferences
+
+   - **Mac:** Cyberduck -> Preferences
 
 7. Under the General tab, select:
 
@@ -123,8 +119,6 @@ section of the window.
    * Enter your password in the box next to "Password:"
 
    * Then close out of the window (the little red X)
-
-</div>
 
 ::: {.column-margin}
 ![Open Connection (Click to enlarge)](/images/tutorial-images/Cyberduck1.png)
