@@ -5,7 +5,7 @@ website:
   title: "Wright Lab Tutorials"
   favicon: images/favicon.ico
   sidebar:
-    logo: images/WLABS_light.webp
+    logo: images/bar_logo_alt.png
     search: true
     contents:
       - href: index.qmd
