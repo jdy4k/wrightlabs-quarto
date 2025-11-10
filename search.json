@@ -69,7 +69,7 @@
     "href": "index.html#available-tutorials",
     "title": "Wright Labs Tutorial Book",
     "section": "Available Tutorials",
-    "text": "Available Tutorials\n\nUsing the Cluster\nLearn how to work with Juniata College’s Cluster computing infrastructure. This tutorial covers:\n\nRemotely connecting to the Cluster from your personal computer’s terminal\nBasics of working in a Linux terminal\nHow the Cluster operates\n\n\n\n\n16s Tutorial\nComing soon! This tutorial will cover 16S rRNA sequencing analysis workflows.\nView Overview →\n\n\n\nShotgun MT/MG Tutorial\nComing soon! This tutorial will cover shotgun metagenomics and metatranscriptomics analysis.\nView Overview →",
+    "text": "Available Tutorials\n\nUsing the Cluster\nLearn how to work with Juniata College’s Cluster computing infrastructure. This tutorial covers:\n\n\nRemotely connecting to the Cluster from your personal computer’s terminal\nBasics of working in a Linux terminal\nHow the Cluster operates\n\n\n\n\n\n16s Tutorial\nComing soon! This tutorial will cover 16S rRNA sequencing analysis workflows.\nView Overview →\n\n\n\nShotgun MT/MG Tutorial\nComing soon! This tutorial will cover shotgun metagenomics and metatranscriptomics analysis.\nView Overview →",
     "crumbs": [
       "Home"
     ]
