@@ -81,8 +81,7 @@
     "section": "",
     "text": "Bioinformatics requires a machine much stronger than the computers we use in daily life. It is helpful to have access to a Cluster computer—such as the one housed at Juniata College—to complete our analysis. In this tutorial, you will learn how to:\n\nConnect to Juniata’s wifi when off campus\nRemotely connect to Juniata’s Cluster from your personal computer’s terminal\nBasics of working in a Linux terminal\nHow the Cluster operates",
     "crumbs": [
-      "Using the Cluster",
-      "Overview"
+      "Using the Cluster"
     ]
   },
   {
