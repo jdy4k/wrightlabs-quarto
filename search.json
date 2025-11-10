@@ -112,7 +112,7 @@
     "href": "chapter1-1.html#via-ssh-on-macos",
     "title": "Connecting to the Cluster",
     "section": "Via SSH on MacOs",
-    "text": "Via SSH on MacOs\nOpen the terminal application to bring up the command line interface that will allow you to connect to the Cluster. Type ssh  your_username_here@147.73.20.123 followed by enter, then your password.\n\n\n\n\n\n\nWarningWarning\n\n\n\nAs you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over.",
+    "text": "Via SSH on MacOs\nOpen the terminal application to bring up the command line interface that will allow you to connect to the Cluster. Type ssh your_username_here@147.73.20.123 followed by enter, then your password.\n\n\n\n\n\n\nWarningWarning\n\n\n\nAs you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over.",
     "crumbs": [
       "Using the Cluster",
       "Connecting to the Cluster"
@@ -123,18 +123,7 @@
     "href": "chapter1-1.html#via-cyberduck",
     "title": "Connecting to the Cluster",
     "section": "Via Cyberduck",
-    "text": "Via Cyberduck\nTo help view and edit files on the Cluster, both Mac and Windows users can install the program “Cyberduck” on their computer:",
-    "crumbs": [
-      "Using the Cluster",
-      "Connecting to the Cluster"
-    ]
-  },
-  {
-    "objectID": "chapter1-1.html#cyberduck-setup",
-    "href": "chapter1-1.html#cyberduck-setup",
-    "title": "Connecting to the Cluster",
-    "section": "Cyberduck Setup",
-    "text": "Cyberduck Setup\n\n\nDownload Cyberduck\nClick the box on the left to select the download appropriate for your operating system\nFollow the onscreen instructions to install the program to your device\nOpen the Cyberduck application\nIn Cyberduck, click “Open Connection” in the upper left hand section of the window.\n\nChange FTP (File Transfer Protocol) to SFTP (SSH File Transfer Protocol)\nIn the “Server” box type 147.73.20.123 to connect to Juniata’s new Cluster\nPut in your username and password\nClick “Connect”\n\nGo to the preferences\n\nWindows: Edit -&gt; Preferences\nMac: Cyberduck -&gt; Preferences\n\nUnder the General tab, select:\n\n“Save Workspace”\n“Use Keychain”\n“Info window always shows current selection” (Mac users: in the Browser tab)\nFor PC users: also select “double click opens file in external editor”\nSelect: “Editor,” select your text editor (Notepad++ is a good one for Windows users, if you want to download that), then check the box “Always use this application” to set it as the default.\n\nUnder the Bookmark tab, select:\n\n“New Bookmark”\nEnter a name for the bookmark in the box next to “Nickname:”\nEnter your password in the box next to “Password:”\nThen close out of the window (the little red X)\n\n\n\n\n\n\n\n\nOpen Connection (Click to enlarge)\n\n\n\n\n\n\nCredentials (Click to enlarge)\n\n\n\nYou can now launch Cyberduck and connect to the Cluster. If at any point you need to reconnect to the Cluster, you can go to “Bookmark” and select your bookmark.",
+    "text": "Via Cyberduck\nTo help view and edit files on the Cluster, both Mac and Windows users can install the program “Cyberduck” on their computer:\n\n\nDownload Cyberduck\nClick the box on the left to select the download appropriate for your operating system\nFollow the onscreen instructions to install the program to your device\nOpen the Cyberduck application\nIn Cyberduck, click “Open Connection” in the upper left hand section of the window.\n\nChange FTP (File Transfer Protocol) to SFTP (SSH File Transfer Protocol)\nIn the “Server” box type 147.73.20.123 to connect to Juniata’s new Cluster\nPut in your username and password\nClick “Connect”\n\nGo to the preferences\n\nWindows: Edit -&gt; Preferences\nMac: Cyberduck -&gt; Preferences\n\nUnder the General tab, select:\n\n“Save Workspace”\n“Use Keychain”\n“Info window always shows current selection” (Mac users: in the Browser tab)\nFor PC users: also select “double click opens file in external editor”\nSelect: “Editor,” select your text editor (Notepad++ is a good one for Windows users, if you want to download that), then check the box “Always use this application” to set it as the default.\n\nUnder the Bookmark tab, select:\n\n“New Bookmark”\nEnter a name for the bookmark in the box next to “Nickname:”\nEnter your password in the box next to “Password:”\nThen close out of the window (the little red X)\n\n\n\n\n\n\n\n\nOpen Connection (Click to enlarge)\n\n\n\n\n\n\nCredentials (Click to enlarge)\n\n\n\nYou can now launch Cyberduck and connect to the Cluster. If at any point you need to reconnect to the Cluster, you can go to “Bookmark” and select your bookmark.",
     "crumbs": [
       "Using the Cluster",
       "Connecting to the Cluster"
