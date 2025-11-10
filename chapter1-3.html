@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cluster Basics – Wright Lab Tutorials</title>
+<title>Cluster Basics – Wright Labs Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7f6a3dac166d0e2395d94c9a56125eb1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c9c472b310504b4e0a340a50f80f5978.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -286,14 +286,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="code-explanation">
 <ul>
 <li><p>Using a laptop or desktop computer, you start an ssh session with the head node of the Cluster as you previously did.</p></li>
 <li><p>Off the head node, you can get your files in order, run small programs, and prepare a job script for larger programs. However, larger programs will need to be submitted to worker nodes in order to prevent the Cluster from crashing.</p></li>
 <li><p>To run large programs, the user will need to write a submission script (you will be using these later in the QIIME tutorial). Once your script is written on the head node, you will submit the job to a worker node which will process your request, sometimes taking minutes, hours, or weeks, and then deposit any final documents into your directory on the head node.</p></li>
 <li><p>This allows many users to use the Cluster at the same time without fighting for resources.</p></li>
 </ul>
-</div>
 <section id="using-cyberduck" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="using-cyberduck">Using Cyberduck</h2>
 
@@ -320,12 +318,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div></div>
 
-<p>To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown in the images to the right<sup>1</sup>. To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with<sup>2</sup>. If you like to download a file, right click on it and choose <code>Download As</code> <sup>3</sup>.</p>
+<p>To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown in the image to the right. To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with. If you like to download a file, right click on it and choose <code>Download As</code>.</p>
 </section>
 <section id="running-jobs" class="level2">
 <h2 class="anchored" data-anchor-id="running-jobs">Running jobs</h2>
 <p>Everything you can do on a normal Linux system, you can also do on the Cluster. But, you will want to run all of your programs off the worker nodes rather than the head node. You connect to the head node with ssh and submit jobs to the worker nodes through the command line. It is dangerous to execute programs on the head node since it may cause the supercomputer to crash. To prevent this, we run jobs on the worker nodes, which can easily be done in three steps:</p>
-<div class="code-explanation">
 <ol type="1">
 <li><p>Create a <code>job.sh</code> script containing the commands to run our program (giftwrap the script)</p></li>
 <li><p>Submit the script using <code>sbatch</code> (give the script to the worker node)</p></li>
@@ -335,7 +332,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>To exit that, use <kbd>CTRL</kbd> + <kbd>c</kbd></p></li>
 </ul></li>
 </ol>
-</div>
 <p>Throughout this tutorial you will see how to submit scripts to a worker node using <code>sbatch</code> and how to check the status of running scripts using watch <code>squeue</code>. It is important to remember to check the output locations of the programs you are running for later access.</p>
 </section>
 <section id="anatomy-of-a-script" class="level2">
@@ -403,9 +399,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span data-code-cell="annotated-cell-1" data-code-lines="23,24,25,26,27" data-code-annotation="8">Here is the main command that we are running. We run the qiime tools import command with a few flags.</span>
 </dd>
 </dl>
-<p><em>Hover over the numbers to the right of the code above to see annotations.</em></p>
+<div class="hint-text">
+<p>Hover over the numbers to the right of the code above to see annotations.</p>
+</div>
 <p>There is a lot in the above image to unpack. Basically, the scripts that you will be using can be divided into three sections,</p>
-<div class="code-explanation">
 <ol type="1">
 <li>The topmost (in the black rectangle) gives general information about the script itself.
 <ul>
@@ -420,12 +417,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>In the above script, we are telling the Cluster to move into the folder as specified by the workdir variable, then activate the <code>qiime2-2019.7</code> environment, and finally run the qiime tools import command with a few flags</li>
 </ul></li>
 </ol>
-</div>
 <p>Two symbols that you will see a lot in our scripts are <code>#</code> and <code>\</code>.</p>
 <p>In general, <code>#</code> tells the Cluster to ignore that line and continue on with the script. These lines are referred to as comments. The exceptions to this are in the black box above. But, everywhere else, the comments, as denoted by <code>#</code>, are just skipped.</p>
 <p><code>\</code> tells the Cluster that the command is continued on the next line. So, the qiime tools import command above is equivalent to:</p>
-<p><em>Put your cursor over the code below and scroll to the right.</em></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools import <span class="at">--type</span> <span class="st">'SampleData[PairedEndSequenceWithQuality]'</span> <span class="at">--input-path</span> co_b.mapping.csv.txt <span class="at">--output-path</span> co_b.paired-end-demux.qza <span class="at">--input-format</span> PairedEndFastqManifestPhred33</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="hint-text">
+<p>Put your cursor over the code above and scroll to the right.</p>
+</div>
 <p>As you can see (kind of), that command gets pretty long, so we use the <code>\</code>’s to make it more viewable within our scripts.</p>
 <p>For a more viewable example <code>ls -l ~</code> is equivalent to:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="dt">\</span></span>
@@ -467,7 +465,6 @@ What is the purpose of setting the workdir variable; how is it being used?
 <section id="editing-and-submitting-scripts" class="level2">
 <h2 class="anchored" data-anchor-id="editing-and-submitting-scripts">Editing and submitting scripts</h2>
 <p>There are a couple ways to edit scripts. You can edit them through the Cluster, with Putty, the terminal, or you could edit them with Cyberduck. To edit through the Cluster…</p>
-<div class="code-explanation">
 <ol type="1">
 <li><p><code>nano [SCRIPT NAME]</code> when you are in the same folder as the script you want to edit - For example, <code>nano 1.2_raw_reads_import.sh</code></p></li>
 <li><p>Navigate using the arrow keys</p></li>
@@ -477,9 +474,7 @@ What is the purpose of setting the workdir variable; how is it being used?
 <li><p>Then press <kbd>y</kbd></p></li>
 <li><p>Then press <kbd>ENTER</kbd></p></li>
 </ol>
-</div>
 <p>To edit through Cyberduck…</p>
-<div class="code-explanation">
 <ol type="1">
 <li><p>Right click on the script and choose “Edit With”</p></li>
 <li><p>Then pick the program you want to use to edit it</p></li>
@@ -487,7 +482,6 @@ What is the purpose of setting the workdir variable; how is it being used?
 <li><p>Make the desired changes</p></li>
 <li><p>Go to “File” then “Save” to save the script</p></li>
 </ol>
-</div>
 <p>Regardless of how you edit it, you submit scripts using <code>sbatch [SCRIPT NAME]</code>. For instance, <code>sbatch 1.2_raw_reads_import.sh</code> would submit the <code>1.2_raw_reads_import.sh</code> script to the head node, which would then give it to a worker node to run.</p>
 <p>You can check the progress of scripts with <code>squeue</code>.</p>
 <p>To have the progress be continuously updated, use watch <code>squeue</code>. You can exit watch <code>squeue</code> by using <kbd>CTRL</kbd> + <kbd>C</kbd></p>
@@ -958,6 +952,19 @@ What is the purpose of setting the workdir variable; how is it being used?
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Tutorials written by Wright Labs.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This site was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
