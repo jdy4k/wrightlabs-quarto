@@ -30,15 +30,13 @@ be called “the a flag.” Try running `ls` with this flags (shown below).
 ls -a
 ```
 
-<details>
+<details class="output">
 <summary>Output for `ls -a`</summary>
-
 Where as `ls` shows all normal files in your directory, `ls -a` will
 show you all the files in a directory/folder, including **hidden
 files** (these files and folders will have a period before there
 name, for example `.config` or `.local`)
-
-```{.no-copy}
+``` bash {.no-copy}
 .config .local Documents Downloads Pictures
 ```
 </details>
@@ -47,7 +45,7 @@ name, for example `.config` or `.local`)
 ls -l
 ```
 
-<details>
+<details class="output">
 <summary>Output for `ls -l`</summary>
 
 `ls -l` will show you more information about those files in a long list.
@@ -103,7 +101,7 @@ ls [OPTION] ... [FILE] ...
 
 <div class="code-explanation">
 
-- `ls` is simply the command name
+- `ls`: simply the command name
 
 - `OPTION` is where you put your options or flags. You can think of
 options as modifiers of the command. In this case, `-a` and `-l` are

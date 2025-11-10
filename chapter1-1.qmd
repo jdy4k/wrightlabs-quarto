@@ -20,24 +20,23 @@ download [PuTTY](http://www.chiark.greenend.org.uk/\~sgtatham/putty/download.htm
 
 Upon opening PuTTY, this a window should appear.
 
-
-
-::: {.callout-note}
-* Type the Cluster's IP address `147.73.20.123` into the "Host Name" box
-
-* Ensure that "SSH" is selected for "Connection Type."
-
-* Press "Open"
-
-* Type your username (then enter) and password in the terminal window.
-  
-  * Password: `4gcatRocks!`
-:::
 ::: {.column-margin}
 
-![Click to enlarge](/images/tutorial-images/PuTTY_Config.png)
+![PuTTY Configuration Window (Click to enlarge)](/images/tutorial-images/PuTTY_Config.png)
 
 :::
+
+<div class="code-explanation">
+1. Type the Cluster's IP address `147.73.20.123` into the "Host Name" box
+
+2. Ensure that "SSH" is selected for "Connection Type."
+
+3. Press "Open"
+
+4. Type your username (then enter) and password in the terminal window.
+  
+   - Password: `4gcatRocks!`
+</div>
 
 :::{.callout-warning}
 ## Warning
@@ -51,9 +50,8 @@ enter to again reveal the password prompt and start over.
 ## Via SSH on MacOs
 
 Open the terminal application to bring up the command line interface
-that will allow you to connect to the Cluster. Type `ssh 
-your_username_here@147.73.20.123` followed by enter, then your
-password.
+that will allow you to connect to the Cluster. Type `ssh your_username_here@147.73.20.123` 
+followed by enter, then your password.
 
 :::{.callout-warning}
 ## Warning
@@ -69,8 +67,7 @@ enter to again reveal the password prompt and start over.
 To help view and edit files on the Cluster, both Mac and Windows users
 can install the program “Cyberduck” on their computer:
 
-::: {.callout-note}
-## Cyberduck Setup
+<div class="code-explanation">
 
 1. Download [Cyberduck](http://cyberduck.io/?1=en)
 
@@ -126,12 +123,15 @@ section of the window.
    * Enter your password in the box next to "Password:"
 
    * Then close out of the window (the little red X)
-:::
+
+</div>
+
 ::: {.column-margin}
-![Click to enlarge](/images/tutorial-images/Cyberduck1.png)
+![Open Connection (Click to enlarge)](/images/tutorial-images/Cyberduck1.png)
 :::
+
 ::: {.column-margin}
-![Click to enlarge](/images/tutorial-images/Cyberduck2.png)
+![Credentials (Click to enlarge)](/images/tutorial-images/Cyberduck2.png)
 :::
 
 You can now launch Cyberduck and connect to the Cluster. If at any

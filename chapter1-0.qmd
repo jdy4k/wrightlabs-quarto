@@ -6,7 +6,7 @@ use in daily life. It is helpful to have access to a Cluster
 computer—such as the one housed at Juniata College—to complete our
 analysis. In this tutorial, you will learn how to:
 
-- Connect to Juniata's wifi when off campus
-- Remotely connect to Juniata's Cluster from your personal computer's terminal
-- Basics of working in a Linux terminal
-- How the Cluster operates
+1. Connect to Juniata's wifi when off campus
+2. Remotely connect to Juniata's Cluster from your personal computer's terminal
+3. Basics of working in a Linux terminal
+4. How the Cluster operates

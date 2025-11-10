@@ -1,5 +1,5 @@
 ---
-title: "Wright Lab Tutorials"
+title: "Wright Labs Tutorial Book"
 page-navigation: 
   next: false
 ---
@@ -12,7 +12,6 @@ Welcome to the Wright Lab Tutorials! This collection of tutorials provides step-
 
 Learn how to work with Juniata College's Cluster computing infrastructure. This tutorial covers:
 
- - Connecting to Juniata's wifi when off campus
  - Remotely connecting to the Cluster from your personal computer's terminal
  - Basics of working in a Linux terminal
  - How the Cluster operates

@@ -1,5 +1,6 @@
 ---
 title: "Cluster Basics"
+code-annotations: hover
 ---
 
 Purchased via an HHMI grant, the Juniata College Cluster is vital to
@@ -17,6 +18,15 @@ worker nodes are underneath the head node; they complete jobs assigned
 to them.
 
 Users interact with the Cluster as depicted below:
+```{mermaid}
+  flowchart TD
+    A[You] -->|Your Hands| B(Laptop)
+    B -->|SSH Session| C{Head Node}
+    C -->|Job| D[Worker Node 1]
+    C -->|Job| E[Worker Node 2]
+    C -->|Job| F[Worker Node 3]
+    C -->|Job| G[Worker Node 4]
+```
 
 <div class="code-explanation">
  - Using a laptop or desktop computer, you start an ssh session with the head node of the Cluster as you previously did.
@@ -29,29 +39,18 @@ Users interact with the Cluster as depicted below:
 </div>
 
 ## Using Cyberduck
-
 ::: {.column-margin}
-![Click to enlarge](/images/tutorial-images/Cyberduck3.png)
+![(1) Drag and drop (Click to enlarge)](/images/tutorial-images/Cyberduck3.png)
 :::
 
 ::: {.column-margin}
-![Click to enlarge](/images/tutorial-images/Cyberduck4.png)
+![(2) Edit (Click to enlarge)](/images/tutorial-images/Cyberduck4.png)
 :::
-
-<div class="code-explanation">
-
- - To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown below:
-
- - To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with.
-
- - To download a file, right click on it and choose "Download As,"
-
-</div>
 
 ::: {.column-margin}
-![Click to enlarge](/images/tutorial-images/Cyberduck5.png)
+![(3) Download (Click to enlarge)](/images/tutorial-images/Cyberduck5.png)
 :::
-
+To upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown in the images to the right^1^. To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with^2^. If you like to download a file, right click on it and choose `Download As` ^3^.
 
 ## Running jobs
 
@@ -81,52 +80,57 @@ Throughout this tutorial you will see how to submit scripts to a worker node usi
 
 All of the scripts that you will be using for this tutorial are already made. However, a brief description of their various components will hopefully help you better understand how they work and make your own, should the need arise.
 
-![Click to enlarge](/images/tutorial-images/ScriptAnnotated.png)
+<!-- ![](/images/tutorial-images/ScriptAnnotated.png) -->
 
-<!--
-``` bash {.no-copy}
-#!/bin/bash # <1> <2>
+``` bash
+
+#!/bin/bash # <1>
 # PBS -l nodes=1:ppn=6 # <2>
-#PBS -N qiime2 import
+#PBS -N qiime2 import # <3>
 #PBS -j oe
 
-#=======================================================#
-#   Imports raw fastq reads into a QIIME 2 artifact
-#
-#   June 29, 2018
-#=======================================================#
+#=======================================================# # <4>
+#   Imports raw fastq reads into a QIIME 2 artifact # <4>
+# # <4>
+#   June 29, 2018 # <4>
+#=======================================================# # <4>
 
 # Set your working directory to where you have your raw data sequence
-workdir=/home/see/Wright_Labs/Connors_B_11.19/
-cd $workdir
+workdir=/home/see/Wright_Labs/Connors_B_11.19/ # <5>
+cd $workdir # <6>
 
-source activate qiime2-2019.7
+source activate qiime2-2019.7 # <7>
 
-## before running script make a mapping file as described in the 
-##tutorial This is important because it points to the forward 
-## and reverse reads which will be imported
+# Before running script make a mapping file as described in the 
+# tutorial This is important because it points to the forward 
+# and reverse reads which will be imported.
 
-qiime tools import \
-  --type 'SampleData[PairedEndSequenceWithQuality]' \
-  --input-path co_b.mapping.csv.txt \
-  --output-path co_b.paired-end-demux.qza \
-  --input-format PairedEndFastqManifestPhred33
+qiime tools import \ # <8>
+  --type 'SampleData[PairedEndSequenceWithQuality]' \ # <8>
+  --input-path co_b.mapping.csv.txt \ # <8>
+  --output-path co_b.paired-end-demux.qza \ # <8>
+  --input-format PairedEndFastqManifestPhred33 # <8>
 ```
-1. Test
-2. Test 2
--->
+1. Specifies the coding language of the script
+2. Specifies the number of nodes and ppn to allocate to the job. (higher the pnn, the more resources are allocated to the job)
+3. Specifies the name of the job as seen when you do qstat or watch qstat
+4. This box just gives a brief description of what the script does. It does not impact the job itself.
+5. Specifies the value for 'workdir'
+6. Changes the working directory to the value of 'workdir'
+7. 'Soure activate' is a command that activates an environment specified in the script. In this case, it is the qiime2-2019.7 environment.
+8. Here is the main command that we are running. We run the qiime tools import command with a few flags.
+
+*Hover over the numbers to the right of the code above to see annotations.*
 
 There is a lot in the above image to unpack. Basically, the scripts that you will be using can be divided into three sections,
 
 <div class="code-explanation">
-
  1. The topmost (in the black rectangle) gives general information about the script itself. 
     - Things like which language the script is written in (we use BASH) and how much resources to allocate to that job are here
  2. The next section (in the gray rectangle) is just a description of what the script does.
     - This does not impact the job itself; it’s just to give the user more information about the script.
  3. The last section (in the pink rectangle) is the meat of the script, so to speak. It tells the Cluster what you actually want it to do.
     - In the above script, we are telling the Cluster to move into the folder as specified by the workdir variable, then activate the `qiime2-2019.7` environment, and finally run the qiime tools import command with a few flags
-
 </div>
 
 Two symbols that you will see a lot in our scripts are `#` and `\`.
@@ -134,6 +138,8 @@ Two symbols that you will see a lot in our scripts are `#` and `\`.
 In general, `#` tells the Cluster to ignore that line and continue on with the script. These lines are referred to as comments. The exceptions to this are in the black box above. But, everywhere else, the comments, as denoted by `#`, are just skipped.
 
 `\` tells the Cluster that the command is continued on the next line. So, the qiime tools import command above is equivalent to: 
+
+*Put your cursor over the code below and scroll to the right.*
 
 ``` bash
 qiime tools import --type 'SampleData[PairedEndSequenceWithQuality]' --input-path co_b.mapping.csv.txt --output-path co_b.paired-end-demux.qza --input-format PairedEndFastqManifestPhred33
