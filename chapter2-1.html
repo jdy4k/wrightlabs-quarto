@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Shotgun MT/MG Tutorial – Wright Labs Tutorials</title>
+<title>Program Installation &amp; Acquiring Data – Wright Labs Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./chapter2-3.html" rel="prev">
+<link href="./chapter2-2.html" rel="next">
+<link href="./chapter2-0.html" rel="prev">
 <link href="./images/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -82,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter3-0.html">Shotgun MT/MG Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter3-0.html">Overview</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter2-0.html">16s Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter2-1.html">Program &amp; Data Aquisition</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter2-1.html" class="sidebar-item-text sidebar-link">
+  <a href="./chapter2-1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Program &amp; Data Aquisition</span></a>
   </div>
 </li>
@@ -182,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter3-0.html" class="sidebar-item-text sidebar-link active">
+  <a href="./chapter3-0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -193,15 +229,25 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#miniconda" id="toc-miniconda" class="nav-link active" data-scroll-target="#miniconda">Miniconda</a>
+  <ul class="collapse">
+  <li><a href="#checking-for-miniconda-installation" id="toc-checking-for-miniconda-installation" class="nav-link" data-scroll-target="#checking-for-miniconda-installation">Checking for Miniconda Installation</a></li>
+  <li><a href="#installing-miniconda" id="toc-installing-miniconda" class="nav-link" data-scroll-target="#installing-miniconda">Installing Miniconda</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter3-0.html">Shotgun MT/MG Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter3-0.html">Overview</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter2-0.html">16s Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter2-1.html">Program &amp; Data Aquisition</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Shotgun MT/MG Tutorial</h1>
+<h1 class="title">Program Installation &amp; Acquiring Data</h1>
 </div>
 
 
@@ -218,8 +264,86 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>We need to create two environments to use our Qiime2 pipeline, one for Qiime2 and one for biom convert. Environments are essentially just collections of programs that we will use to perform various analyses.</p>
+<p>Some programs are incompatible with others and thus must be installed to different environments. As an added bonus, installing programs using environments can also help avoid breaking your cluster account.</p>
+<section id="miniconda" class="level2">
+<h2 class="anchored" data-anchor-id="miniconda">Miniconda</h2>
+<p>(summary of what miniconda is)</p>
+<section id="checking-for-miniconda-installation" class="level3">
+<h3 class="anchored" data-anchor-id="checking-for-miniconda-installation">Checking for Miniconda Installation</h3>
+<p>To check if you have miniconda installed, you can run the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If this returns a list of environments, you have miniconda installed. If you get an error instead, follow the installation insctructions for miniconda in the next section.</p>
+</section>
+<section id="installing-miniconda" class="level3">
+<h3 class="anchored" data-anchor-id="installing-miniconda">Installing Miniconda</h3>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>If you already have miniconda installed, you can skip this section.</p>
+</div>
+</div>
+</div>
+<p>To download and setup miniconda, you can run these commands:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh <span class="at">--no-check-certificate</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-py37_4.10.3-Linux-x86_64.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An installer for miniconda will begin in your terminal. You can follow these steps to configure it properly:</p>
+<ol type="1">
+<li>Hit enter a bunch of times; many of the intital prompt will be asking you to change default. If you are comfortable changing these deffault settings, feel free too. Otherw, just hit enter until the next step.</li>
+<li>Then accept the license agreement by typing “yes”, without the quotation marks</li>
+<li>Hit enter after typing that.</li>
+<li>Hit enter again. Type “yes” again at the “Do you wish the installer to initialize Miniconda3 by running conda init?” prompt.</li>
+<li>After installing it, copy the .condarc file to your home directory</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /home/see/.condarc ~</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li>Open your .bashrc file</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="7" type="1">
+<li>At the bottom of this file, paste by copying and right-clicking:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LC_ALL</span><span class="op">=</span><span class="st">"en_US.utf8"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LANG</span><span class="op">=</span><span class="st">"en_US.utf8"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your <code>.bashrc</code> file should look something like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Source global definitions</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> /etc/bashrc <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /etc/bashrc</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the following line if you don't like systemctl's auto-paging fea$</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># export SYSTEMD_PAGER=</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># User specific aliases and functions</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># !! Contents within this block are managed by 'conda init' !!</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="va">__conda_setup</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="st">'/home/stewacs19/miniconda3/bin/conda'</span> <span class="st">'shell.bash'</span> <span class="st">'hook'</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null<span class="va">)</span><span class="st">"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="va">$?</span> <span class="ot">-eq</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$__conda_setup</span><span class="st">"</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">"/home/stewacs19/miniconda3/etc/profile.d/conda.sh"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="st">"/home/stewacs19/miniconda3/etc/profile.d/conda.sh"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"/home/stewacs19/miniconda3/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="bu">unset</span> <span class="va">__conda_setup</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LC_ALL</span><span class="op">=</span><span class="st">"en_US.utf8"</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LANG</span><span class="op">=</span><span class="st">"en_US.utf8"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="8" type="1">
+<li>Save and exit the file by clicking <code>CTRL</code> + <code>O</code> and then <code>CTRL</code> + <code>X</code></li>
+<li>Reload your bashrc file by running:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Confirm that you have miniconda installed by running <code>conda list</code> in your terminal.If you get a list of packages, congratulations! You have installed miniconda and can move on to the next section.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -623,11 +747,14 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./chapter2-3.html" class="pagination-link" aria-label="JC Qiime2 Pipeline">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">JC Qiime2 Pipeline</span>
+      <a href="./chapter2-0.html" class="pagination-link" aria-label="16s Tutorial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">16s Tutorial</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./chapter2-2.html" class="pagination-link" aria-label="Qiime2 Basics">
+        <span class="nav-page-text">Qiime2 Basics</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

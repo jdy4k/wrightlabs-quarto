@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Shotgun MT/MG Tutorial – Wright Labs Tutorials</title>
+<title>JC Qiime2 Pipeline – Wright Labs Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./chapter2-3.html" rel="prev">
+<link href="./chapter3-0.html" rel="next">
+<link href="./chapter2-2.html" rel="prev">
 <link href="./images/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -82,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter3-0.html">Shotgun MT/MG Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter3-0.html">Overview</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter2-0.html">16s Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter2-3.html">JC Qiime2 Pipeline</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -165,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter2-3.html" class="sidebar-item-text sidebar-link">
+  <a href="./chapter2-3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">JC Qiime2 Pipeline</span></a>
   </div>
 </li>
@@ -182,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter3-0.html" class="sidebar-item-text sidebar-link active">
+  <a href="./chapter3-0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -193,15 +194,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#import-raw-data-into-qiime2" id="toc-import-raw-data-into-qiime2" class="nav-link active" data-scroll-target="#import-raw-data-into-qiime2">Import Raw Data into Qiime2</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter3-0.html">Shotgun MT/MG Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter3-0.html">Overview</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter2-0.html">16s Tutorial</a></li><li class="breadcrumb-item"><a href="./chapter2-3.html">JC Qiime2 Pipeline</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Shotgun MT/MG Tutorial</h1>
+<h1 class="title">JC Qiime2 Pipeline</h1>
 </div>
 
 
@@ -218,8 +225,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>This tutorial will follow a general cycle. You will first open a file from the QIIME2_pipeline folder, edit the file, submit the file, and then look at the results. If the submission script was successful, you will move on to the next file and continue the cycle. If it was not, then you will look at the log file in your current directory, determine what went wrong, and then start the cycle over with the same script.</p>
+<section id="import-raw-data-into-qiime2" class="level2">
+<h2 class="anchored" data-anchor-id="import-raw-data-into-qiime2">Import Raw Data into Qiime2</h2>
+<p>Each account contains a file called BIN600 this you should always move into this folder when working on the cluster. Inside that folder you should find the metadata and raw data already imported to the Cluster account and it should be ready for you to start analysis!</p>
+<p>Before you start a quick note on notepad editors. Most all of your computers will come with a notepad software that you can use with cyberduck to edit the scripts to submit to the cluster. However for ease of use downloading a software called notepad ++. This notepad software helpes colorcode items in the script to make it easier to read. While this is not required it is highly recommended if you plan on using a notepad app to edit the scripts. If you prefer to use the nano function this is not required.</p>
+<p>Download link: <a href="https://notepad-plus-plus.org/downloads/v8.5.3/">https://notepad-plus-plus.org/downloads/v8.5.3/</a></p>
+<p>Before we can do anything with Qiime2, we need to get our data into a format it can use. That’s what this section is for.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -623,11 +638,14 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./chapter2-3.html" class="pagination-link" aria-label="JC Qiime2 Pipeline">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">JC Qiime2 Pipeline</span>
+      <a href="./chapter2-2.html" class="pagination-link" aria-label="Qiime2 Basics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Qiime2 Basics</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./chapter3-0.html" class="pagination-link" aria-label="Overview">
+        <span class="nav-page-text">Overview</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
