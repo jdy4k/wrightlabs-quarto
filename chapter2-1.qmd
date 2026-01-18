@@ -1,0 +1,99 @@
+---
+title: "Program Installation & Acquiring Data"
+---
+
+We need to create two environments to use our Qiime2 pipeline, one for Qiime2 and one for
+biom convert. Environments are essentially just collections of programs that we will use to
+perform various analyses.
+
+Some programs are incompatible with others and thus must be installed to different
+environments. As an added bonus, installing programs using environments can also help avoid
+breaking your cluster account.
+
+## Miniconda
+
+(summary of what miniconda is)
+
+### Checking for Miniconda Installation
+
+To check if you have miniconda installed, you can run the following command:
+
+``` bash
+conda list
+```
+
+If this returns a list of environments, you have miniconda installed. If you get an error instead, follow 
+the installation insctructions for miniconda in the next section.
+
+### Installing Miniconda
+
+:::{.callout-note}
+If you already have miniconda installed, you can skip this section.
+:::
+
+To download and setup miniconda, you can run these commands:
+
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh --no-check-certificate
+bash Miniconda3-py37_4.10.3-Linux-x86_64.sh
+```
+An installer for miniconda will begin in your terminal. You can follow these steps to configure it properly:
+
+1. Hit enter a bunch of times; many of the intital prompt will be asking you to change default. If you are
+comfortable changing these deffault settings, feel free too. Otherw, just hit enter until the next step.
+2. Then accept the license agreement by typing “yes”, without the quotation marks
+3. Hit enter after typing that.
+4. Hit enter again. Type “yes” again at the “Do you wish the installer to initialize Miniconda3
+by running conda init?” prompt.
+5. After installing it, copy the .condarc file to your home directory
+``` bash
+cp /home/see/.condarc ~
+```
+6. Open your .bashrc file
+``` bash
+nano ~/.bashrc
+```
+7. At the bottom of this file, paste by copying and right-clicking:
+``` bash
+export LC_ALL="en_US.utf8"
+export LANG="en_US.utf8"
+```
+
+Your `.bashrc` file should look something like this:
+
+```bash
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+. /etc/bashrc
+fi
+# Uncomment the following line if you don't like systemctl's auto-paging fea$
+# export SYSTEMD_PAGER=
+# User specific aliases and functions
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/stewacs19/miniconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+if [ $? -eq 0 ]; then
+eval "$__conda_setup"
+else
+if [ -f "/home/stewacs19/miniconda3/etc/profile.d/conda.sh" ]; then
+. "/home/stewacs19/miniconda3/etc/profile.d/conda.sh"
+else
+export PATH="/home/stewacs19/miniconda3/bin:$PATH"
+fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export LC_ALL="en_US.utf8"
+export LANG="en_US.utf8"
+```
+
+8. Save and exit the file by clicking `CTRL` + `O` and then `CTRL` + `X`
+9. Reload your bashrc file by running:
+``` bash
+source ~/.bashrc
+```
+
+Confirm that you have miniconda installed by running `conda list` in your terminal.If you get a list of packages, congratulations! You have installed miniconda and can move on to the next section.
+

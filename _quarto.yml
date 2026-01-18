@@ -10,6 +10,7 @@ website:
     contents:
       - href: index.qmd
         text: Home
+      
       - href: chapter1-0.qmd
         section: Using the Cluster
         contents:
@@ -19,10 +20,17 @@ website:
             text: Unix Shell Basics
           - href: chapter1-3.qmd
             text: Cluster Basics
-      - section: 16s Tutorial
+      
+      - href: chapter2-0.qmd
+        section: 16s Tutorial
         contents:
-          - href: chapter2-0.qmd
-            text: Overview
+          - href: chapter2-1.qmd
+            text: Program & Data Aquisition
+          - href: chapter2-2.qmd
+            text: Qiime2 Basics
+          - href: chapter2-3.qmd
+            text: JC Qiime2 Pipeline                        
+      
       - section: Shotgun MT/MG Tutorial
         contents:
           - href: chapter3-0.qmd

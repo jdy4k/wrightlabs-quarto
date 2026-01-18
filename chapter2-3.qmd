@@ -1,0 +1,28 @@
+---
+title: "JC Qiime2 Pipeline"
+---
+
+This tutorial will follow a general cycle. You will first open a file from the QIIME2_pipeline folder,
+edit the file, submit the file, and then look at the results. If the submission script was successful,
+you will move on to the next file and continue the cycle. If it was not, then you will look at the log
+file in your current directory, determine what went wrong, and then start the cycle over with the
+same script.
+
+## Import Raw Data into Qiime2
+
+Each account contains a file called BIN600 this you should always move into this folder when
+working on the cluster. Inside that folder you should find the metadata and raw data already
+imported to the Cluster account and it should be ready for you to start analysis!
+
+Before you start a quick note on notepad editors. Most all of your computers will come with a
+notepad software that you can use with cyberduck to edit the scripts to submit to the cluster.
+However for ease of use downloading a software called notepad ++. This notepad software
+helpes colorcode items in the script to make it easier to read. While this is not required it is
+highly recommended if you plan on using a notepad app to edit the scripts. If you prefer to use
+the nano function this is not required.
+
+Download link:
+[https://notepad-plus-plus.org/downloads/v8.5.3/](https://notepad-plus-plus.org/downloads/v8.5.3/)
+
+Before we can do anything with Qiime2, we need to get our data into a format it can use. That’s
+what this section is for.

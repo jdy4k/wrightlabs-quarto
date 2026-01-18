@@ -1,0 +1,339 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Wright Labs Tutorial Book",
+    "section": "",
+    "text": "Welcome to the Wright Lab Tutorials! This collection of tutorials provides step-by-step guides for bioinformatics analysis using Juniata College’s Cluster computing resources.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#available-tutorials",
+    "href": "index.html#available-tutorials",
+    "title": "Wright Labs Tutorial Book",
+    "section": "Available Tutorials",
+    "text": "Available Tutorials\n\nUsing the Cluster\nLearn how to work with Juniata College’s Cluster computing infrastructure. This tutorial covers:\n\nRemotely connecting to the Cluster from your personal computer’s terminal\nBasics of working in a Linux terminal\nHow the Cluster operates\n\n\n\n\n16s Tutorial\nComing soon! This tutorial will cover 16S rRNA sequencing analysis workflows.\nView Overview →\n\n\n\nShotgun MT/MG Tutorial\nComing soon! This tutorial will cover shotgun metagenomics and metatranscriptomics analysis.\nView Overview →",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "chapter1-0.html",
+    "href": "chapter1-0.html",
+    "title": "Using the Cluster",
+    "section": "",
+    "text": "Bioinformatics requires a machine much stronger than the computers we use in daily life. It is helpful to have access to a Cluster computer—such as the one housed at Juniata College—to complete our analysis. In this tutorial, you will learn how to:\n\nConnect to Juniata’s wifi when off campus\nRemotely connect to Juniata’s Cluster from your personal computer’s terminal\nBasics of working in a Linux terminal\nHow the Cluster operates",
+    "crumbs": [
+      "Using the Cluster"
+    ]
+  },
+  {
+    "objectID": "chapter2-1.html",
+    "href": "chapter2-1.html",
+    "title": "Program Installation & Acquiring Data",
+    "section": "",
+    "text": "We need to create two environments to use our Qiime2 pipeline, one for Qiime2 and one for biom convert. Environments are essentially just collections of programs that we will use to perform various analyses.\nSome programs are incompatible with others and thus must be installed to different environments. As an added bonus, installing programs using environments can also help avoid breaking your cluster account.",
+    "crumbs": [
+      "16s Tutorial",
+      "Program & Data Aquisition"
+    ]
+  },
+  {
+    "objectID": "chapter2-1.html#miniconda",
+    "href": "chapter2-1.html#miniconda",
+    "title": "Program Installation & Acquiring Data",
+    "section": "Miniconda",
+    "text": "Miniconda\n(summary of what miniconda is)\n\nChecking for Miniconda Installation\nTo check if you have miniconda installed, you can run the following command:\nconda list\nIf this returns a list of environments, you have miniconda installed. If you get an error instead, follow the installation insctructions for miniconda in the next section.\n\n\nInstalling Miniconda\n\n\n\n\n\n\nIf you already have miniconda installed, you can skip this section.\n\n\n\nTo download and setup miniconda, you can run these commands:\nwget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh --no-check-certificate\nbash Miniconda3-py37_4.10.3-Linux-x86_64.sh\nAn installer for miniconda will begin in your terminal. You can follow these steps to configure it properly:\n\nHit enter a bunch of times; many of the intital prompt will be asking you to change default. If you are comfortable changing these deffault settings, feel free too. Otherw, just hit enter until the next step.\nThen accept the license agreement by typing “yes”, without the quotation marks\nHit enter after typing that.\nHit enter again. Type “yes” again at the “Do you wish the installer to initialize Miniconda3 by running conda init?” prompt.\nAfter installing it, copy the .condarc file to your home directory\n\ncp /home/see/.condarc ~\n\nOpen your .bashrc file\n\nnano ~/.bashrc\n\nAt the bottom of this file, paste by copying and right-clicking:\n\nexport LC_ALL=\"en_US.utf8\"\nexport LANG=\"en_US.utf8\"\nYour .bashrc file should look something like this:\n# Source global definitions\nif [ -f /etc/bashrc ]; then\n. /etc/bashrc\nfi\n# Uncomment the following line if you don't like systemctl's auto-paging fea$\n# export SYSTEMD_PAGER=\n# User specific aliases and functions\n\n# &gt;&gt;&gt; conda initialize &gt;&gt;&gt;\n# !! Contents within this block are managed by 'conda init' !!\n__conda_setup=\"$('/home/stewacs19/miniconda3/bin/conda' 'shell.bash' 'hook' 2&gt;/dev/null)\"\nif [ $? -eq 0 ]; then\neval \"$__conda_setup\"\nelse\nif [ -f \"/home/stewacs19/miniconda3/etc/profile.d/conda.sh\" ]; then\n. \"/home/stewacs19/miniconda3/etc/profile.d/conda.sh\"\nelse\nexport PATH=\"/home/stewacs19/miniconda3/bin:$PATH\"\nfi\nfi\nunset __conda_setup\n# &lt;&lt;&lt; conda initialize &lt;&lt;&lt;\n\nexport LC_ALL=\"en_US.utf8\"\nexport LANG=\"en_US.utf8\"\n\nSave and exit the file by clicking CTRL + O and then CTRL + X\nReload your bashrc file by running:\n\nsource ~/.bashrc\nConfirm that you have miniconda installed by running conda list in your terminal.If you get a list of packages, congratulations! You have installed miniconda and can move on to the next section.",
+    "crumbs": [
+      "16s Tutorial",
+      "Program & Data Aquisition"
+    ]
+  },
+  {
+    "objectID": "chapter1-3.html",
+    "href": "chapter1-3.html",
+    "title": "Cluster Basics",
+    "section": "",
+    "text": "Purchased via an HHMI grant, the Juniata College Cluster is vital to analyzing genetic data. We have since purchased another, which was made possible by a donation from Wright Labs. Anyway, this section describe how this miniature supercomputer is structured so that we can use it effectively for analysis. The Cluster is fundamentally different from the laptops and desktops we frequently work with, not just because it runs Linux, but because it is composed of several powerful computers Clustered together.\nEach powerful computer of the Cluster is called a “node.” The head node is at the top. You use this node to access your data and programs. The worker nodes are underneath the head node; they complete jobs assigned to them.\nUsers interact with the Cluster as depicted below:\nflowchart TD\n    A[You] --&gt;|Your Hands| B(Laptop)\n    B --&gt;|SSH Session| C{Head Node}\n    C --&gt;|Job| D[Worker Node 1]\n    C --&gt;|Job| E[Worker Node 2]\n    C --&gt;|Job| F[Worker Node 3]\n    C --&gt;|Job| G[Worker Node 4]",
+    "crumbs": [
+      "Using the Cluster",
+      "Cluster Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-3.html#using-cyberduck",
+    "href": "chapter1-3.html#using-cyberduck",
+    "title": "Cluster Basics",
+    "section": "Using Cyberduck",
+    "text": "Using Cyberduck\n\n\n\n\n\n(1) Drag and drop (Click to enlarge)\n\n\n\n\n\n\n(2) Edit (Click to enlarge)\n\n\n\n\n\n\n(3) Download (Click to enlarge)\n\n\n\n\nTo upload files to Cyberduck, simply drag and drop them to where you want them to be uploaded to, as shown in the image to the right. To edit a file with Cyberduck, right click on it and choose the program you want to use to edit it with. If you like to download a file, right click on it and choose Download As.",
+    "crumbs": [
+      "Using the Cluster",
+      "Cluster Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-3.html#running-jobs",
+    "href": "chapter1-3.html#running-jobs",
+    "title": "Cluster Basics",
+    "section": "Running jobs",
+    "text": "Running jobs\nEverything you can do on a normal Linux system, you can also do on the Cluster. But, you will want to run all of your programs off the worker nodes rather than the head node. You connect to the head node with ssh and submit jobs to the worker nodes through the command line. It is dangerous to execute programs on the head node since it may cause the supercomputer to crash. To prevent this, we run jobs on the worker nodes, which can easily be done in three steps:\n\nCreate a job.sh script containing the commands to run our program (giftwrap the script)\nSubmit the script using sbatch (give the script to the worker node)\nCheck on the status of our job using squeue (see if the worker node is actively running the commands)\n\nYou can use watch squeue to see your job’s status be continually updated\nTo exit that, use CTRL + c\n\n\nThroughout this tutorial you will see how to submit scripts to a worker node using sbatch and how to check the status of running scripts using watch squeue. It is important to remember to check the output locations of the programs you are running for later access.",
+    "crumbs": [
+      "Using the Cluster",
+      "Cluster Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-3.html#anatomy-of-a-script",
+    "href": "chapter1-3.html#anatomy-of-a-script",
+    "title": "Cluster Basics",
+    "section": "Anatomy of a script",
+    "text": "Anatomy of a script\nAll of the scripts that you will be using for this tutorial are already made. However, a brief description of their various components will hopefully help you better understand how they work and make your own, should the need arise.\n\n\n1#!/bin/bash\n2# PBS -l nodes=1:ppn=6\n3#PBS -N qiime2 import\n#PBS -j oe\n\n4#=======================================================#\n#   Imports raw fastq reads into a QIIME 2 artifact\n#\n#   June 29, 2018\n#=======================================================#\n\n# Set your working directory to where you have your raw data sequence\n5workdir=/home/see/Wright_Labs/Connors_B_11.19/\n6cd $workdir\n\n7source activate qiime2-2019.7\n\n# Before running script make a mapping file as described in the \n# tutorial This is important because it points to the forward \n# and reverse reads which will be imported.\n\n8qiime tools import \\\n  --type 'SampleData[PairedEndSequenceWithQuality]' \\\n  --input-path co_b.mapping.csv.txt \\\n  --output-path co_b.paired-end-demux.qza \\\n  --input-format PairedEndFastqManifestPhred33\n\n1\n\nSpecifies the coding language of the script\n\n2\n\nSpecifies the number of nodes and ppn to allocate to the job. (higher the pnn, the more resources are allocated to the job)\n\n3\n\nSpecifies the name of the job as seen when you do qstat or watch qstat\n\n4\n\nThis box just gives a brief description of what the script does. It does not impact the job itself.\n\n5\n\nSpecifies the value for ‘workdir’\n\n6\n\nChanges the working directory to the value of ‘workdir’\n\n7\n\n‘Soure activate’ is a command that activates an environment specified in the script. In this case, it is the qiime2-2019.7 environment.\n\n8\n\nHere is the main command that we are running. We run the qiime tools import command with a few flags.\n\n\n\nHover over the numbers to the right of the code above to see annotations.\n\nThere is a lot in the above image to unpack. Basically, the scripts that you will be using can be divided into three sections,\n\nThe topmost (in the black rectangle) gives general information about the script itself.\n\nThings like which language the script is written in (we use BASH) and how much resources to allocate to that job are here\n\nThe next section (in the gray rectangle) is just a description of what the script does.\n\nThis does not impact the job itself; it’s just to give the user more information about the script.\n\nThe last section (in the pink rectangle) is the meat of the script, so to speak. It tells the Cluster what you actually want it to do.\n\nIn the above script, we are telling the Cluster to move into the folder as specified by the workdir variable, then activate the qiime2-2019.7 environment, and finally run the qiime tools import command with a few flags\n\n\nTwo symbols that you will see a lot in our scripts are # and \\.\nIn general, # tells the Cluster to ignore that line and continue on with the script. These lines are referred to as comments. The exceptions to this are in the black box above. But, everywhere else, the comments, as denoted by #, are just skipped.\n\\ tells the Cluster that the command is continued on the next line. So, the qiime tools import command above is equivalent to:\nqiime tools import --type 'SampleData[PairedEndSequenceWithQuality]' --input-path co_b.mapping.csv.txt --output-path co_b.paired-end-demux.qza --input-format PairedEndFastqManifestPhred33\n\nPut your cursor over the code above and scroll to the right.\n\nAs you can see (kind of), that command gets pretty long, so we use the \\’s to make it more viewable within our scripts.\nFor a more viewable example ls -l ~ is equivalent to:\nls \\\n-l \\\n~\n\n\n\n\n\n\nWhat do you think would happen if we submitted the above script with a # before source activate?\n\n\n\n\n\n\n\n\n\n\n\n\nWhere would we expect to find the output file for the above script?\n\n\n\n\n\nHint\n\nWhat is the purpose of setting the workdir variable; how is it being used?\n\n\n\nI should also note that the text editor that I am using (Notepad++) applies formatting to make the scripts easier to understand, e.g. making commented sections green. The text editor you are using may not do that, but as long as you remember what the different characters mean, you should not have an issue understanding the scripts.",
+    "crumbs": [
+      "Using the Cluster",
+      "Cluster Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-3.html#editing-and-submitting-scripts",
+    "href": "chapter1-3.html#editing-and-submitting-scripts",
+    "title": "Cluster Basics",
+    "section": "Editing and submitting scripts",
+    "text": "Editing and submitting scripts\nThere are a couple ways to edit scripts. You can edit them through the Cluster, with Putty, the terminal, or you could edit them with Cyberduck. To edit through the Cluster…\n\nnano [SCRIPT NAME] when you are in the same folder as the script you want to edit - For example, nano 1.2_raw_reads_import.sh\nNavigate using the arrow keys\nSet the working directory to the location of your input (typically your data directory)\nSet any input/output names and desired parameters\nSave your changes (CTRL + X)\nThen press y\nThen press ENTER\n\nTo edit through Cyberduck…\n\nRight click on the script and choose “Edit With”\nThen pick the program you want to use to edit it\nThe script should now be opened\nMake the desired changes\nGo to “File” then “Save” to save the script\n\nRegardless of how you edit it, you submit scripts using sbatch [SCRIPT NAME]. For instance, sbatch 1.2_raw_reads_import.sh would submit the 1.2_raw_reads_import.sh script to the head node, which would then give it to a worker node to run.\nYou can check the progress of scripts with squeue.\nTo have the progress be continuously updated, use watch squeue. You can exit watch squeue by using CTRL + C\nUnder S, there will be a letter indicating the job’s status\n\nQ - Queued (waiting to run)\nR - Running\nC - Completed or Canceled\n\nEvery script outputs a log file in the directory you were in when it was submitted, with the name of the job followed by .o+Job number So, the above script will have a file named Humann.65745.out and Humann.65745.err when it is finished, but as indicated by the R, it is currently still running\nThese log files are helpful for troubleshooting errors. The most common errors are due to incorrectly specifying your working directory or the input file(s)\nYou can also cancel your jobs, with scancel.\nIf I wanted to cancel the Humann job above, I would use scancel 65745.",
+    "crumbs": [
+      "Using the Cluster",
+      "Cluster Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-1.html",
+    "href": "chapter1-1.html",
+    "title": "Connecting to the Cluster",
+    "section": "",
+    "text": "To use the Linux-based computer Cluster housed at Juniata College, you have to connect remotely to the supercomputer. This can be done through any computer running MacOS or Windows using a secure shell session, also called ssh. Many bioinformatics pipelines are built for a Linux environment because of its power and flexibility when working with large amounts of data. Linux is an operating system much like Unix, but unlike Windows and MacOS operating systems, it runs primarily through a command line interface rather than the visible desktop to which many of us are accustomed. Through this interface of the Cluster users are able to select many options and parameters in running its installed programs.",
+    "crumbs": [
+      "Using the Cluster",
+      "Connecting to the Cluster"
+    ]
+  },
+  {
+    "objectID": "chapter1-1.html#via-ssh-on-windows",
+    "href": "chapter1-1.html#via-ssh-on-windows",
+    "title": "Connecting to the Cluster",
+    "section": "Via SSH on Windows",
+    "text": "Via SSH on Windows\nIf you have a PC running a windows operating system, you will need to download PuTTY. Upon opening PuTTY, this a window should appear.\n\n\n\n\n\nPuTTY Configuration Window (Click to enlarge)\n\n\n\nType the Cluster’s IP address 147.73.20.123 into the “Host Name” box\nEnsure that “SSH” is selected for “Connection Type.”\nPress “Open”\nType your username (then enter) and password in the terminal window.\n\nPassword: 4gcatRocks!\n\n\n\n\n\n\n\n\nWarning\n\n\n\nAs you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over.",
+    "crumbs": [
+      "Using the Cluster",
+      "Connecting to the Cluster"
+    ]
+  },
+  {
+    "objectID": "chapter1-1.html#via-ssh-on-macos",
+    "href": "chapter1-1.html#via-ssh-on-macos",
+    "title": "Connecting to the Cluster",
+    "section": "Via SSH on MacOs",
+    "text": "Via SSH on MacOs\nOpen the terminal application to bring up the command line interface that will allow you to connect to the Cluster. Type ssh your_username_here@147.73.20.123 followed by enter, then your password.\n\n\n\n\n\n\nWarning\n\n\n\nAs you type your password, it will not show anything at all (not even asterisks or dots as you type). There is a password there even if you cannot see it! Be brave! If the password is typed incorrectly, press enter to again reveal the password prompt and start over.",
+    "crumbs": [
+      "Using the Cluster",
+      "Connecting to the Cluster"
+    ]
+  },
+  {
+    "objectID": "chapter1-1.html#via-cyberduck",
+    "href": "chapter1-1.html#via-cyberduck",
+    "title": "Connecting to the Cluster",
+    "section": "Via Cyberduck",
+    "text": "Via Cyberduck\nTo help view and edit files on the Cluster, both Mac and Windows users can install the program “Cyberduck” on their computer:\n\nDownload Cyberduck\nClick the box on the left to select the download appropriate for your operating system\nFollow the onscreen instructions to install the program to your device\nOpen the Cyberduck application\nIn Cyberduck, click “Open Connection” in the upper left hand section of the window.\n\nChange FTP (File Transfer Protocol) to SFTP (SSH File Transfer Protocol)\nIn the “Server” box type 147.73.20.123 to connect to Juniata’s new Cluster\nPut in your username and password\nClick “Connect”\n\nGo to the preferences\n\nWindows: Edit -&gt; Preferences\nMac: Cyberduck -&gt; Preferences\n\nUnder the General tab, select:\n\n“Save Workspace”\n“Use Keychain”\n“Info window always shows current selection” (Mac users: in the Browser tab)\nFor PC users: also select “double click opens file in external editor”\nSelect: “Editor,” select your text editor (Notepad++ is a good one for Windows users, if you want to download that), then check the box “Always use this application” to set it as the default.\n\nUnder the Bookmark tab, select:\n\n“New Bookmark”\nEnter a name for the bookmark in the box next to “Nickname:”\nEnter your password in the box next to “Password:”\nThen close out of the window (the little red X)\n\n\n\n\n\n\n\nOpen Connection (Click to enlarge)\n\n\n\n\n\n\nCredentials (Click to enlarge)\n\n\n\nYou can now launch Cyberduck and connect to the Cluster. If at any point you need to reconnect to the Cluster, you can go to “Bookmark” and select your bookmark.",
+    "crumbs": [
+      "Using the Cluster",
+      "Connecting to the Cluster"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html",
+    "href": "chapter1-2.html",
+    "title": "Unix Shell Basics",
+    "section": "",
+    "text": "After logging into a secure shell session, you will now have a command line prompt from which you can navigate a Linux system. To familiarize yourself with how to do so, the following short tutorial will introduce you to the general syntax of command line structure, as well as the function of several commonly-used commands. Most of these commands involve working with files and folders. We will dive into data analysis later.",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-ls-and-general-command-structure",
+    "href": "chapter1-2.html#using-ls-and-general-command-structure",
+    "title": "Unix Shell Basics",
+    "section": "Using ls (and general command structure)",
+    "text": "Using ls (and general command structure)\nThe command ls will list the contents of your current directory (folder). Folders and directories are the same thing. In commands “directory” is often shortened to “dir” Once you have logged in to your Cluster account, type ls now to show the contents of your home directory:\nls\nCommands such as ls have options that modify their function. These options are indicated by a dash and are termed flags. So -a may be called “the a flag.” Try running ls with this flags (shown below).\nls -a\n\n\nOutput for ls -a\n\nWhere as ls shows all normal files in your directory, ls -a will show you all the files in a directory/folder, including hidden files (these files and folders will have a period before there name, for example .config or .local)\n.config .local Documents Downloads Pictures\n\nls -l\n\n\nOutput for ls -l\n\nls -l will show you more information about those files in a long list.\ndrwxr-xr-x 6 user user 4096 Sep 26 13:31 Documents/\ndrwxr-xr-x 4 user user 4096 Sep 25 00:49 Downloads/\ndrwxr-xr-x 3 user user 4096 Sep 26 13:46 Pictures/\n\n\n\n\n\n\n\nHow would you list all files (hidden ones included) with additional information?\n\n\n\n\n\nAnswer\n\nCombining both flag in the commands ls -l -a or ls -a -l (order does not matter) will give you the desired output. Note that you can also combine these flags and run ls -la or ls -al, though you will not be able to do this with all flags you use in the Linux terminal.\ndrwxr-xr-x 6 user user 4096 Sep 26 13:31 .local/\ndrwxr-xr-x 6 user user 4096 Sep 26 13:31 .config/\ndrwxr-xr-x 6 user user 4096 Sep 26 13:31 Documents/\ndrwxr-xr-x 4 user user 4096 Sep 25 00:49 Downloads/\ndrwxr-xr-x 3 user user 4096 Sep 26 13:46 Pictures/\n\n\n\nThe ls command also has a help function. To see it, type:\nls --help\n\n\n\n\n\n\nNote\n\n\n\nThere are two dashed before help.\n\n\nFrom this help menu, you can see all the available options for the ls command. Run this, then scroll to the top of the output where you will find a line that starts with Usage: .... You should see\nls [OPTION] ... [FILE] ...\n\nls: simply the command name\nOPTION is where you put your options or flags. You can think of options as modifiers of the command. In this case, -a and -l are both flags that modify the performance of the ls command. Options are often a dash followed by a single letter, if a command has a lot of possible options, they can be two dashes followed by a word.\nFILE is the folder that you are running ls on. You can think of it as the target of ls. So, running: ls /home will list all files in /home instead of listing files in your current directory.\n[] (the brackets) show that the OPTION flags and the FILE specification are optional. Basically, you do not have to include -a or even a folder to use ls. So the command ls alone is legal even though it has no flags or files.\n. . . (the dots) show that you can list several OPTION’s or FILE’s, as in: ls -a -h - l or that you can list all flags together as in: ls -ahl. This is convenient when using a lot of options.\n\nLet’s quickly read through the options for ls to see what else we can do with it.\n\n\n\n\n\n\nWhat command would you run to sort the files in /home by their creation time?\n\n\n\n\n\nHint\n\nUse the --help flag to find the correct flag for this situation.\n\n\n\n\n\n\n\n\n\nWhat does the -h option of ls do?",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-pwd-and-cd",
+    "href": "chapter1-2.html#using-pwd-and-cd",
+    "title": "Unix Shell Basics",
+    "section": "Using pwd and cd",
+    "text": "Using pwd and cd\nWhile ls lets us view the contents of our current directory, pwd tells us where that directory is located. Typing pwd will print the working directory, whereas cd will change our directory to the location of our choosing (by default, to work within your home folder).\nBefore we start exploring the Cluster using cd and ls, let’s take a moment to describe the file structure of a Linux machine. Though you cannot see it all at once, this is how some of the directory structure looks inside the Cluster. For example, notice how user accounts are all inside of /home/.\n/  &lt;------------------------ \"root directory\"\n  bin/\n  dev/\n  home/  &lt;------------------ \"home directory\"\n    399group1/\n    299group2/\n    username/  &lt;------------ \"YOUR home directory\"\n      yourfiles/\n    sabey/\n      16S_tutorial/\n        data/\n        jc_qime_pipeline/\n    otheruseraccounts/\n  share/\n\n\n\n\n\n\nNote\n\n\n\nWhen the term “your home directory” is used in this tutorial, we are referring to the directory created according to your account username, NOT the encompassing directory named /home (see diagram above).\n\n\nTo list your current location within this structure, try typing:\npwd\n\n\n\n\n\n\nBased on the results, where are you currently located in the file directory?\n\n\n\n\n\n\nNow let’s go to the root directory, at the very top of the diagram above:\ncd /\nUse ls to see the contents of this directory, then move into the share folder, then into the apps directory within it:\ncd home/share\ncd apps\n\n\n\n\n\n\nWhat is the full path of the directory we are in now?\n\n\n\n\n\nHint\n\nUse pwd.\n\n\n\n\n\n\n\n\n\nWhat are the contents of the apps directory?\n\n\n\n\n\nHint\n\nUse ls.\n\n\n\n\n\n\n\n\n\nHow could we have moved into the apps folder with a single command (instead of three)?\n\n\n\n\n\n\nNow that we have moved all the way into /home/share/apps, let’s move back into /home/share. There are two ways to do this:\nGo ‘up one directory’ by typing:\ncd ..\nUse an absolute path by typing:\ncd /home/share\nThis will take you directly to the /share directory regardless of your position beforehand. It is called an absolute path because it starts all the way back at the root of all directories. Notice how this path starts with a forward slash (/), since that is the root of the file structure.\nExplore other directories using cd foldername to move into a folder, ls to list the files inside, and cd .. to go up and out of that directory. If you ever get lost, you can type pwd to print your current location. You can also type cd all by itself to return to your home directory.\n\n\n\n\n\n\nWhat is the location of your home folder?\n\n\n\n\n\nHint\n\nUse cd then pwd.\n\n\n\nAnother very convenient feature of Linux that is especially useful for typing long file name, is auto-completion. When you are typing the name of a file or folder, you can press TAB to autocomplete the rest.\nFor example, if the only directory within /home/ that begins with “sa” is “sabey”, typing cd /home/sa followed by pressing TAB will autocomplete the path to /home/sabey. Try this to change into your own directory.",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-mkdir-to-make-a-directory",
+    "href": "chapter1-2.html#using-mkdir-to-make-a-directory",
+    "title": "Unix Shell Basics",
+    "section": "Using mkdir to make a directory",
+    "text": "Using mkdir to make a directory\nReturn to your home folder using cd then make a new folder named /linux_practice:\nmkdir linux_practice\nThe command mkdir also has a help command. To view it, type:\nmkdir --help\n\n\n\n\n\n\nWrite down the first two lines as you did for ls. Once you have finished this, move into your newly created directory and write the command you used to do so:",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-wget-to-download-a-file",
+    "href": "chapter1-2.html#using-wget-to-download-a-file",
+    "title": "Unix Shell Basics",
+    "section": "Using wget to download a file",
+    "text": "Using wget to download a file\nThe wget command also has a help file. As with ls and mkdir, open this file and focus on the first two lines, then skim the options below. Type:\nwget --help\n\n\n\n\n\n\nOnce again, write down the first two lines. Interpret the first line in simple language; what does wget do? Write your answer in the chart on the first page of this section.\n\n\n\nYou will notice that wget has even more options than ls. Are you required to use any of them?\nWhat happends when you run the wget, and why does that make sense?\n\n\nAfter your PCR amplicons are sequenced, the sequencing core will upload the data to a website from which it can be downloaded. In a web browser, you can click on various files to download them, but in a terminal, you instead use wget. Let’s practice with some sample data:\nDownloading files through the terminal:\n\nOpen this link in a web browser.\nScroll to the bottom and find the file called simm.tar.gz.\nRight-click that link.\nChoose “copy link” or “copy link address.”\nIn your folder, type wget followed by a space, then paste the link you just copied (If you are using PuTTY, you will have to right click to paste instead of using Ctrl + V )\n\ncd linux_practice\nwget http://www.drive5.com/uchime/simm.tar.gz\n\nPress enter to run wget and download the indicated file",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-gzip-to-compress-and-decompress-files",
+    "href": "chapter1-2.html#using-gzip-to-compress-and-decompress-files",
+    "title": "Unix Shell Basics",
+    "section": "Using gzip to compress and decompress files",
+    "text": "Using gzip to compress and decompress files\nLooking at the file you just downloaded, you will notice its name ends with tar.gz, which tells us two things. First, .tar means it is a whole folder inside of a single file (called a tarball). Second, .gz means the file is compressed with gzip.\n\n\n\n\n\n\nHow large is the file you just downloaded? (Hint: use ls with these two flags: -l, which produces a long list, and -h which displays the file sizes in a human-readable format). The file sizes will appear just to the left of the file names.\n\n\n\nAlso, (again) write down the first two lines of gzip --help.\n\n\nTo decompress the file we just downloaded, run:\ngzip -d simm.tar.gz\nYou can also use the command gunzip (literally “g” + “unzip”). gzip -d and gunzip complete the same task. Remember that you can also use TAB to autocomplete file names as you type them in.\n\n\n\n\n\n\nUsing the same ls -lh command, what is the size of the file now?\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is the compression percentage of gzip on this file?\n\n\n\n\n\nHint\n\nDivide the .tar.gz file size by the .tar file size and do not forget to convert Mb to Kb, where 1 Mb = 1024 Kb\n\n\n\nFor practice using gzip, let’s recompress the file you just decompressed by using one the options from the help tab.\n\n\n\n\n\n\nWarning\n\n\n\nOmit the -d when you run this command since we are not decompressing!\n\n\n\n\n\n\n\n\nWhy might gzip be useful for large data files like the genetic data in our 16S sequences?",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-cp-to-copy-files",
+    "href": "chapter1-2.html#using-cp-to-copy-files",
+    "title": "Unix Shell Basics",
+    "section": "Using cp to copy files",
+    "text": "Using cp to copy files\nThere are three ways to use the cp command to copy files. We will focus on these two:\ncp [OPTION] ... [-T] SOURCE DESK\n  ### OR ###\ncp [OPTION] ... SOURCE ... DIRECTORY\n\n\n\n\n\n\nWhich of those parameters are not optional and why does that make sense?\n\n\n\n\n\n\nCopy the file you downloaded into a new file called seqs.tar.gz:\ncp simm.tar.gz seqs.tar.gz\nMake a new directory within your /linux_practice folder called /downloads by typing:\nmkdir downloads\nThen copy seqs.tar.gz into it:\ncp seqs.tar.gz downloads\nMove to your new directory and make sure the file copied successfully:\ncd downloads\nls\nGo back up one directory by typing:\ncd ..\nThen use ls to view the files. You should see that the seqs.tar.gz file is in both locations.\n\n\n\n\n\n\nWarning\n\n\n\nCopying can overwrite files. When you choose a destination that contains a file with the same name as that you are copying, the original file will be replaced. To avoid this, use unique names for important files.",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-mv-to-move-and-rename-files",
+    "href": "chapter1-2.html#using-mv-to-move-and-rename-files",
+    "title": "Unix Shell Basics",
+    "section": "Using mv to move and rename files",
+    "text": "Using mv to move and rename files\nThe process of moving files is very similar to that for copying them The first lines of mv --help read:\nmv [OPTION]… [-T] SOURCE DEST\n  ### OR  ###\nmv [OPTION]… SOURCE… DIRECTORY\nMove the original file you downloaded in the downloads directory:\nmv simm.tar.gz downloads\nYou also have two copies of the seqs.tar.gz file, one in your current directory and one in the /downloads directory that you copied there previously. Use mv to move the remaining copy into the /downloads folder with:\nmv seqs.tar.gz downloads\n\n\n\n\n\n\nWhat happens when you move two files with the same name into one directory?\n\n\n\n\n\n\nJust like copying, moving can also overwrite files. The file you just moved into the /downloads directory has replaced the one you copied earlier.\nIn Linux, renaming files is the same as moving them. Go into the /downloads folder:\ncd downloads\nThen change simm.tar.gz to also_simm.fastq.gz\nmv simm.tar.gz also_simm.fastq.gz\n\n\n\n\n\n\nRun ls and write down the current contents of the /downloads directory.\n\n\n\n\n\nAnswer\n\nIt should appear as below:\nalso_simm.fatq.gz  seqs.tar.gz",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-rm-to-remove-files",
+    "href": "chapter1-2.html#using-rm-to-remove-files",
+    "title": "Unix Shell Basics",
+    "section": "Using rm to remove files",
+    "text": "Using rm to remove files\nThe command rm has the same function as deleting files in Windows or MacOs.\nrm [OPTION]… [FILE]…\n\n\n\n\n\n\nRemove one of the files in your /downloads directory and write the command you used.\n\n\n\n\n\n\nChange out of your /downloads directory and into your lastname directory:\ncd ..\nBy default, rm only removes files, not directories. This is done to ensure that the user certainly wants to remove an entire directory. So use the -r flag to recursively remove the /downloads folder and everything within it. But use caution, as once you remove something, it cannot be retrieved (i.e. there is no trash directory that store deleted files).\n\n\n\n\n\n\nKnowing this, try to remove the downloads directory and all of the files listed inside it.\n\n\n\n\n\n\nUse ls to check that /downloads has been successfully removed.",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter1-2.html#using-top-to-view-system-resources",
+    "href": "chapter1-2.html#using-top-to-view-system-resources",
+    "title": "Unix Shell Basics",
+    "section": "Using top to view system resources",
+    "text": "Using top to view system resources\nEvery program discussed so far helps you move and change files. With the top command, you can view all of the programs running on the Cluster. Try typing it now and take note of what programs are running:\ntop\nThis provides a summary of the amount of load your system is under, and a list of the processes that are using the most CPU and memory. It should look something like this,\ntop - 13:48:46 up  1:26,  1 user,  load average: 0.31, 0.26, 0.27\nTasks: 356 total, 1 running, 355 sleep, 0 d-sleep, 0 stopped, 0 zombie\n%Cpu(s):  0.2 us,  0.2 sy,  0.0 ni, 99.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st\nMiB Mem :  15910.9 total,   9179.9 free,   3924.1 used,   3129.3 buff/cache\nMiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  11986.8 avail Mem\n\nPID     USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND\n146309  user      20   0   45960  42156  10528 S   1.0   0.3   0:13.52 nvim\n2136    user      20   0    7668   3632   3156 S   0.3   0.0   0:01.58 dbus\n4798    user      20   0   33.0g 321624 203520 S   0.3   2.0   0:58.65 firefox\n9909    user      20   0   69756  66084  13024 S   0.3   0.4   1:23.23 nvim\n13966   user      20   0 1365696  64524  41540 S   0.3   0.4   0:02.32 ueberzug\n1       root      20   0   22876  13784   9748 S   0.0   0.1   0:00.84 systemd\n2       root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd\n3       root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool\n...     ...       ...  ...     ...    ...  ... ... ...   ...   ...     ...\n\n\n\n\n\n\nHow much RAM (memory) is the Cluster currently using?\n\n\n\n\n\n\n\n\n\n\n\n\nWrite what top shows you on the first page.",
+    "crumbs": [
+      "Using the Cluster",
+      "Unix Shell Basics"
+    ]
+  },
+  {
+    "objectID": "chapter2-0.html",
+    "href": "chapter2-0.html",
+    "title": "16s Tutorial",
+    "section": "",
+    "text": "test",
+    "crumbs": [
+      "16s Tutorial"
+    ]
+  },
+  {
+    "objectID": "chapter2-3.html",
+    "href": "chapter2-3.html",
+    "title": "JC Qiime2 Pipeline",
+    "section": "",
+    "text": "This tutorial will follow a general cycle. You will first open a file from the QIIME2_pipeline folder, edit the file, submit the file, and then look at the results. If the submission script was successful, you will move on to the next file and continue the cycle. If it was not, then you will look at the log file in your current directory, determine what went wrong, and then start the cycle over with the same script.",
+    "crumbs": [
+      "16s Tutorial",
+      "JC Qiime2 Pipeline"
+    ]
+  },
+  {
+    "objectID": "chapter2-3.html#import-raw-data-into-qiime2",
+    "href": "chapter2-3.html#import-raw-data-into-qiime2",
+    "title": "JC Qiime2 Pipeline",
+    "section": "Import Raw Data into Qiime2",
+    "text": "Import Raw Data into Qiime2\nEach account contains a file called BIN600 this you should always move into this folder when working on the cluster. Inside that folder you should find the metadata and raw data already imported to the Cluster account and it should be ready for you to start analysis!\nBefore you start a quick note on notepad editors. Most all of your computers will come with a notepad software that you can use with cyberduck to edit the scripts to submit to the cluster. However for ease of use downloading a software called notepad ++. This notepad software helpes colorcode items in the script to make it easier to read. While this is not required it is highly recommended if you plan on using a notepad app to edit the scripts. If you prefer to use the nano function this is not required.\nDownload link: https://notepad-plus-plus.org/downloads/v8.5.3/\nBefore we can do anything with Qiime2, we need to get our data into a format it can use. That’s what this section is for.",
+    "crumbs": [
+      "16s Tutorial",
+      "JC Qiime2 Pipeline"
+    ]
+  },
+  {
+    "objectID": "chapter2-2.html",
+    "href": "chapter2-2.html",
+    "title": "Qiime2 Basics",
+    "section": "",
+    "text": "QIIME2, with Qiime pronounced as “chime”, or Quantitative Insights Into Microbial Ecology 2, is an open source software package for comparison and analysis of microbial communities. Culture independent analysis of microbial communities has been enabled by high-throughput genetic sequencing and high-throughput data analysis. Multiplexing and high-throughput sequencing technologies, such as Illumina sequencing, allow scientists to perform parallel sequencing of hundreds of samples at high depths. Open-source bioinformatics pipelines, such as QIIME2, allow for robust analysis of millions of sequences. While these tools are powerful and flexible, they are complex and can be difficult to learn.\nThe core goal of this workshop is to create a standard pipeline that is accessible to first time QIIME2 users. QIIME2 is extremely flexible and can accommodate various sequencing technologies and methods of data analysis. This tutorial presents a set of scripts that will allow a user to quickly progress through “typical” analysis of 16S rRNA gene data. These scripts have been built for use with Illumina sequencing technology and the Juniata College HHMI computational environment.\nAll of the files that you will use with Qiime2 are either .qza (artifacts) or .qzv (visualizations). Qiime2 tracks how those files were created, which helps with reproducibility. The website view.qiime2.org is used to see this information and visualizations.\nArtifacts have different semantic types. These semantic types are basically analogous to different file types on your computer and help prevent users from applying analyses incorrectly.\nQiime2’s functionality is based on plugins. All the plugins that you need for the main pipeline are installed by default. However, you might find some plugins listed here interesting.\nThe Qiime2 website has a variety of tutorials if you want any additional practice or just want to see what else it can do. The Moving Pictures tutorial in particular has a lot of similarities with our pipeline",
+    "crumbs": [
+      "16s Tutorial",
+      "Qiime2 Basics"
+    ]
+  },
+  {
+    "objectID": "chapter2-2.html#installing-qiime2",
+    "href": "chapter2-2.html#installing-qiime2",
+    "title": "Qiime2 Basics",
+    "section": "Installing Qiime2",
+    "text": "Installing Qiime2\nWe will be installing Qiime2 my creating a miniconda environment, then installing Qiime2 into that environment. You can do this by running the following commands:\nwget https://data.qiime2.org/distro/core/qiime2-2022.11-py38-linux-conda.yml\nconda env create -n qiime2-2022.11 --file qiime2-2022.11-py38-linux-conda.yml\n\n\n\n\n\n\nThis may take a while to run.\n\n\n\n\n\n\n\n\n\nIf you get a HTTP error, try running the command again.",
+    "crumbs": [
+      "16s Tutorial",
+      "Qiime2 Basics"
+    ]
+  },
+  {
+    "objectID": "chapter2-2.html#other-necessary-installations",
+    "href": "chapter2-2.html#other-necessary-installations",
+    "title": "Qiime2 Basics",
+    "section": "Other Necessary Installations",
+    "text": "Other Necessary Installations\nWe also need to create another environment; we’ll use this environment with script 6.1 and 7.2:\nconda env create -n biom-convert --file /home/see/YML_Files/biom-convert5.yml\nAnd, one more for script 6.0…\nconda env create -n decontam --file /home/see/YML_Files/decontam2.yaml\nThese environments can be activated using conda activate [NAME OF ENVIRONMENT]. So, for example\nconda activate qiime2-2022.11\nAnd, they can be deactivated using the command:\nconda deactivate\nYou can check that your environments installed correctly by activating them and running a command that should now work with the –help flag and seeing if that brings up the command’s options.\nCheck that the biom-convert environment installed correctly by doing:\nconda activate biom-convert\nAlternatively to check, use:\nconda env list\n\n\n\n\n\n\nConfirm that your environments work. Use the command biom convert --help for the biom-convert environment and the command qiime tools import --help for the qiime2-2020.11 environment.",
+    "crumbs": [
+      "16s Tutorial",
+      "Qiime2 Basics"
+    ]
+  },
+  {
+    "objectID": "chapter2-2.html#qiime2-files",
+    "href": "chapter2-2.html#qiime2-files",
+    "title": "Qiime2 Basics",
+    "section": "Qiime2 Files",
+    "text": "Qiime2 Files\nQiime2 uses .qza and .qzv files. Qiime2 .qza files are referred to as artifacts. These files contain data used in analyses, in addition to information about how that data were generated (provenance) and the file type, e.g. FeatureTable[Frequency]. Artifacts can be viewed at view.qiime2.org.\nYou can see all of the formats and types by using flags with the qiime tools import command after activating the environment\nqiime tools import --show-importable-types\nqiime tools import --show-importable-formats\n\nThe details tab (shown above) gives the file name, the Qiime2 id (uuid), the type, and format. It also lists citations for the tools used to create the file below. The provenance tab (the tab in the blue rectangle above) contains information about how the data were generated.\n\nIf you click on the circle, that will just show you the uuid, type, and format again. But, if you click on the square surrounding it…\n\nYou’ll get basically all the information you could ever want about how it was made. As you can see above, it tells you when the file was made, how long its creation took, what plugin was used to make it, the inputs used, and even the parameters used for the command. This is great for keeping track of how Qiime2 data and figures were generated.\nLike artifacts, Qiime2 visualizations (.qzv files) also have Details and Provenance tabs when viewed with view.qiime2.org..\n\nBut, it has another tab, the Visualization tab. And, above, is the same data, except one additional command was used to convert the table from an artifact to a visualization, making it more readable and providing you with additional information about it.\n\nYou can see that there’s another square now in the provenance tab. That’s because of the additional command converting the artifact to a visualization, and on the right side, you can see that the details about that command are provided.\nBut, let’s look at the two sets of tabs. The tabs in the purple rectangle are the same for every visualization and artifact. In other words, all visualizations have Visualization, Details, and Provenance tabs, while all artifacts have Details and Provenance tabs.\nThe tabs in the orange box vary based on which tab in the purple area you’re in, and there may not even be any tabs in this area, as is the case when on the Details tab for the table.qza artifact above. For the Visualization tab, the tabs in the orange rectangle area also vary depending on the data being visualized and type of visualization.",
+    "crumbs": [
+      "16s Tutorial",
+      "Qiime2 Basics"
+    ]
+  }
+]
