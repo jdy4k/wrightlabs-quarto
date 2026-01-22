@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -43,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-3d6de004152a0bf56ec6b9f428a1232e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -199,7 +237,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#import-raw-data-into-qiime2" id="toc-import-raw-data-into-qiime2" class="nav-link active" data-scroll-target="#import-raw-data-into-qiime2">Import Raw Data into Qiime2</a></li>
+  <li><a href="#import-raw-data-into-qiime2" id="toc-import-raw-data-into-qiime2" class="nav-link active" data-scroll-target="#import-raw-data-into-qiime2">Import Raw Data into Qiime2</a>
+  <ul class="collapse">
+  <li><a href="#make-mapping.sh" id="toc-make-mapping.sh" class="nav-link" data-scroll-target="#make-mapping.sh">1.1_make-mapping.sh</a></li>
+  <li><a href="#raw_reads_import.sh" id="toc-raw_reads_import.sh" class="nav-link" data-scroll-target="#raw_reads_import.sh">1.2_raw_reads_import.sh</a></li>
+  </ul></li>
+  <li><a href="#quality-checking-and-filtering" id="toc-quality-checking-and-filtering" class="nav-link" data-scroll-target="#quality-checking-and-filtering">Quality Checking and Filtering</a>
+  <ul class="collapse">
+  <li><a href="#quality_check.sh" id="toc-quality_check.sh" class="nav-link" data-scroll-target="#quality_check.sh">2_quality_check.sh</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -232,8 +278,158 @@ ul.task-list li input[type="checkbox"] {
 <p>Before you start a quick note on notepad editors. Most all of your computers will come with a notepad software that you can use with cyberduck to edit the scripts to submit to the cluster. However for ease of use downloading a software called notepad ++. This notepad software helpes colorcode items in the script to make it easier to read. While this is not required it is highly recommended if you plan on using a notepad app to edit the scripts. If you prefer to use the nano function this is not required.</p>
 <p>Download link: <a href="https://notepad-plus-plus.org/downloads/v8.5.3/">https://notepad-plus-plus.org/downloads/v8.5.3/</a></p>
 <p>Before we can do anything with Qiime2, we need to get our data into a format it can use. That’s what this section is for.</p>
+<section id="make-mapping.sh" class="level3">
+<h3 class="anchored" data-anchor-id="make-mapping.sh">1.1_make-mapping.sh</h3>
+<p>The mapping file is a list of files with sample IDs for Qiime2 to import. So, we need to make one before analyzing our raw data.</p>
+<ol type="1">
+<li>Move into your <code>QIIME2_pipeline-updated</code> folder</li>
+</ol>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>What command did you use to move into the <code>QIIME2_pipeline-updated</code> folder?</p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>Open your 1.1_make-mapping.sh script, either with Putty/Terminal, using <code>nano 1.1_make-mapping.sh</code> or, through Cyberduck, by right-clicking on it and choosing Edit With and then a text editor.</p></li>
+<li><p>Set the working directory to your main data folder (the folder containing the <code>raw_data</code> folder)</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">workdir</span> = <span class="co"># your main data folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In Putty, which command can you use to print your working directory and why might this be helpful when setting a working directory in a script?</p>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Submit the script to the cluster</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> 1.1_make-mapping.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>sbatch needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder but, you can submit from the main data folder too if you want, using <code>sbatch QIIME2_pipeline/1_raw_reads_import.sh</code>. Don’t forget the folder that you submit from will contain the <code>.o</code> log file.</p>
+</div>
+</div>
+</div>
+<p>This should make a <code>mapping.csv</code> file in the folder you specified for “workdir”. The <code>mapping.csv</code> file should contain three columns: <code>sample-id</code>, <code>absolute-filepath</code>, and <code>direction</code>.</p>
+</section>
+<section id="raw_reads_import.sh" class="level3">
+<h3 class="anchored" data-anchor-id="raw_reads_import.sh">1.2_raw_reads_import.sh</h3>
+<p>This script uses the mapping file that you copied to import your data into Qiime2.</p>
+<ol type="1">
+<li><p>Move into your QIIME2_pipeline folder</p></li>
+<li><p>Open your <code>1.2_raw_reads_import.sh</code> script either with Putty/Terminal, using <code>nano 1.2_raw_reads_import.sh</code> or through Cyberduck, by right-clicking on it and choosing Edit With and then a text editor.</p></li>
+</ol>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Do you prefer to use nano or a text-editor such as Notepad++ to edit scripts? If you have a preference, why do you have this preference?</p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Set the working directory to your main data folder (the location of your mapping file)</li>
+</ol>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>For example, <code>workdir=/home/stenley/bin-600/</code></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Important: Your working directory is going to look different than this one because your user directory will be named differently and the other directories you have have different names than the directories in this path.</p>
+</div>
+</div>
+</div>
+<p><a href="images/tutorial-images-2/2-2_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/tutorial-images-2/2-2_0.png" class="img-fluid"></a></p>
+<p>For the <code>--type</code> flag, we almost always use: <code>SampleData[PairedEndSequencesWithQuality]</code>, but refer to documentation if you are working with something different. You know you have Paired End sequences if you have R1 and R2 files, and you know if you have quality information if the extension is either <code>.fastq</code> or <code>.fastq.gz</code>. To see all available types do:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate qiime2-2022.11</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">### OR</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools import <span class="at">--show-importable-types</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>What outputs can you expect to see from script 1.2? What files were used as the input?</p>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Submit the script to the cluster</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> 1.2_raw_reads_import.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>sbatch</code> needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder. But, you can submit from the main data folder too if you want, using <code>sbatch QIIME2_pipeline/1_raw_reads_import.sh</code>.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Don’t forget the folder that you submit from will contain the .o log file</p>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Check status of job with squeue or watch squeue</li>
+</ol>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This script can take a while. A <code>.o</code> file with the job number will be created once it’s finished. If you use <code>watch squeue</code>, you can use <kbd>CTRL</kbd> + <kbd>c</kbd> to exit that screen.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="quality-checking-and-filtering" class="level2">
+<h2 class="anchored" data-anchor-id="quality-checking-and-filtering">Quality Checking and Filtering</h2>
+<p>Before figuring out what bacterial taxa your sequences represent, you will first need to make sure that you are only submitting high quality sequences for analysis. Reads from the sequencing instrument can vary in quality, so it is important to ensure that the reads you are working with are of high quality to help guarantee good downstream results. The quality of the Illumina MiSeq platform is great; however, it is still prone to errors (less than 1%). We perform quality filtering to remove low quality sequences and to truncate sequences when they begin dropping below a specified quality score. Retention of this data could otherwise lead to erroneous conclusions from downstream analyses.</p>
+<p>Sequences are received in the “fastq” format. This format includes both the sequences themselves, as well as the quality of each base pair in those sequences, as shown below:</p>
+<p><a href="images/tutorial-images-2/2-2_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/tutorial-images-2/2-2_1.png" class="img-fluid"></a></p>
+<p>The first line includes the unique sequence ID followed by the nucleotide sequence. The quality scores of each position are listed after the plus sign, where each character represents an ASCII-encoded quality score. These characters can also be used to calculate the quality of the sequence as a whole.</p>
+<p>To look at what one of our <code>.fastq</code> text files looks like, choose one of the file names and use the <code>zcat</code> and head commands to view the first 10 lines in it. For instance, in the <code>raw_data</code> folder:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> Chris_1C_S181_R1_001.fastq.gz <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="quality_check.sh" class="level3">
+<h3 class="anchored" data-anchor-id="quality_check.sh">2_quality_check.sh</h3>
+<p>We use this script to get quality information for the raw data.</p>
+<ol type="1">
+<li><p>Open the script using nano or Cyberduck</p></li>
+<li><p>Set the working directory to your main data folder. This script needs the <code>paired-end-demux.qza</code> file produced from the last one, and that should be in your main data folder. If you don’t see the <code>paired-end-demux.qza</code> file file in Cyberduck, try hitting the refresh button towards the top of the window. You could also use ls to see if that file exists.</p></li>
+<li><p>Before closing the script, note the flags and their values. In Qiime2, flags that begin with <code>--i</code> denote files used as input for the command. Likewise, <code>--o</code> flags denote flags specifying the names of output files. All filenames for viewable files generated by our pipeline begin with “VIEWABLE_”. So, if you decide to change the names of output files at any point during this tutorial or in the future, you will have to edit those flags and flags in subsequent scripts appropriately.</p></li>
+<li><p>Submit the script to the cluster with <code>sbatch 2_quality_check.sh</code>. <code>sbatch</code> needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder.</p></li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -309,7 +505,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/jdy4k\.github\.io\/wrightlabs-quarto\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -662,6 +858,38 @@ ul.task-list li input[type="checkbox"] {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

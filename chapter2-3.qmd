@@ -26,3 +26,126 @@ Download link:
 
 Before we can do anything with Qiime2, we need to get our data into a format it can use. That’s
 what this section is for.
+
+### 1.1_make-mapping.sh
+The mapping file is a list of files with sample IDs for Qiime2 to import. So, we need to make one before analyzing our raw data.
+
+1. Move into your `QIIME2_pipeline-updated` folder
+
+::: {.callout-tip}
+What command did you use to move into the `QIIME2_pipeline-updated` folder?
+:::
+
+2. Open your 1.1_make-mapping.sh script, either with Putty/Terminal, using `nano 1.1_make-mapping.sh` or, through Cyberduck, by right-clicking on it and choosing Edit With and then a text
+editor.
+
+3. Set the working directory to your main data folder (the folder containing the `raw_data`
+folder)
+
+``` bash
+workdir = # your main data folder
+```
+
+::: {.callout-tip}
+In Putty, which command can you use to print your working directory and why might this
+be helpful when setting a working directory in a script?
+:::
+
+4. Submit the script to the cluster
+
+``` bash
+sbatch 1.1_make-mapping.sh
+```
+
+::: {.callout-tip}
+sbatch needs to be able to find the job file. So, the above command works if you’re in the
+QIIME2_pipeline folder but, you can submit from the main data folder too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`. Don’t forget the folder that you submit from will contain the `.o` log file.
+:::
+
+This should make a `mapping.csv` file in the folder you specified for “workdir”. The `mapping.csv` file should contain three columns: `sample-id`, `absolute-filepath`, and `direction`.
+
+### 1.2_raw_reads_import.sh
+This script uses the mapping file that you copied to import your data into Qiime2.
+
+1. Move into your QIIME2_pipeline folder
+
+2. Open your `1.2_raw_reads_import.sh` script either with Putty/Terminal, using `nano 1.2_raw_reads_import.sh` or through Cyberduck, by right-clicking on it and choosing Edit With and then a text editor.
+
+::: {.callout-tip}
+Do you prefer to use nano or a text-editor such as Notepad++ to edit scripts? If you have a
+preference, why do you have this preference?
+:::
+
+3. Set the working directory to your main data folder (the location of your mapping file)
+
+::: {.callout-tip}
+For example, `workdir=/home/stenley/bin-600/`
+:::
+
+::: {.callout-warning}
+Important: Your working directory is going to look different than this one because your
+user directory will be named differently and the other directories you have have different
+names than the directories in this path.
+:::
+
+![](images/tutorial-images-2/2-2_0.png)
+
+For the `--type` flag, we almost always use: `SampleData[PairedEndSequencesWithQuality]`, but
+refer to documentation if you are working with something different. You know you have Paired End sequences if you have R1 and R2 files, and you know if you have quality information if the extension is either `.fastq` or `.fastq.gz`. To see all available types do:
+
+``` bash
+conda activate qiime2-2022.11
+### OR
+qiime tools import --show-importable-types
+```
+
+::: {.callout-tip}
+What outputs can you expect to see from script 1.2? What files were used as the input?
+:::
+
+5. Submit the script to the cluster
+
+``` bash
+sbatch 1.2_raw_reads_import.sh
+```
+
+`sbatch` needs to be able to find the job file. So, the above command works if you’re in the
+QIIME2_pipeline folder. But, you can submit from the main data folder too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`.
+
+::: {.callout-warning}
+Don’t forget the folder that you submit from will contain the .o log file 
+:::
+
+6. Check status of job with squeue or watch squeue 
+
+::: {.callout-warning}
+This script can take a while. A `.o` file with the job number will be created once it’s finished. If you use `watch squeue`, you can use <kbd>CTRL</kbd> + <kbd>c</kbd> to exit that screen.
+:::
+
+## Quality Checking and Filtering
+
+Before figuring out what bacterial taxa your sequences represent, you will first need to make sure that you are only submitting high quality sequences for analysis. Reads from the sequencing instrument can vary in quality, so it is important to ensure that the reads you are working with are of high quality to help guarantee good downstream results. The quality of the Illumina MiSeq platform is great; however, it is still prone to errors (less than 1%). We perform quality filtering to remove low quality sequences and to truncate sequences when they begin dropping below a specified quality score. Retention of this data could otherwise lead to erroneous conclusions from downstream analyses.
+
+Sequences are received in the “fastq” format. This format includes both the sequences themselves, as well as the quality of each base pair in those sequences, as shown below:
+
+![](images/tutorial-images-2/2-2_1.png)
+
+The first line includes the unique sequence ID followed by the nucleotide sequence. The quality scores of each position are listed after the plus sign, where each character represents an ASCII-encoded quality score. These characters can also be used to calculate the quality of the sequence as a whole.
+
+To look at what one of our `.fastq` text files looks like, choose one of the file names and use the `zcat` and head commands to view the first 10 lines in it. For instance, in the `raw_data` folder: 
+
+``` bash
+zcat Chris_1C_S181_R1_001.fastq.gz | head
+```
+
+### 2_quality_check.sh
+
+We use this script to get quality information for the raw data.
+
+1. Open the script using nano or Cyberduck
+
+2. Set the working directory to your main data folder. This script needs the `paired-end-demux.qza` file produced from the last one, and that should be in your main data folder. If you don’t see the `paired-end-demux.qza` file file in Cyberduck, try hitting the refresh button towards the top of the window. You could also use ls to see if that file exists.
+
+3. Before closing the script, note the flags and their values. In Qiime2, flags that begin with `--i` denote files used as input for the command. Likewise, `--o` flags denote flags specifying the names of output files. All filenames for viewable files generated by our pipeline begin with “VIEWABLE_”. So, if you decide to change the names of output files at any point during this tutorial or in the future, you will have to edit those flags and flags in subsequent scripts appropriately.
+
+4. Submit the script to the cluster with `sbatch 2_quality_check.sh`. `sbatch` needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder.
