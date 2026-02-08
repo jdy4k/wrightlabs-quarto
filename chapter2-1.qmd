@@ -2,13 +2,13 @@
 title: "Program Installation & Acquiring Data"
 ---
 
-We need to create two environments to use our Qiime2 pipeline, one for Qiime2 and one for
-biom convert. Environments are essentially just collections of programs that we will use to
-perform various analyses.
+We need to create two environments to use our Qiime2 pipeline, one for Qiime2 and one
+for biom convert. Environments are essentially just collections of programs that we will
+use to perform various analyses.
 
 Some programs are incompatible with others and thus must be installed to different
-environments. As an added bonus, installing programs using environments can also help avoid
-breaking your cluster account.
+environments. As an added bonus, installing programs using environments can also help
+avoid breaking your cluster account.
 
 ## Miniconda
 
@@ -22,8 +22,8 @@ To check if you have miniconda installed, you can run the following command:
 conda list
 ```
 
-If this returns a list of environments, you have miniconda installed. If you get an error instead, follow 
-the installation insctructions for miniconda in the next section.
+If this returns a list of environments, you have miniconda installed. If you get an
+error instead, follow the installation instructions for miniconda in the next section.
 
 ### Installing Miniconda
 
@@ -33,35 +33,45 @@ If you already have miniconda installed, you can skip this section.
 
 To download and setup miniconda, you can run these commands:
 
-```bash
+``` bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh --no-check-certificate
 bash Miniconda3-py37_4.10.3-Linux-x86_64.sh
 ```
-An installer for miniconda will begin in your terminal. You can follow these steps to configure it properly:
 
-1. Hit enter a bunch of times; many of the intital prompt will be asking you to change default. If you are
-comfortable changing these deffault settings, feel free too. Otherw, just hit enter until the next step.
-2. Then accept the license agreement by typing “yes”, without the quotation marks
+An installer for miniconda will begin in your terminal. You can follow these steps to
+configure it properly:
+
+1. Hit enter a bunch of times; many of the initial prompts will be asking you to change
+   defaults. If you are comfortable changing these default settings, feel free to do so.
+   Otherwise, just hit enter until the next step.
+
+2. Then accept the license agreement by typing "yes", without the quotation marks.
+
 3. Hit enter after typing that.
-4. Hit enter again. Type “yes” again at the “Do you wish the installer to initialize Miniconda3
-by running conda init?” prompt.
-5. After installing it, copy the .condarc file to your home directory
+
+4. Hit enter again. Type "yes" again at the "Do you wish the installer to initialize
+   Miniconda3 by running conda init?" prompt.
+
+5. After installing it, copy the `.condarc` file to your home directory
 ``` bash
 cp /home/see/.condarc ~
 ```
-6. Open your .bashrc file
+
+6. Open your `.bashrc` file
+
 ``` bash
 nano ~/.bashrc
 ```
+
 7. At the bottom of this file, paste by copying and right-clicking:
 ``` bash
 export LC_ALL="en_US.utf8"
 export LANG="en_US.utf8"
 ```
 
-Your `.bashrc` file should look something like this:
+Your `~/.bashrc` file should look something like this:
 
-```bash
+``` bash
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 . /etc/bashrc
@@ -89,11 +99,15 @@ export LC_ALL="en_US.utf8"
 export LANG="en_US.utf8"
 ```
 
-8. Save and exit the file by clicking `CTRL` + `O` and then `CTRL` + `X`
-9. Reload your bashrc file by running:
+8. Save and exit the file by clicking `CTRL` + `O` and then `CTRL` + `X`.
+
+9. Reload your `.bashrc` file by running:
+
 ``` bash
 source ~/.bashrc
 ```
 
-Confirm that you have miniconda installed by running `conda list` in your terminal.If you get a list of packages, congratulations! You have installed miniconda and can move on to the next section.
+Confirm that you have miniconda installed by running `conda list` in your terminal. If
+you get a list of packages, congratulations! You have installed miniconda and can move
+on to the next section.
 

@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3d6de004152a0bf56ec6b9f428a1232e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a75e2c3c19e705e52ae089c450cf05c6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -277,13 +277,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>All of the files that you will use with Qiime2 are either .qza (artifacts) or .qzv (visualizations). Qiime2 tracks how those files were created, which helps with reproducibility. The website view.qiime2.org is used to see this information and visualizations.</p>
+<p>All of the files that you will use with Qiime2 are either <code>.qza</code> (artifacts) or <code>.qzv</code> (visualizations). Qiime2 tracks how those files were created, which helps with reproducibility. The website <a href="view.qiime2.org">view.qiime2.org</a> is used to see this information and visualizations.</p>
 <p>Artifacts have different <a href="https://docs.qiime2.org/2022.11/semantic-types/">semantic types</a>. These semantic types are basically analogous to different file types on your computer and help prevent users from applying analyses incorrectly.</p>
 <p>Qiime2’s functionality is based on plugins. All the plugins that you need for the main pipeline are installed by default. However, you might find some plugins listed <a href="https://library.qiime2.org/plugins/">here</a> interesting.</p>
-<p>The <a href="https://docs.qiime2.org/2022.11/">Qiime2 website</a> has a variety of tutorials if you want any additional practice or just want to see what else it can do. The <a href="https://docs.qiime2.org/2022.11/">Moving Pictures tutorial</a> in particular has a lot of similarities with our pipeline</p>
+<p>The <a href="https://docs.qiime2.org/2022.11/">Qiime2 website</a> has a variety of tutorials if you want any additional practice or just want to see what else it can do. The <a href="https://docs.qiime2.org/2022.11/">Moving Pictures tutorial</a> in particular has a lot of similarities with our pipeline.</p>
 <section id="installing-qiime2" class="level2">
 <h2 class="anchored" data-anchor-id="installing-qiime2">Installing Qiime2</h2>
-<p>We will be installing Qiime2 my creating a miniconda environment, then installing Qiime2 into that environment. You can do this by running the following commands:</p>
+<p>We will be installing Qiime2 by creating a miniconda environment, then installing Qiime2 into that environment. You can do this by running the following commands:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://data.qiime2.org/distro/core/qiime2-2022.11-py38-linux-conda.yml</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> qiime2-2022.11 <span class="at">--file</span> qiime2-2022.11-py38-linux-conda.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-note">
@@ -313,11 +313,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> biom-convert <span class="at">--file</span> /home/see/YML_Files/biom-convert5.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And, one more for script 6.0…</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> decontam <span class="at">--file</span> /home/see/YML_Files/decontam2.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>These environments can be activated using conda activate [NAME OF ENVIRONMENT]. So, for example</p>
+<p>These environments can be activated using <code>conda activate [NAME OF ENVIRONMENT]</code>. So, for example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate qiime2-2022.11</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And, they can be deactivated using the command:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can check that your environments installed correctly by activating them and running a command that should now work with the –help flag and seeing if that brings up the command’s options.</p>
+<p>You can check that your environments installed correctly by activating them and running a command that should now work with the <code>--help</code> flag and seeing if that brings up the command’s options.</p>
 <p>Check that the biom-convert environment installed correctly by doing:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate biom-convert</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Alternatively to check, use:</p>
@@ -328,15 +328,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Confirm that your environments work. Use the command <code>biom convert --help</code> for the biom-convert environment and the command <code>qiime tools import --help</code> for the qiime2-2020.11 environment.</p>
+<p>Confirm that your environments work. Use the command <code>biom convert --help</code> for the biom-convert environment and the command <code>qiime tools import --help</code> for the qiime2-2022.11 environment.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="qiime2-files" class="level2">
 <h2 class="anchored" data-anchor-id="qiime2-files">Qiime2 Files</h2>
-<p>Qiime2 uses .qza and .qzv files. Qiime2 .qza files are referred to as artifacts. These files contain data used in analyses, in addition to information about how that data were generated (provenance) and the file type, e.g.&nbsp;FeatureTable[Frequency]. Artifacts can be viewed at <a href="view.qiime2.org">view.qiime2.org</a>.</p>
-<p>You can see all of the formats and types by using flags with the qiime tools import command after activating the environment</p>
+<p>Qiime2 uses <code>.qza</code> and <code>.qzv</code> files. Qiime2 <code>.qza</code> files are referred to as artifacts. These files contain data used in analyses, in addition to information about how that data were generated (provenance) and the file type, e.g.&nbsp;<code>FeatureTable[Frequency]</code>. Artifacts can be viewed at <a href="view.qiime2.org">view.qiime2.org</a>.</p>
+<p>You can see all of the formats and types by using flags with the <code>qiime tools import</code> command after activating the environment:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools import <span class="at">--show-importable-types</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools import <span class="at">--show-importable-formats</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><a href="images/tutorial-images-2/2-1_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/tutorial-images-2/2-1_0.png" class="img-fluid"></a></p>
@@ -345,13 +345,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you click on the circle, that will just show you the uuid, type, and format again. But, if you click on the square surrounding it…</p>
 <p><a href="images/tutorial-images-2/2-1_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/tutorial-images-2/2-1_2.png" class="img-fluid"></a></p>
 <p>You’ll get basically all the information you could ever want about how it was made. As you can see above, it tells you when the file was made, how long its creation took, what plugin was used to make it, the inputs used, and even the parameters used for the command. This is great for keeping track of how Qiime2 data and figures were generated.</p>
-<p>Like artifacts, Qiime2 visualizations (.qzv files) also have Details and Provenance tabs when viewed with <a href="view.qiime2.org.">view.qiime2.org.</a>.</p>
+<p>Like artifacts, Qiime2 visualizations (<code>.qzv</code> files) also have Details and Provenance tabs when viewed with <a href="view.qiime2.org">view.qiime2.org</a>.</p>
 <p><a href="images/tutorial-images-2/2-1_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images/tutorial-images-2/2-1_3.png" class="img-fluid"></a></p>
 <p>But, it has another tab, the Visualization tab. And, above, is the same data, except one additional command was used to convert the table from an artifact to a visualization, making it more readable and providing you with additional information about it.</p>
 <p><a href="images/tutorial-images-2/2-1_4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="images/tutorial-images-2/2-1_4.png" class="img-fluid"></a></p>
 <p>You can see that there’s another square now in the provenance tab. That’s because of the additional command converting the artifact to a visualization, and on the right side, you can see that the details about that command are provided.</p>
 <p>But, let’s look at the two sets of tabs. The tabs in the purple rectangle are the same for every visualization and artifact. In other words, all visualizations have Visualization, Details, and Provenance tabs, while all artifacts have Details and Provenance tabs.</p>
-<p>The tabs in the orange box vary based on which tab in the purple area you’re in, and there may not even be any tabs in this area, as is the case when on the Details tab for the table.qza artifact above. For the Visualization tab, the tabs in the orange rectangle area also vary depending on the data being visualized and type of visualization.</p>
+<p>The tabs in the orange box vary based on which tab in the purple area you’re in, and there may not even be any tabs in this area, as is the case when on the Details tab for the <code>table.qza</code> artifact above. For the Visualization tab, the tabs in the orange rectangle area also vary depending on the data being visualized and type of visualization.</p>
 
 
 </section>
@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/jdy4k\.github\.io\/wrightlabs-quarto\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

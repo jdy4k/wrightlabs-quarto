@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3d6de004152a0bf56ec6b9f428a1232e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0f9270a4a04207a15412c145d0f2f4d5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -264,6 +264,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#alpha_rarefactions.sh" id="toc-alpha_rarefactions.sh" class="nav-link" data-scroll-target="#alpha_rarefactions.sh">7.1_alpha_rarefactions.sh</a></li>
   <li><a href="#alpha_format.sh" id="toc-alpha_format.sh" class="nav-link" data-scroll-target="#alpha_format.sh">7.2_alpha_format.sh</a></li>
+  <li><a href="#alpha_div_significance.sh" id="toc-alpha_div_significance.sh" class="nav-link" data-scroll-target="#alpha_div_significance.sh">7.3_alpha_div_significance.sh</a></li>
+  <li><a href="#alpha_div_correlation.sh" id="toc-alpha_div_correlation.sh" class="nav-link" data-scroll-target="#alpha_div_correlation.sh">7.4_alpha_div_correlation.sh</a></li>
+  </ul></li>
+  <li><a href="#beta-diversity" id="toc-beta-diversity" class="nav-link" data-scroll-target="#beta-diversity">Beta Diversity</a>
+  <ul class="collapse">
+  <li><a href="#a-quick-note-on-distance-matrices" id="toc-a-quick-note-on-distance-matrices" class="nav-link" data-scroll-target="#a-quick-note-on-distance-matrices">A Quick Note on Distance Matrices</a></li>
+  <li><a href="#beta_input.sh" id="toc-beta_input.sh" class="nav-link" data-scroll-target="#beta_input.sh">8.1_beta_input.sh</a></li>
+  <li><a href="#beta_div_significance.sh" id="toc-beta_div_significance.sh" class="nav-link" data-scroll-target="#beta_div_significance.sh">8.2_beta_div_significance.sh</a></li>
+  <li><a href="#beta_div_correlation.sh" id="toc-beta_div_correlation.sh" class="nav-link" data-scroll-target="#beta_div_correlation.sh">8.3_beta_div_correlation.sh</a></li>
+  </ul></li>
+  <li><a href="#differential-abundance-analysis" id="toc-differential-abundance-analysis" class="nav-link" data-scroll-target="#differential-abundance-analysis">Differential Abundance Analysis</a>
+  <ul class="collapse">
+  <li><a href="#diff_abundance.sh" id="toc-diff_abundance.sh" class="nav-link" data-scroll-target="#diff_abundance.sh">9_diff_abundance.sh</a></li>
+  </ul></li>
+  <li><a href="#lefse---biomarker-analysis" id="toc-lefse---biomarker-analysis" class="nav-link" data-scroll-target="#lefse---biomarker-analysis">LEfSe - Biomarker Analysis</a>
+  <ul class="collapse">
+  <li><a href="#lefse-installation" id="toc-lefse-installation" class="nav-link" data-scroll-target="#lefse-installation">LEfSe Installation</a></li>
+  <li><a href="#lefse_generic_summarize_taxa.sh" id="toc-lefse_generic_summarize_taxa.sh" class="nav-link" data-scroll-target="#lefse_generic_summarize_taxa.sh">1_LEfSe_generic_summarize_taxa.sh</a></li>
+  <li><a href="#lefse_run.sh" id="toc-lefse_run.sh" class="nav-link" data-scroll-target="#lefse_run.sh">2_LEfSe_run.sh</a></li>
+  <li><a href="#lefse_redo_figures.sh" id="toc-lefse_redo_figures.sh" class="nav-link" data-scroll-target="#lefse_redo_figures.sh">3_LEfSe_redo_figures.sh</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -290,11 +310,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This tutorial will follow a general cycle. You will first open a file from the QIIME2_pipeline folder, edit the file, submit the file, and then look at the results. If the submission script was successful, you will move on to the next file and continue the cycle. If it was not, then you will look at the log file in your current directory, determine what went wrong, and then start the cycle over with the same script.</p>
+<p>This tutorial will follow a general cycle. You will first open a file from the <code>QIIME2_pipeline</code> folder, edit the file, submit the file, and then look at the results. If the submission script was successful, you will move on to the next file and continue the cycle. If it was not, then you will look at the log file in your current directory, determine what went wrong, and then start the cycle over with the same script.</p>
 <section id="import-raw-data-into-qiime2" class="level2">
 <h2 class="anchored" data-anchor-id="import-raw-data-into-qiime2">Import Raw Data into Qiime2</h2>
-<p>Each account contains a file called BIN600 this you should always move into this folder when working on the cluster. Inside that folder you should find the metadata and raw data already imported to the Cluster account and it should be ready for you to start analysis!</p>
-<p>Before you start a quick note on notepad editors. Most all of your computers will come with a notepad software that you can use with cyberduck to edit the scripts to submit to the cluster. However for ease of use downloading a software called notepad ++. This notepad software helpes colorcode items in the script to make it easier to read. While this is not required it is highly recommended if you plan on using a notepad app to edit the scripts. If you prefer to use the nano function this is not required.</p>
+<p>Each account contains a file called <code>BIN600</code> this you should always move into this folder when working on the cluster. Inside that folder you should find the metadata and raw data already imported to the Cluster account and it should be ready for you to start analysis!</p>
+<p>Before you start a quick note on notepad editors. Most all of your computers will come with a notepad software that you can use with Cyberduck to edit the scripts to submit to the cluster. However for ease of use downloading a software called Notepad ++. This notepad software helps colorcode items in the script to make it easier to read. While this is not required it is highly recommended if you plan on using a notepad app to edit the scripts. If you prefer to use the <code>nano</code> function this is not required.</p>
 <p>Download link: <a href="https://notepad-plus-plus.org/downloads/v8.5.3/">https://notepad-plus-plus.org/downloads/v8.5.3/</a></p>
 <p>Before we can do anything with Qiime2, we need to get our data into a format it can use. That’s what this section is for.</p>
 <section id="make-mapping.sh" class="level3">
@@ -314,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol start="2" type="1">
-<li><p>Open your 1.1_make-mapping.sh script, either with Putty/Terminal, using <code>nano 1.1_make-mapping.sh</code> or, through Cyberduck, by right-clicking on it and choosing Edit With and then a text editor.</p></li>
+<li><p>Open your <code>1.1_make-mapping.sh</code> script, either with Putty/Terminal, using <code>nano 1.1_make-mapping.sh</code> or, through Cyberduck, by right-clicking on it and choosing Edit With and then a text editor.</p></li>
 <li><p>Set the working directory to your main data folder (the folder containing the <code>raw_data</code> folder)</p></li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">workdir</span> = <span class="co"># your main data folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -338,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>sbatch needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder but, you can submit from the main data folder too if you want, using <code>sbatch QIIME2_pipeline/1_raw_reads_import.sh</code>. Don’t forget the folder that you submit from will contain the <code>.o</code> log file.</p>
+<p><code>sbatch</code> needs to be able to find the job file. So, the above command works if you’re in the <code>QIIME2_pipeline</code> folder but, you can submit from the main data folder too if you want, using <code>sbatch QIIME2_pipeline/1_raw_reads_import.sh</code>. Don’t forget the folder that you submit from will contain the <code>.o</code> log file.</p>
 </div>
 </div>
 </div>
@@ -348,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="raw_reads_import.sh">1.2_raw_reads_import.sh</h3>
 <p>This script uses the mapping file that you copied to import your data into Qiime2.</p>
 <ol type="1">
-<li><p>Move into your QIIME2_pipeline folder</p></li>
+<li><p>Move into your <code>QIIME2_pipeline</code> folder</p></li>
 <li><p>Open your <code>1.2_raw_reads_import.sh</code> script either with Putty/Terminal, using <code>nano 1.2_raw_reads_import.sh</code> or through Cyberduck, by right-clicking on it and choosing Edit With and then a text editor.</p></li>
 </ol>
 <div class="callout callout-style-simple callout-tip">
@@ -357,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Do you prefer to use nano or a text-editor such as Notepad++ to edit scripts? If you have a preference, why do you have this preference?</p>
+<p>Do you prefer to use <code>nano</code> or a text-editor such as Notepad++ to edit scripts? If you have a preference, why do you have this preference?</p>
 </div>
 </div>
 </div>
@@ -403,19 +423,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Submit the script to the cluster</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> 1.2_raw_reads_import.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>sbatch</code> needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder. But, you can submit from the main data folder too if you want, using <code>sbatch QIIME2_pipeline/1_raw_reads_import.sh</code>.</p>
+<p><code>sbatch</code> needs to be able to find the job file. So, the above command works if you’re in the <code>QIIME2_pipeline</code> folder. But, you can submit from the main data folder too if you want, using <code>sbatch QIIME2_pipeline/1_raw_reads_import.sh</code>.</p>
 <div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Don’t forget the folder that you submit from will contain the .o log file</p>
+<p>Don’t forget the folder that you submit from will contain the <code>.o</code> log file</p>
 </div>
 </div>
 </div>
 <ol start="6" type="1">
-<li>Check status of job with squeue or watch squeue</li>
+<li>Check status of job with <code>squeue</code> or <code>watch squeue</code></li>
 </ol>
 <div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
@@ -435,16 +455,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Sequences are received in the “fastq” format. This format includes both the sequences themselves, as well as the quality of each base pair in those sequences, as shown below:</p>
 <p><a href="images/tutorial-images-2/2-2_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/tutorial-images-2/2-2_1.png" class="img-fluid"></a></p>
 <p>The first line includes the unique sequence ID followed by the nucleotide sequence. The quality scores of each position are listed after the plus sign, where each character represents an ASCII-encoded quality score. These characters can also be used to calculate the quality of the sequence as a whole.</p>
-<p>To look at what one of our <code>.fastq</code> text files looks like, choose one of the file names and use the <code>zcat</code> and head commands to view the first 10 lines in it. For instance, in the <code>raw_data</code> folder:</p>
+<p>To look at what one of our <code>.fastq</code> text files looks like, choose one of the file names and use the <code>zcat</code> and <code>head</code> commands to view the first 10 lines in it. For instance, in the <code>raw_data</code> folder:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> Chris_1C_S181_R1_001.fastq.gz <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="quality_check.sh" class="level3">
 <h3 class="anchored" data-anchor-id="quality_check.sh">2_quality_check.sh</h3>
 <p>We use this script to get quality information for the raw data.</p>
 <ol type="1">
-<li><p>Open the script using nano or Cyberduck</p></li>
-<li><p>Set the working directory to your main data folder. This script needs the <code>paired-end-demux.qza</code> file produced from the last one, and that should be in your main data folder. If you don’t see the <code>paired-end-demux.qza</code> file file in Cyberduck, try hitting the refresh button towards the top of the window. You could also use ls to see if that file exists.</p></li>
+<li><p>Open the script using <code>nano</code> or Cyberduck</p></li>
+<li><p>Set the working directory to your main data folder. This script needs the <code>paired-end-demux.qza</code> file produced from the last one, and that should be in your main data folder. If you don’t see the <code>paired-end-demux.qza</code> file in Cyberduck, try hitting the refresh button towards the top of the window. You could also use <code>ls</code> to see if that file exists.</p></li>
 <li><p>Before closing the script, note the flags and their values. In Qiime2, flags that begin with <code>--i</code> denote files used as input for the command. Likewise, <code>--o</code> flags denote flags specifying the names of output files. All filenames for viewable files generated by our pipeline begin with “VIEWABLE_”. So, if you decide to change the names of output files at any point during this tutorial or in the future, you will have to edit those flags and flags in subsequent scripts appropriately.</p></li>
-<li><p>Submit the script to the cluster with <code>sbatch 2_quality_check.sh</code>. <code>sbatch</code> needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder.</p></li>
+<li><p>Submit the script to the cluster with <code>sbatch 2_quality_check.sh</code>. <code>sbatch</code> needs to be able to find the job file. So, the above command works if you’re in the <code>QIIME2_pipeline</code> folder.</p></li>
 <li><p>Check status of job with <code>squeue</code> or <code>watch squeue</code>.</p></li>
 </ol>
 <div class="callout callout-style-simple callout-warning">
@@ -453,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>This script can take a while. .out and .err files with the job number will be created once it’s finished. If you use watch <code>squeue</code>, you can use <kbd>Control</kbd> + <kbd>c</kbd> to exit that screen.</p>
+<p>This script can take a while. <code>.out</code> and <code>.err</code> files with the job number will be created once it’s finished. If you use <code>watch squeue</code>, you can use <kbd>Control</kbd> + <kbd>c</kbd> to exit that screen.</p>
 </div>
 </div>
 </div>
@@ -468,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol start="6" type="1">
-<li><p>Download the output <code>qzv</code> files.</p></li>
+<li><p>Download the output <code>.qzv</code> files.</p></li>
 <li><p>Go to <a href="view.qiime2.org">view.qiime2.org</a> and then drag and drop the downloaded VIEWABLE files into the Drag and drop area (you have to do one at a time).</p></li>
 <li><p>It’ll bring you to an Overview page (shown below), which will have information about the number of sequences per sample. If you scroll down further than I did, you’ll see the number of sequences for each sample.</p></li>
 </ol>
@@ -487,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Update 4/6/2023: Instead of those two text files, an additional visualization (VIEWABLE_ee_paired-end-demux.qzv) is created The fastq_eestats tab has the information that was in the text files, with the Forward Reads table above the Reverse Reads table.</p>
+<p>Update 4/6/2023: Instead of those two text files, an additional visualization (<code>VIEWABLE_ee_paired-end-demux.qzv</code>) is created. The fastq_eestats tab has the information that was in the text files, with the Forward Reads table above the Reverse Reads table.</p>
 </div>
 </div>
 </div>
@@ -507,14 +527,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We will filter by length and expected error. Average expected error is the percentage of bases expected to be incorrect per 100 bases. So by using an expected error of 1, we are allowing one base of each 100 bases to be incorrect, for an expected error of 0.5, we are allowing one base of every 200 bases to be incorrect, and so on.</p>
 <p>Typically, an average expected error of 0.5 is considered very good sequence quality.</p>
 <ol type="1">
-<li><p>As with the other two scripts, open and edit it with nano or Cyberduck.</p></li>
-<li><p>Save and submit the script with sbatch</p></li>
+<li><p>As with the other two scripts, open and edit it with <code>nano</code> or Cyberduck.</p></li>
+<li><p>Save and submit the script with <code>sbatch</code></p></li>
 </ol>
-<p>Here are a list of flags for the qiime dada2 denoise-paired command:</p>
+<p>Here are a list of flags for the <code>qiime dada2 denoise-paired</code> command:</p>
 <p><a href="images/tutorial-images-2/2-2_5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="images/tutorial-images-2/2-2_5.png" class="img-fluid"></a></p>
 <p>A lot of the commands that we run in the tutorial up until alpha diversity essentially just have flags for input and output, and if they do have other flags, it’s not necessary to change them.</p>
-<p>Still, if you are ever curious about a Qiime2 command, you can see its flags by activating the Qiime2 environment (conda activate qiime2-2022.11) and then typing the command name followed by “–help”, e.g.&nbsp;qiime dada2 denoise-paired –help.</p>
-<p>I’ll also note that whenever you see –p-n-threads, it should match ppn at the top of the script (refer back to the Anatomy of a Script section if you have trouble finding that). The higher those are, the faster the script will run.</p>
+<p>Still, if you are ever curious about a Qiime2 command, you can see its flags by activating the Qiime2 environment (<code>conda activate qiime2-2022.11</code>) and then typing the command name followed by <code>--help</code>, e.g.&nbsp;<code>qiime dada2 denoise-paired --help</code>.</p>
+<p>I’ll also note that whenever you see <code>--p-n-threads</code>, it should match <code>ppn</code> at the top of the script (refer back to the Anatomy of a Script section if you have trouble finding that). The higher those are, the faster the script will run.</p>
 <p>However, our cluster doesn’t have infinite resources, so if you’re doing this in a workshop setting, please do not exceed 10 ppn.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -571,14 +591,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We use a pre-trained classifier to determine which bacteria are present in our data.</p>
 <p>This is the first script that can make use of a metadata file.</p>
 <p>If you don’t have a metadata file at this point, you could either make one with just a column for sample ids, or you could just comment out this command and flags.</p>
-<p>If you do have a metadata file, you may wish to validate it first with https://keemei.qiime2.org/. Keep in mind, Keemei will only tell you if there’s any formatting errors; it cannot tell you if the sample id’s in your data match the id’s in your metadata file</p>
+<p>If you do have a metadata file, you may wish to validate it first with https://keemei.qiime2.org/. Keep in mind, Keemei will only tell you if there’s any formatting errors; it cannot tell you if the sample id’s in your data match the id’s in your metadata file.</p>
 <ol type="1">
-<li><p>Open the script and edit it with the nano command or Cyberduck</p></li>
-<li><p>Set the working directory to your main data folder Check that the name of the qza file with your representative sequences matches what’s after the –i-reads flag. If it doesn’t, change what’s after the flag so the names match. Make sure the value of –p-n-jobs matches ppn at the top of the script.</p></li>
-<li><p>Save and submit the script with sbatch</p></li>
-<li><p>Open the .o log file associated with your job number and check that no errors occurred.</p></li>
+<li><p>Open the script and edit it with the <code>nano</code> command or Cyberduck</p></li>
+<li><p>Set the working directory to your main data folder. Check that the name of the <code>.qza</code> file with your representative sequences matches what’s after the <code>--i-reads</code> flag. If it doesn’t, change what’s after the flag so the names match. Make sure the value of <code>--p-n-jobs</code> matches <code>ppn</code> at the top of the script.</p></li>
+<li><p>Save and submit the script with <code>sbatch</code></p></li>
+<li><p>Open the <code>.o</code> log file associated with your job number and check that no errors occurred.</p></li>
 <li><p>Check to see that the expected output files were created</p></li>
-<li><p>Take a look at the VIEWABLE_taxonomy.qzv file</p></li>
+<li><p>Take a look at the <code>VIEWABLE_taxonomy.qzv</code> file</p></li>
 <li><p>As before, download it, then drag and drop it onto Qiime2’s website.</p></li>
 </ol>
 <p><a href="images/tutorial-images-2/2-2_11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="images/tutorial-images-2/2-2_11.png" class="img-fluid"></a></p>
@@ -587,11 +607,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The first column gives the names of the ASVs</p></li>
 <li><p>The second gives the assigned taxonomy</p></li>
 <li><p>The third reports how confident the classifier is that it’s right about the ASVs identities</p></li>
-<li><p>Next, let’s look at the VIEWABLE_taxa-bar-plots.qzv file</p></li>
+<li><p>Next, let’s look at the <code>VIEWABLE_taxa-bar-plots.qzv</code> file</p></li>
 <li><p>Again, download it, then drag and drop it onto Qiime2’s website.</p></li>
 </ol>
 <p><a href="images/tutorial-images-2/2-2_12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="images/tutorial-images-2/2-2_12.png" class="img-fluid"></a></p>
-<p>As you can see, it creates a bar plot of the relative abundances, with each sample having a total sum of 100. If you mouse over one of the bar segments, the relative abundance will be shown for that bacteria in that sample, as seen with Betaproteobacteriales above.</p>
+<p>As you can see, it creates a bar plot of the relative abundances, with each sample having a total sum of 100. If you mouse over one of the bar segments, the relative abundance will be shown for that bacteria in that sample, as seen with <em>Betaproteobacteriales</em> above.</p>
 <p>You can change the taxonomic level with the drop down box under Taxonomic Level. In the above picture, orders are shown.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
@@ -619,12 +639,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="alpha_diversity.sh" class="level3">
 <h3 class="anchored" data-anchor-id="alpha_diversity.sh">5_alpha_diversity.sh</h3>
 <p>We use this script to generate a phylogenetic tree, so this tree shows how closely related we think our ASVs are to each other.</p>
-<p>If you’re curious about how this script works,see the “Generate a tree for phylogenetic diversity analyses” section <a href="https://docs.qiime2.org/2019.7/tutorials/moving-pictures/">here</a>.</p>
+<p>If you’re curious about how this script works, see the “Generate a tree for phylogenetic diversity analyses” section <a href="https://docs.qiime2.org/2019.7/tutorials/moving-pictures/">here</a>.</p>
 <p>Basically, the representative ASV sequences are aligned, in other words similarities between sequences are determined. Those alignments are then used as the basis for determining the phylogeny.</p>
 <ol type="1">
-<li><p>Open the script and edit it with the nano command or Cyberduck</p></li>
-<li><p>Set the working directory to your main data folder. Check that the name of the qza file with your representative sequences matches what’s after the –i-reads flag. If it doesn’t, change what’s after the flag so the names match</p></li>
-<li><p>Save and submit the script with sbatch</p></li>
+<li><p>Open the script and edit it with the <code>nano</code> command or Cyberduck</p></li>
+<li><p>Set the working directory to your main data folder. Check that the name of the <code>.qza</code> file with your representative sequences matches what’s after the <code>--i-reads</code> flag. If it doesn’t, change what’s after the flag so the names match</p></li>
+<li><p>Save and submit the script with <code>sbatch</code></p></li>
 </ol>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -640,7 +660,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="downstream-analysis-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="downstream-analysis-preparation">Downstream Analysis Preparation</h2>
-<p>The 6.0 script can only be one when at least one negative control is present.</p>
+<p>The 6.0 script can only be run when at least one negative control is present.</p>
 <p>The 6.1 script doesn’t yield any new information, but it does put all the necessary files into folders for alpha and beta diversity analysis in addition to providing a few input folders for other types of analyses.</p>
 <section id="decontam.sh" class="level3">
 <h3 class="anchored" data-anchor-id="decontam.sh">6.0_decontam.sh</h3>
@@ -658,49 +678,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol type="1">
-<li><p>Open the script with nano or Cyberduck</p></li>
+<li><p>Open the script with <code>nano</code> or Cyberduck</p></li>
 <li><p>Change the working directory to your main data folder</p></li>
-<li><p>Specify the name of your .qza table</p></li>
-</ol>
+<li><p>Specify the name of your <code>.qza</code> table</p>
 <ul>
-<li>input=</li>
-</ul>
-<ol start="4" type="1">
-<li>Specify the name of the metadata file</li>
-</ol>
+<li><code>input=</code></li>
+</ul></li>
+<li><p>Specify the name of the metadata file</p>
 <ul>
-<li>meta=</li>
-</ul>
-<ol start="5" type="1">
-<li>Specify the column in the metadata file that says whether a sample is a negative or not</li>
-</ol>
+<li><code>meta=</code></li>
+</ul></li>
+<li><p>Specify the column in the metadata file that says whether a sample is a negative or not</p>
 <ul>
-<li>column=</li>
-</ul>
-<ol start="6" type="1">
-<li>Specify the value in that column for samples that are negatives</li>
-</ol>
+<li><code>column=</code></li>
+</ul></li>
+<li><p>Specify the value in that column for samples that are negatives</p>
 <ul>
-<li>value=</li>
-</ul>
-<ol start="7" type="1">
-<li>Specify the name of the final decontaminated qza table</li>
-</ol>
+<li><code>value=</code></li>
+</ul></li>
+<li><p>Specify the name of the final decontaminated <code>.qza</code> table</p>
 <ul>
-<li>output=</li>
-</ul>
-<ol start="8" type="1">
-<li>Specify the name of the table containing the list of ASVs filtered out as contaminants</li>
-</ol>
+<li><code>output=</code></li>
+</ul></li>
+<li><p>Specify the name of the table containing the list of ASVs filtered out as contaminants</p>
 <ul>
-<li>contam=</li>
-</ul>
-<ol start="9" type="1">
-<li>Save and submit the script</li>
-</ol>
+<li><code>contam=</code></li>
+</ul></li>
+<li><p>Save and submit the script</p>
 <ul>
-<li>Use the output qza table (decontam-table.qza by default) with script 6.0</li>
-</ul>
+<li>Use the output <code>.qza</code> table (<code>decontam-table.qza</code> by default) with script 6.1</li>
+</ul></li>
+</ol>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -717,8 +725,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The next script (6.1) is used for filtering our data based on number of sequences, but before we do that, it’d be good to talk about some general guidelines for filtering.</p>
 <p>We typically filter out samples that contain less than 1,000 sequences because it’s unlikely that the sequences present are accurate representations of the communities they originated from.</p>
 <ol type="1">
-<li><p>View the VIEWABLE_unfiltered_table.qzv file again using view.qiime2.org ● If script 6.0 was run, refer to the summarized-$output text file instead (where output is whatever you specified that variable as in script 6.0)</p></li>
-<li><p>Click on the Interactive Sample Detail tab (shown below in the orange rectangle)</p></li>
+<li>View the <code>VIEWABLE_unfiltered_table.qzv</code> file again using view.qiime2.org
+<ul>
+<li>If script 6.0 was run, refer to the <code>summarized-$output</code> text file instead (where output is whatever you specified that variable as in script 6.0)</li>
+</ul></li>
+<li>Click on the Interactive Sample Detail tab (shown below in the orange rectangle)</li>
 </ol>
 <p><a href="images/tutorial-images-2/2-2_13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="images/tutorial-images-2/2-2_13.png" class="img-fluid"></a></p>
 <ol start="3" type="1">
@@ -750,7 +761,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="a-quick-note-about-variables">A Quick Note about Variables</h3>
 <p>6.0 and 6.1 are set up a little differently compared to the previous scripts. Instead of specifying options next to flags in the commands themselves, you set the value of variables to what you want them to be and these variables are used in the commands.</p>
 <p><a href="images/tutorial-images-2/2-2_14.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="images/tutorial-images-2/2-2_14.png" class="img-fluid"></a></p>
-<p>You can see in the above example: I’m filtering out all samples that have less than 1,000 sequences; my metadata file is named meta.txt; my table file is table.qza; my taxonomy file is taxonomy.qza, and lastly, my rooted tree file is rooted-tree.qza.</p>
+<p>You can see in the above example: I’m filtering out all samples that have less than 1,000 sequences; my metadata file is named <code>meta.txt</code>; my table file is <code>table.qza</code>; my taxonomy file is <code>taxonomy.qza</code>, and lastly, my rooted tree file is <code>rooted-tree.qza</code>.</p>
 <p>The section in the purple rectangle is creating variables with those values which are then used later in the script.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -765,9 +776,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can see the benefits of using variables in the below picture…</p>
 <p><a href="images/tutorial-images-2/2-2_15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="images/tutorial-images-2/2-2_15.png" class="img-fluid"></a></p>
 <p>The tree variable is being used five times.</p>
-<p>Chances are your tree file is also named “rooted-tree.qza”, but if it weren’t and we didn’t use variables in this script, you would have to specify the name of your tree file five times, instead of just once. So, using variables can save you a lot of time.</p>
-<p>You’ll also notice that $tree is in orange. Depending on your text editor, it might not have any special formatting, but the dollar sign in front of “tree” is what tells the cluster to get the value of the tree variable instead of looking for a file literally named “tree.”</p>
-<p>As an example, for me, cd $workdir is equivalent to cd /home/see/16S_tutorial/data. But, cd workdir would have the cluster look for a file actually named “workdir”.</p>
+<p>Chances are your tree file is also named <code>rooted-tree.qza</code>, but if it weren’t and we didn’t use variables in this script, you would have to specify the name of your tree file five times, instead of just once. So, using variables can save you a lot of time.</p>
+<p>You’ll also notice that <code>$tree</code> is in orange. Depending on your text editor, it might not have any special formatting, but the dollar sign in front of “tree” is what tells the cluster to get the value of the tree variable instead of looking for a file literally named “tree.”</p>
+<p>As an example, for me, <code>cd $workdir</code> is equivalent to <code>cd /home/see/16S_tutorial/data</code>. But, <code>cd workdir</code> would have the cluster look for a file actually named “workdir”.</p>
 <p>We’ve actually been using variables this entire time. When you’ve specified the value for workdir, the workdir variable was then used to change to your working directory.</p>
 <p>Putting spaces in these lines is a very easy mistake to make, and from experience, I can say it’s pretty hard to tell you made it if you just glance through the script before submitting.</p>
 <div class="callout callout-style-simple callout-note">
@@ -791,34 +802,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="format_data.sh" class="level3">
 <h3 class="anchored" data-anchor-id="format_data.sh">6.1_format_data.sh</h3>
 <p>Now, that you have a bit more background information about filtering and variables, we are ready to start on script 6.1.</p>
-<p>In addition to filtering out low abundance samples and Mitochondria and Chloroplasts, this script exports the rooted tree, table, and taxonomy qza files.</p>
+<p>In addition to filtering out low abundance samples and Mitochondria and Chloroplasts, this script exports the rooted tree, table, and taxonomy <code>.qza</code> files.</p>
 <p>It also creates folders for use with alpha and beta diversity analysis, biomarker analysis, and R.</p>
 <ol type="1">
-<li><p>Open the script with the nano command or Cyberduck</p></li>
+<li><p>Open the script with the <code>nano</code> command or Cyberduck</p></li>
 <li><p>Change the working directory to your main data folder</p></li>
-<li><p>Choose the minimum number of sequences a sample needs to be retained If you want to keep all of your sequences, use 0</p>
+<li><p>Choose the minimum number of sequences a sample needs to be retained. If you want to keep all of your sequences, use 0</p>
 <ul>
-<li>cutoff=</li>
+<li><code>cutoff=</code></li>
 </ul></li>
 <li><p>Specify the names of your metadata, table, taxonomy, and tree files</p>
 <ul>
-<li>meta=</li>
-<li>table=</li>
-<li>taxonomy=</li>
-<li>tree=</li>
-<li>IF YOU RAN DECONTAM (6.0), table SHOULD BE “decontam-table.qza”
-<ul>
-<li>Without quotation marks</li>
+<li><code>meta=</code></li>
+<li><code>table=</code></li>
+<li><code>taxonomy=</code></li>
+<li><code>tree=</code></li>
+<li>IF YOU RAN DECONTAM (6.0), table SHOULD BE <code>decontam-table.qza</code> (without quotation marks)</li>
 </ul></li>
-</ul></li>
-<li><p>Save script and then submit it with sbatch</p></li>
-<li><p>Check the .o and .err log files</p></li>
-<li><p>Check that the alpha_div, ancom, beta_div, exported-feature-table, and R folders were created</p>
+<li><p>Save script and then submit it with <code>sbatch</code></p></li>
+<li><p>Check the <code>.o</code> and <code>.err</code> log files</p></li>
+<li><p>Check that the <code>alpha_div</code>, <code>ancom</code>, <code>beta_div</code>, <code>exported-feature-table</code>, and <code>R</code> folders were created</p>
 <ul>
-<li>alpha_div folder should contain your metadata file, rooted-tree.qza file, filtered_feature-table.qza, and a VIEWABLE file for that table.</li>
-<li>ancom folder should contain your metadata file and filtered_feature-table.qza.</li>
-<li>beta_div folder should contain your metadata file, rooted-tree.qza file, and norm_feature-table.qza.</li>
-<li>R folder should contain your metadata file (like all the other folders), rooted_tree.nwk file, unnorm_R_table-with-taxonomy.txt file, and norm_R_table-with-taxonomy.txt
+<li><code>alpha_div</code> folder should contain your metadata file, <code>rooted-tree.qza</code> file, <code>filtered_feature-table.qza</code>, and a VIEWABLE file for that table.</li>
+<li><code>ancom</code> folder should contain your metadata file and <code>filtered_feature-table.qza</code>.</li>
+<li><code>beta_div</code> folder should contain your metadata file, <code>rooted-tree.qza</code> file, and <code>norm_feature-table.qza</code>.</li>
+<li><code>R</code> folder should contain your metadata file (like all the other folders), <code>rooted_tree.nwk</code> file, <code>unnorm_R_table-with-taxonomy.txt</code> file, and <code>norm_R_table-with-taxonomy.txt</code>
 <ul>
 <li>You can do a lot with R, like random forest analysis, partial squares discriminant analysis, etc. For starters though, I recommend looking into the Phyloseq package.</li>
 <li>You can use R on the cluster, but it’s easier to make nice plots if you use it on your own laptop
@@ -830,13 +838,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>With that being said, feel free to contact JCS at chensjr16@juniata.edu if there’s any specific analyses you’re interested in doing with R.</li>
 </ul></li>
 </ul></li>
-<li>The exported-feature-table folder should have taxonomy.tsv, feature-table.biom, VIEWABLE_chloroplast-mitochondria_filtered-$table.qzv, and summarized_feature-table.txt files
+<li>The <code>exported-feature-table</code> folder should have <code>taxonomy.tsv</code>, <code>feature-table.biom</code>, <code>VIEWABLE_chloroplast-mitochondria_filtered-$table.qzv</code>, and <code>summarized_feature-table.txt</code> files
 <ul>
-<li>The VIEWABLE file contains the sequence counts per sample after mitochondria and chloroplasts are removed; the summarized_feature-table.txt contains the sequence counts only for the samples retained after filtering with the sequence number cutoff.</li>
-<li>There should also be three additional biom files: norm_filtered_$cutoff.feature-table.biom, norm_table-with-taxonomy.biom, and unnorm_table-with-taxonomy.biom
+<li>The VIEWABLE file contains the sequence counts per sample after mitochondria and chloroplasts are removed; the <code>summarized_feature-table.txt</code> contains the sequence counts only for the samples retained after filtering with the sequence number cutoff.</li>
+<li>There should also be three additional biom files: <code>norm_filtered_$cutoff.feature-table.biom</code>, <code>norm_table-with-taxonomy.biom</code>, and <code>unnorm_table-with-taxonomy.biom</code>
 <ul>
 <li>The first file was imported for use with Qiime2’s beta diversity commands</li>
-<li>The other two were exported to the R folder</li>
+<li>The other two were exported to the <code>R</code> folder</li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -857,7 +865,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Before moving on, check that your alpha_div, beta_div, and ancom folders have the following files.</p>
+<p>Before moving on, check that your <code>alpha_div</code>, <code>beta_div</code>, and <code>ancom</code> folders have the following files.</p>
 <p><a href="images/tutorial-images-2/2-2_16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="images/tutorial-images-2/2-2_16.png" class="img-fluid"></a></p>
 </div>
 </div>
@@ -869,8 +877,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>First of all, let’s talk about what alpha diversity actually is. We’ve mentioned it a couple times, but we haven’t actually defined it. Basically, alpha diversity just refers to within sample diversity.</p>
 <p>So, imagine, we have two samples, A and B. A has 30 different ASVs and B has 70 different ASVs. We could say that B has higher alpha diversity, because it has more different ASVs, and indeed, this is actually a measure of alpha diversity, called “observed.”</p>
 <p>However, perhaps, A has 5,000 sequences, while B has 10,000, around twice as many. So, you can see then, at least for this metric, B might just have higher diversity because it has more sequences. So, we can use a normalization strategy to better compare these two samples. For instance, we could randomly pick 4,000 sequences from A and 4,000 from B. This is called rarefying the data. So, we could re-word the previous sentence as: we could rarefy A and B at a depth of 4,000 sequences.</p>
-<p>We could then see how many different features are in those sub-samples. Now, of course, you probably wouldn’t get the same exact number if you were to repeat this process, so we repeat it a certain number of times (as defined by the –p-iterations flag) and end up averaging the results.</p>
-<p>What’s more, we do this at multiple depths, with the minimum being defined by –p-min-depth and the maximum by –p-max-depth. This allows us to see how alpha diversity, as defined by our different metrics, changes as we use more and more sequences, which is actually really important. We can plot the alpha diversity as the y axis and number of sequences as an x axis to show how that diversity changes with respect to depth. These plots are called rarefaction curves.</p>
+<p>We could then see how many different features are in those sub-samples. Now, of course, you probably wouldn’t get the same exact number if you were to repeat this process, so we repeat it a certain number of times (as defined by the <code>--p-iterations</code> flag) and end up averaging the results.</p>
+<p>What’s more, we do this at multiple depths, with the minimum being defined by <code>--p-min-depth</code> and the maximum by <code>--p-max-depth</code>. This allows us to see how alpha diversity, as defined by our different metrics, changes as we use more and more sequences, which is actually really important. We can plot the alpha diversity as the y axis and number of sequences as an x axis to show how that diversity changes with respect to depth. These plots are called rarefaction curves.</p>
 <p>One common criticism of rarefaction as a normalization strategy is the fact that you’re not using a lot of your data. But, by sampling at multiple depths, we can see if the slope of the alpha diversity metrics levels off as we approach our maximum depth. If it does, then we probably used enough of our data to capture a good approximation of the actual alpha diversity present in our samples. However, if the slope is still rather steep, a higher maximum should be used.</p>
 <p>Still, this loss of data is the reason that we only use rarefaction for alpha diversity, instead of for both alpha and beta diversity analyses.</p>
 <div class="callout callout-style-simple callout-note">
@@ -886,27 +894,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="alpha_rarefactions.sh" class="level3">
 <h3 class="anchored" data-anchor-id="alpha_rarefactions.sh">7.1_alpha_rarefactions.sh</h3>
 <p>This script rarefies our data at multiple depths, multiple times for each depth, and creates viewable rarefaction plots so we can see if we chose a sufficiently high depth.</p>
-<p>You might want to look at the VIEWABLE_filtered_$cutoff.feature-table.qzv file or the summarized_feature-table.txt file in the alpha_div folder</p>
+<p>You might want to look at the <code>VIEWABLE_filtered_$cutoff.feature-table.qzv</code> file or the <code>summarized_feature-table.txt</code> file in the <code>alpha_div</code> folder</p>
 <p>Qiime2 needs a minimum and maximum depth. It will choose ten intermediary depths to sample at as well.</p>
 <p>Your maximum depth should be a little less than the smallest number of sequences possessed by your samples, at least the first time you run this script.</p>
 <p>But, you may find that a higher depth is needed to accurately reflect your samples’ alpha diversity.</p>
 <p>You can set your minimum depth to a tenth of that.</p>
 <ol type="1">
-<li><p>Change your working directory to your alpha_div folder</p></li>
-<li><p>Check that the value of –m-metadata-file matches the name of your metadata file</p></li>
+<li><p>Change your working directory to your <code>alpha_div</code> folder</p></li>
+<li><p>Check that the value of <code>--m-metadata-file</code> matches the name of your metadata file</p></li>
 <li><p>Change the values for the other flags as desired</p></li>
 </ol>
 <p><a href="images/tutorial-images-2/2-2_17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="images/tutorial-images-2/2-2_17.png" class="img-fluid"></a></p>
 <ol start="4" type="1">
 <li><p>You can see additional alpha diversity metrics <a href="https://forum.qiime2.org/t/alpha-and-beta-diversity-explanations-and-commands/2282">here</a> under the Alpha Diversity Analysis section.</p></li>
 <li><p>Save and submit the script</p></li>
-<li><p>Review the .o and .err log files to see if there were any errors</p></li>
+<li><p>Review the <code>.o</code> and <code>.err</code> log files to see if there were any errors</p></li>
 <li><p>Open the resulting visualization file</p>
 <ul>
-<li>Look at the –o-visualization flag again if you’re having trouble finding it
-<ul>
-<li>It should have that name and be in your alpha_div folder if the script worked</li>
-</ul></li>
+<li>Look at the <code>--o-visualization</code> flag again if you’re having trouble finding it</li>
+<li>It should have that name and be in your <code>alpha_div</code> folder if the script worked</li>
 </ul></li>
 </ol>
 <p><a href="images/tutorial-images-2/2-2_18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="images/tutorial-images-2/2-2_18.png" class="img-fluid"></a></p>
@@ -946,10 +952,412 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>max=</li>
 </ul></li>
-<li><p>Check that the value of –input-path for the qiime tools export command matches the name of the visualization file for the alpha rarefactions plot</p></li>
+<li><p>Check that the value of <code>--input-path</code> for the <code>qiime tools export</code> command matches the name of the visualization file for the alpha rarefactions plot</p></li>
 <li><p>Save and submit the script</p></li>
-<li><p>Check the .o log file for errors and check the q2_alpha folder, within the alpha_div folder, for one .qza file for each metric</p></li>
+<li><p>Check the <code>.o</code> log file for errors and check the <code>q2_alpha</code> folder, within the <code>alpha_div</code> folder, for one <code>.qza</code> file for each metric</p></li>
 </ol>
+</section>
+<section id="alpha_div_significance.sh" class="level3">
+<h3 class="anchored" data-anchor-id="alpha_div_significance.sh">7.3_alpha_div_significance.sh</h3>
+<p>We can see if alpha diversity varies by categorical groups. For instance, if we had an experiment in which some samples were treated with antibiotics and others weren’t, we would probably expect the control group to have higher alpha diversity than the treatment group. We can use this script to see if alpha diversity does differ based on our metadata if you have categorical metadata groups. 1. Change the working directory to your <code>alpha_div</code> folder</p>
+<ol start="2" type="1">
+<li>Specify the name of your metadata file
+<ul>
+<li><code>meta=</code></li>
+<li>You don’t have to change any of them, but here are the flags for the <code>qiime diversity alpha-group-significance</code> command</li>
+</ul></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_20.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="images/tutorial-images-2/2-2_20.png" class="img-fluid"></a></p>
+<ol start="3" type="1">
+<li>Save and submit the script</li>
+<li>Check the log file for errors</li>
+<li>The alpha_sig_results folder within your alpha_div folder should contain one VIEWABLE qzv file for each alpha diversity metric</li>
+<li>Look at the VIEWABLE files</li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img src="images/tutorial-images-2/2-2_21.png" class="img-fluid"></a></p>
+<p>Only categorical columns can be used for this analysis. But, it’ll list any columns that were excluded at the top in a yellow rectangle, and it’ll say why they were excluded.</p>
+<p>Below that will be boxplots. You can change the metadata category the visualization shows for the plots and the PERMANOVA results by using the box under “Column.”</p>
+<p>The formatted_alpha folder (from 7.2) within the alpha_div folder contains the data used to make these boxplots if you want to remake them using <a href="http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization#change-box-plot-fill-colors">ggplot2</a> in R.</p>
+<p>Beneath the boxplots are the results of the PERMANOVA tests. PERMANOVA test were performed for all groups together, shown in the Kruskal-Wallis (all groups) section, and for each set of two groups, shown in the Kruskal-Wallis (pairwise) section.</p>
+<p><a href="images/tutorial-images-2/2-2_22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img src="images/tutorial-images-2/2-2_22.png" class="img-fluid"></a></p>
+<p>The p-value column is usually the one we pay the most attention to. A p-value is the probability that you would get your data just due to chance if there were no differences between the groups.</p>
+<p>Generally, a p-value of 0.05 or lower is considered significant, as in, if the p-value is less than or equal to 0.05, that’s good evidence that there is a real difference as the odds of getting our data just due to chance is very low.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Choose one of your alpha diversity measures and give a brief explanation of its meaning. Is it significant?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="alpha_div_correlation.sh" class="level3">
+<h3 class="anchored" data-anchor-id="alpha_div_correlation.sh">7.4_alpha_div_correlation.sh</h3>
+<p>We can also see if alpha diversity varies with numerical metadata using this script if you have any numerical metadata.</p>
+<ol type="1">
+<li><p>Open the script</p></li>
+<li><p>Change the working directory to your <code>alpha_div</code> folder</p></li>
+<li><p>Specify the name of your metadata file</p>
+<ul>
+<li><code>meta=</code></li>
+<li>You don’t have to change any of them, but here are the flags for the <code>qiime diversity alpha-correlation</code> command</li>
+</ul></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_23.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img src="images/tutorial-images-2/2-2_23.png" class="img-fluid"></a></p>
+<ol start="4" type="1">
+<li><p>Save and submit the script</p></li>
+<li><p>Check the <code>.o</code> log file for errors</p></li>
+<li><p>The <code>alpha_corr_results</code> folder within your <code>alpha_div</code> folder should contain one VIEWABLE <code>.qzv</code> file for each alpha diversity metric</p></li>
+<li><p>Look at the VIEWABLE files</p></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_24.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img src="images/tutorial-images-2/2-2_24.png" class="img-fluid"></a></p>
+<p>The output here is pretty similar to 7.3.</p>
+<p>The excluded metadata columns are shown in the yellow rectangle at the top.</p>
+<p>Instead of a boxplot, the graphic is a dot plot, with the metadata column value as the x-axis and the alpha diversity metric value as the y-axis</p>
+</section>
+</section>
+<section id="beta-diversity" class="level2">
+<h2 class="anchored" data-anchor-id="beta-diversity">Beta Diversity</h2>
+<p>Beta diversity is how different samples are from each other, so between sample diversity, rather than within sample diversity.</p>
+<p>As an illustration, imagine that we have two 16S samples, and we wanted to see how different they were from each other. Well, we could make a number line for abundance of <em>E. coli</em> in them, and then we’d have two points on a number line. Well, what if we added another bacteria, say <em>Pseudomonas aeruginosa</em>.</p>
+<p>Theoretically, we could go through every bacteria present in both samples and see how different their abundances are between the samples.</p>
+<p>The various metrics for beta diversity use more complicated formulas than that to determine how different samples are from each other.</p>
+<p>See the metrics under Beta Diversity Analysis section <a href="https://forum.qiime2.org/t/alpha-and-beta-diversity-explanations-and-commands/2282">here</a> for all available metrics.</p>
+<p>We typically use the weight unnormalized unifrac metric, which takes into account phylogeny and abundance.</p>
+<section id="a-quick-note-on-distance-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="a-quick-note-on-distance-matrices">A Quick Note on Distance Matrices</h3>
+<p>We make and then use a distance matrix for our beta diversity analyses, based on the CSS normalized table.</p>
+<p>A distance matrix shows how different, so how distant, samples are from each other.</p>
+<p><a href="images/tutorial-images-2/2-2_25.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img src="images/tutorial-images-2/2-2_25.png" class="img-fluid"></a></p>
+<p>In this distance matrix, B and C are more similar to each other than either is to A. A is more different from C (12) than it is from B (10).</p>
+<p>We can use a distance matrix to create plots, like PCoA and NMDS, to visualize how similar samples are to each other.</p>
+<p>These visualizations are called ordinations. They try to show the distances between samples as accurately as possible using only 2 or 3 dimensions.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Give a brief description of Beta diversity Provide an example. Compare and contrast Alpha and beta diversity. How are they similar and how are they different?</p>
+<p>Based on the Image below what are the alpha and beta diversity measures.</p>
+<p><a href="images/tutorial-images-2/2-2_26.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img src="images/tutorial-images-2/2-2_26.png" class="img-fluid"></a></p>
+</div>
+</div>
+</div>
+</section>
+<section id="beta_input.sh" class="level3">
+<h3 class="anchored" data-anchor-id="beta_input.sh">8.1_beta_input.sh</h3>
+<p>The statistical tests for beta diversity use a distance matrix to see if beta diversity varies with categorical and numerical metadata. This script calculates the distance matrix and creates PCoA coordinates based on them.</p>
+<ol type="1">
+<li><p>Open the script</p></li>
+<li><p>Change the working directory to your <code>beta_div</code> folder</p></li>
+<li><p>Save and submit the script</p>
+<ul>
+<li>You don’t have to change anything else in the script but here are the flags, in case you want to change anything</li>
+<li><code>qiime diversity beta-phylogenetic</code> or <code>qiime diversity beta</code> (if you use a non-phylogenetic metric)</li>
+</ul></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_27.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img src="images/tutorial-images-2/2-2_27.png" class="img-fluid"></a></p>
+<ul>
+<li><code>qiime diversity pcoa</code></li>
+</ul>
+<p><a href="images/tutorial-images-2/2-2_28.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img src="images/tutorial-images-2/2-2_28.png" class="img-fluid"></a></p>
+<p>Where will the output files be located (assuming the script worked)? Also, did JCS make a typo in the workdir line or was he just testing you? Note: if you say he made a typo, he will fail you.</p>
+<ol start="4" type="1">
+<li>Check that the output files have been created</li>
+</ol>
+</section>
+<section id="beta_div_significance.sh" class="level3">
+<h3 class="anchored" data-anchor-id="beta_div_significance.sh">8.2_beta_div_significance.sh</h3>
+<p>Like 7.3, you can only use this script if you have categorical metadata.</p>
+<p>This script will run PERMANOVA for all groups in a category overall and pairwise. These tests allow you to see if samples in the same group are significantly more different from samples in other groups than they are from each other.</p>
+<ol type="1">
+<li>Set the working directory to where the output from the previous script was created
+<ul>
+<li>It should be <code>[VARIABLE]=[DIRECTORY]</code></li>
+</ul></li>
+<li>Change the name of the metadata file to match yours
+<ul>
+<li><code>meta=</code></li>
+</ul></li>
+<li>List the categories that you want to use for the PERMANOVA tests in the columns variable</li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_29.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img src="images/tutorial-images-2/2-2_29.png" class="img-fluid"></a></p>
+<ul>
+<li>Each category should be on a new line, and all of them should be within the parentheses</li>
+<li>For the purposes of this tutorial, you can just use the Location and Site columns You do NOT need to use a third categorical column</li>
+</ul>
+<ol start="4" type="1">
+<li><p>Save and submit the script</p></li>
+<li><p>Look at the output</p></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_30.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img src="images/tutorial-images-2/2-2_30.png" class="img-fluid"></a></p>
+<p>This is a PCoA plot. Samples that are closer to each other are more similar. Each axis captures a certain amount of the variation among the samples. The first axis is always the most important, followed by the second, and then the third.</p>
+<p>You can color samples by a metadata category. The plot above is colored by the categorical column “Day”. The colors used are from the Classic QIIME Colors palette. You can change the colors for each group by clicking on the colored box next to the category it denotes.</p>
+<p><a href="images/tutorial-images-2/2-2_31.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img src="images/tutorial-images-2/2-2_31.png" class="img-fluid"></a></p>
+<p>Looking at the box in green, the topmost box “scatter:” is used to specify which metadata column to use to color the points. The next box is the colors. Here, we use the Red-Purple gradient. In the blue box, check the “Continuous values” box as shown for the colors to be used as a gradient, instead of having a different color for each value.</p>
+<p>Next, we’ll look at the results of the PERMANOVA tests</p>
+<p><a href="images/tutorial-images-2/2-2_32.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img src="images/tutorial-images-2/2-2_32.png" class="img-fluid"></a></p>
+<p>The topmost section gives the results of the PERMANOVA test that considered if samples in all of the groups were more similar to each other than samples in any of the other groups.</p>
+<p><a href="images/tutorial-images-2/2-2_33.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34"><img src="images/tutorial-images-2/2-2_33.png" class="img-fluid"></a></p>
+<p>The middle part shows boxplots of the distances for samples in each group from the group given in the title. Based on this plot then, samples in the Day_5 group seem to be the most different from the Day_1 group. If you look back at the first PCoA picture, you’ll see the one Day_1 sample (red) is pretty far from the Day 5 samples (purple), so this result makes sense.</p>
+<p><a href="images/tutorial-images-2/2-2_34.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35"><img src="images/tutorial-images-2/2-2_34.png" class="img-fluid"></a></p>
+<p>The lowest part of this visualization shows the results of the pairwise PERMANOVA tests.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>If we use a cutoff of 0.05 for significance (α=0.05), how many of the pairwise comparisons above are significant?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="beta_div_correlation.sh" class="level3">
+<h3 class="anchored" data-anchor-id="beta_div_correlation.sh">8.3_beta_div_correlation.sh</h3>
+<p>As with alpha diversity, beta diversity can also be correlated with numerical metadata. And, this script is used to do that.</p>
+<ol type="1">
+<li><p>Copy the scripts with: <code>cp -R /home/see/tutorial_data/8.3_scripts</code></p></li>
+<li><p>Copy the metadata with: <code>cp /home/see/tutorial_data/metadata/*.txt</code></p></li>
+<li><p>Open the script</p></li>
+<li><p>Change the working directory</p></li>
+<li><p>Specify the name of your metadata file (leave it as is for these scripts)</p></li>
+<li><p>Leave the columns as is</p></li>
+<li><p>Save and submit the script</p></li>
+</ol>
+<p>Again, here’s a list of the flags for the commands.</p>
+<ul>
+<li><code>qiime emperor plot</code> <img src="images/tutorial-images-2/2-2_35.png" class="img-fluid"></li>
+<li><code>qiime diversity beta-correlation</code> <img src="images/tutorial-images-2/2-2_36.png" class="img-fluid"></li>
+</ul>
+<ol start="8" type="1">
+<li>View the outputs The metadata file has a lot of missing values, so that’s why we’re using five of those in this case. The commands we use for these scripts can’t tolerate missing values, evidently.</li>
+</ol>
+<p>The timepoint script is a bit different. We can force timepoint to be an axis since we’re representing it with numbers, but it’s actually categorical, not continuous, e.g.&nbsp;there is no 3.14 timepoint, nor could there have been. So, we use the stats command from 8.2 for that one.</p>
+<p>Anyway, let’s look at the PCoA visualization</p>
+<p><a href="images/tutorial-images-2/2-2_37.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36"><img src="images/tutorial-images-2/2-2_37.png" class="img-fluid"></a></p>
+<p>pH is now used as the first axis, and what was the first axis is now plotted where the second axis was.</p>
+<p>You can use this to see if beta diversity is positively or negatively correlated with metadata. If it’s negatively correlated, we would expect samples to be closer together at higher values of the numerical metadata.</p>
+<p>Next, we’ll look at the results of the correlation command for the different columns.</p>
+<p><a href="images/tutorial-images-2/2-2_38.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37"><img src="images/tutorial-images-2/2-2_38.png" class="img-fluid"></a></p>
+<p>As before, the yellow box lists sample id’s that were excluded.</p>
+<p>The results of the statistical test are shown. The p-value is very high (0.719), so according to the Mantel test, there is a high probability that there is no correlation between pH and the distances between samples based on their bacterial composition.</p>
+<p>Spearman rho is the strength of the correlation, ranging from -1 to 1.</p>
+<p>The last type of visualization for this script is for the results of the bioenv command</p>
+<p><a href="images/tutorial-images-2/2-2_39.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38"><img src="images/tutorial-images-2/2-2_39.png" class="img-fluid"></a></p>
+<p>Bio-Env correlates multiple numerical metadata columns with the distances based on the bacterial community. In the above picture, you can see the strongest correlation is achieved by a combination of CONDUCTIVITY, TEMP, SALINITY, and TDS.</p>
+</section>
+</section>
+<section id="differential-abundance-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="differential-abundance-analysis">Differential Abundance Analysis</h2>
+<p>In addition to knowing if alpha and beta diversity differ according to categorical metadata, it would also be nice to know if any bacteria are more abundant in certain categories compared to others.</p>
+<p>There are a variety of programs and tests to determine that. But, for the purpose of this tutorial we will use ANCOM.</p>
+<section id="diff_abundance.sh" class="level3">
+<h3 class="anchored" data-anchor-id="diff_abundance.sh">9_diff_abundance.sh</h3>
+<p>First off, you need to have metadata for all samples in the table; if you don’t, those samples need to be removed before running ANCOM. ANCOM assumes less than 25% of the features differ between groups. If you expect more than 25% are different, don’t use ANCOM.</p>
+<p>It also can’t tolerate frequencies of 0, but we can use another Qiime2 command (qiime composition add-pseudocount) to account for that limitation.</p>
+<p>We also run this on a collapsed table, using the qiime taxa collapse command, to make sure all ASVs used on this analysis are identified to the same level.</p>
+<ol type="1">
+<li><p>Open your metadata file in the <code>ancom</code> folder with Cyberduck</p></li>
+<li><p>Check the column(s) that you want to use</p>
+<ul>
+<li>If any samples in the table have missing values, they will need to be removed before running ANCOM</li>
+<li>We use the <code>qiime feature-table filter-samples</code> command in this script to keep only the samples present in the metadata</li>
+<li>For the purposes of this tutorial, you can just use the Location column</li>
+</ul></li>
+<li><p>Delete the rows for any samples with missing data for the column(s) that you’ll be using</p></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_40.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39"><img src="images/tutorial-images-2/2-2_40.png" class="img-fluid"></a></p>
+<ol start="4" type="1">
+<li><p>Save the metadata file</p></li>
+<li><p>Change the working directory to your ancom folder</p></li>
+<li><p>Specify the name of your metadata file</p></li>
+<li><p>Like the beta diversity scripts, specify the columns you want to use with ANCOM</p></li>
+<li><p>Specify the level you want to collapse at</p>
+<ul>
+<li><code>level=</code></li>
+<li>We usually use 7 for species level analyses</li>
+</ul></li>
+<li><p>Check that the values for the <code>qiime taxa collapse</code> command’s <code>--i-table</code> and <code>--i-taxonomy</code> flags match your file names</p></li>
+<li><p>Save and submit the script</p></li>
+</ol>
+<ul>
+<li><code>qiime taxa collapse</code></li>
+</ul>
+<p><a href="images/tutorial-images-2/2-2_41.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40"><img src="images/tutorial-images-2/2-2_41.png" class="img-fluid"></a></p>
+<ul>
+<li><code>qiime feature-table filter-samples</code></li>
+</ul>
+<p><a href="images/tutorial-images-2/2-2_42.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41"><img src="images/tutorial-images-2/2-2_42.png" class="img-fluid"></a></p>
+<ul>
+<li><code>qiime composition add-pseudocount</code></li>
+</ul>
+<p><a href="images/tutorial-images-2/2-2_43.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42"><img src="images/tutorial-images-2/2-2_43.png" class="img-fluid"></a></p>
+<ul>
+<li><code>qiime composition ancom</code></li>
+</ul>
+<p><a href="images/tutorial-images-2/2-2_44.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43"><img src="images/tutorial-images-2/2-2_44.png" class="img-fluid"></a></p>
+<ol start="11" type="1">
+<li>Look at the resulting visualization files</li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_45.png" class="lightbox" data-gallery="quarto-lightbox-gallery-44"><img src="images/tutorial-images-2/2-2_45.png" class="img-fluid"></a></p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Based on your volcano plot generated how many different taxa are differenitally abundant. What does differentially abundant mean? Describe in your own words.</p>
+</div>
+</div>
+</div>
+<p>Let’s break this down a little bit. W is the number of sub-hypotheses that were rejected. Each sub-hypothesis is testing whether the ratio of one bacteria, let’s say <em>E. coli</em>, to another bacteria, let’s say <em>P. aeruginosa</em>, is the same in one group as it is in another. So, the setup would look something like this</p>
+<p><strong>Formula Here</strong></p>
+<p>So, the value of W for the ASV representing <em>E. coli</em> would be the number of times the null hypothesis is rejected for that ASV. In other words, the number of times the ratio of that ASV to another differs between groups.</p>
+<p>The null hypotheses for the two ASVs shown in the table were rejected 2982 for both.</p>
+<p>The clr value is the difference between the log abundance between that ASV (point) and the average log abundance of all ASVs.</p>
+<p>The lower part of the visualization shows the abundances of the enriched ASVs (the ASVs in the table above) for each group.</p>
+<p><a href="images/tutorial-images-2/2-2_46.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45"><img src="images/tutorial-images-2/2-2_46.png" class="img-fluid"></a></p>
+<p>It shows the abundances for each quartile in each group. However, in this example, Day_1 only had one sample (you would probably not want to use a group with only 1 sample in actual analyses), so that’s why all the values are the same for each percentile. These ASVs were probably not found in the other groups, so the pseudo-count command set their abundances to 1, which is why the percentile values for those are all 1.</p>
+<p>BioBakery’s <a href="https://bitbucket.org/biobakery/biobakery/wiki/lefse">LEfSe</a> and the <a href="https://library.qiime2.org/plugins/q2-aldex2/24/">Aldex2</a> Qiime2 plugin are alternative methods for determining differential abundance.</p>
+</section>
+</section>
+<section id="lefse---biomarker-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="lefse---biomarker-analysis">LEfSe - Biomarker Analysis</h2>
+<p>Previously, we used ANCOM to determine which bacteria were differentially abundant. <a href="https://bitbucket.org/biobakery/biobakery/wiki/lefse">LEfSe</a> is another tool to do that.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Why You Would Use It: You want to see which, if any, bacteria differ significantly in abundance among categorical metadata groups.</p>
+</div>
+</div>
+</div>
+<section id="lefse-installation" class="level3">
+<h3 class="anchored" data-anchor-id="lefse-installation">LEfSe Installation</h3>
+<ol type="1">
+<li>Create LEfSe environment
+<ul>
+<li>Alternatively: <code>conda create --name lefse --file /home/see/YML_Files/lefsepkgs.txt</code></li>
+</ul></li>
+<li>Create input formatting environment
+<ul>
+<li><code>conda create -n tidyverse -y -c conda-forge r-tidyverse r-optparse r-funrar r-plyr</code></li>
+</ul></li>
+</ol>
+<p>LEFSe scripts are located in: <code>QIIME2_pipeline/other_scripts/lefse_scripts</code></p>
+</section>
+<section id="lefse_generic_summarize_taxa.sh" class="level3">
+<h3 class="anchored" data-anchor-id="lefse_generic_summarize_taxa.sh">1_LEfSe_generic_summarize_taxa.sh</h3>
+<p>This script lets you choose the taxonomic level you want to use for LEfSe analyses; we usually use 7 for species. It uses that level to create formatted input files for the next script.</p>
+<ol type="1">
+<li><p>Open script</p></li>
+<li><p>Set the working directory to your <code>ancom</code> folder</p>
+<ul>
+<li><code>workdir=</code></li>
+</ul></li>
+<li><p>Specify metadata file</p>
+<ul>
+<li><code>meta=</code></li>
+</ul></li>
+<li><p>Specify categorical metadata columns that you want to use for LEfSe</p>
+<ul>
+<li><code>columns=</code></li>
+</ul></li>
+<li><p>Specify level to summarize at, e.g.&nbsp;7 for species, 6 for genus, etc.</p>
+<ul>
+<li><code>level=</code></li>
+</ul></li>
+<li><p>Specify name of table to use</p>
+<ul>
+<li><code>table=</code></li>
+</ul></li>
+<li><p>Specify name of taxonomy file to use</p>
+<ul>
+<li><code>taxonomy=</code></li>
+</ul></li>
+<li><p>Specify column header for metadata column containing sample id’s</p>
+<ul>
+<li><code>id=</code></li>
+</ul></li>
+<li><p>Save and submit the script</p></li>
+<li><p>Check that a <code>lefse_</code> text file was created for each column</p></li>
+</ol>
+<p>There should also be a <code>LEFSE_intermediate_files</code> folder that contains three files (one <code>.biom</code> file and two <code>.txt</code>’s that were generated during the course of running the script). These files are no longer needed, but they are there if you want to look at them.</p>
+</section>
+<section id="lefse_run.sh" class="level3">
+<h3 class="anchored" data-anchor-id="lefse_run.sh">2_LEfSe_run.sh</h3>
+<p>This script performs the LEfSe analysis and creates output visualizations, in png form. The x-axis for the bar plot visualization will be the log(LDA) score, which is a measure of enrichment.</p>
+<p>Importantly, this script also performs CPM normalization on the data. That’s basically the same as relative abundance, except all the counts in a sample sum to 1,000,000, instead of 1 or 100.</p>
+<p>LEfSe performs Kruskal-Wallis tests to determine significant differences in abundance based on the metadata group and then uses Linear Discriminant Analysis to get a measure of how much its abundance differs.</p>
+<ol type="1">
+<li><p>Open script</p></li>
+<li><p>Set the working directory to your <code>ancom</code> folder</p>
+<ul>
+<li><code>workdir=</code></li>
+</ul></li>
+<li><p>Specify the minimum LDA score for a taxon to be considered enriched</p>
+<ul>
+<li><code>lda=</code></li>
+<li>We usually use a cutoff of 2</li>
+</ul></li>
+<li><p>Change the values of the other variables as desired</p></li>
+<li><p>Save and submit the script</p></li>
+<li><p>Check that the <code>initial_figures</code> and <code>results_res</code> folders contain two files per sample</p>
+<ul>
+<li>The <code>initial_figures</code> folder should have a cladogram and a bar plot for each comparison</li>
+</ul></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_47.png" class="lightbox" data-gallery="quarto-lightbox-gallery-46"><img src="images/tutorial-images-2/2-2_47.png" class="img-fluid"></a></p>
+<p>This is an example bar plot from LEfSe. The colors indicate the group that is enriched in, and the x-axis indicates the strength of that enrichment.</p>
+<p><a href="images/tutorial-images-2/2-2_48.png" class="lightbox" data-gallery="quarto-lightbox-gallery-47"><img src="images/tutorial-images-2/2-2_48.png" class="img-fluid"></a></p>
+<p>Here’s a cladogram. It doesn’t show the LDA scores, but it shows the phylogenetic relationships among the enriched taxa.</p>
+<ul>
+<li>The <code>results_res</code> folder contains the files that these figures are based on.</li>
+<li>For each sample, it’ll have a <code>.res</code> file at the level you specified for the cutoff and another with a cutoff of 0.</li>
+</ul>
+<p>You may have noticed that some of the names are missing in the above figures. That’s because those bacteria were not identified to species level, or even less specific levels in some cases.</p>
+<p>But, you can change the names in the <code>.res</code> file using Excel and then use the edited file to re-make the figures.</p>
+<p>I recommend deleting all unenriched taxa to make the cladogram look better.</p>
+<ol type="1">
+<li><p>Select all the data</p></li>
+<li><p>Go to Sort &amp; Filter (in the Home bar towards the far right)</p></li>
+<li><p>Sort by Column C to bring all the enriched features to the top of the table</p></li>
+<li><p>Delete everything below the enriched features (all the rows without values in Column C)</p></li>
+</ol>
+<p>You can change the names of the features (taxa) too by altering the cells in Column A. Periods separate the different taxonomic levels. The bar plot and cladograms both just show the last (most specific) one.</p>
+<p>Save altered <code>.res</code> file(s), with the prefix <code>ed_</code> (no quotation marks in the actual name).</p>
+</section>
+<section id="lefse_redo_figures.sh" class="level3">
+<h3 class="anchored" data-anchor-id="lefse_redo_figures.sh">3_LEfSe_redo_figures.sh</h3>
+<p>This script uses the edited (ed_*) .res files to remake the figures.</p>
+<ol type="1">
+<li><p>Make sure your edited .res files being with ed_</p></li>
+<li><p>Open the script</p></li>
+<li><p>Set the working directory to the ancom folder (or wherever you have the edited files)</p></li>
+<li><p>Change the values of the variables as you desire</p></li>
+<li><p>Save and submit the script</p></li>
+<li><p>Check that the <code>edited_figures</code> folder has a bar plot and cladogram for each <code>.res</code> file</p></li>
+</ol>
+<p><a href="images/tutorial-images-2/2-2_49.png" class="lightbox" data-gallery="quarto-lightbox-gallery-48"><img src="images/tutorial-images-2/2-2_49.png" class="img-fluid"></a></p>
+<p>You can see that I changed the unidentified taxa to their most specific taxonomic level, with Qiime2’s level prefix at the start and an abbreviation for the traditional taxonomic levels at the end, e.g.&nbsp;sp for species and g for genus.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Do you think LEfSe would work with a column for patient sex that used “1” to represent female and “2” to represent male?</p>
+</div>
+</div>
+</div>
+<p>If you want to recreate the LEfSe figures with different colors, you can copy the script at: <code>/home/see/lefse_scripts/4_LEfSe_colors.sh</code></p>
+<p>Change the value of the <code>d1</code> variable to match the name of your <code>.res</code> file, and the values after the <code>colors</code> flag to match the hex codes of the colors you want to use.</p>
 
 
 </section>
@@ -1028,7 +1436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/jdy4k\.github\.io\/wrightlabs-quarto\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

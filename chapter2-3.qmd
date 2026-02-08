@@ -2,24 +2,27 @@
 title: "JC Qiime2 Pipeline"
 ---
 
-This tutorial will follow a general cycle. You will first open a file from the QIIME2_pipeline folder,
-edit the file, submit the file, and then look at the results. If the submission script was successful,
-you will move on to the next file and continue the cycle. If it was not, then you will look at the log
-file in your current directory, determine what went wrong, and then start the cycle over with the
-same script.
+This tutorial will follow a general cycle. You will first open a file from the
+`QIIME2_pipeline` folder, edit the file, submit the file, and then look at the results.
+If the submission script was successful, you will move on to the next file and
+continue the cycle. If it was not, then you will look at the log file in your current
+directory, determine what went wrong, and then start the cycle over with the same
+script.
 
 ## Import Raw Data into Qiime2
 
-Each account contains a file called BIN600 this you should always move into this folder when
-working on the cluster. Inside that folder you should find the metadata and raw data already
-imported to the Cluster account and it should be ready for you to start analysis!
+Each account contains a file called `BIN600` this you should always move into this
+folder when working on the cluster. Inside that folder you should find the metadata
+and raw data already imported to the Cluster account and it should be ready for you
+to start analysis!
 
-Before you start a quick note on notepad editors. Most all of your computers will come with a
-notepad software that you can use with cyberduck to edit the scripts to submit to the cluster.
-However for ease of use downloading a software called notepad ++. This notepad software
-helpes colorcode items in the script to make it easier to read. While this is not required it is
-highly recommended if you plan on using a notepad app to edit the scripts. If you prefer to use
-the nano function this is not required.
+Before you start a quick note on notepad editors. Most all of your computers will
+come with a notepad software that you can use with Cyberduck to edit the scripts to
+submit to the cluster. However for ease of use downloading a software called Notepad
+++. This notepad software helps colorcode items in the script to make it easier to
+read. While this is not required it is highly recommended if you plan on using a
+notepad app to edit the scripts. If you prefer to use the `nano` function this is not
+required.
 
 Download link:
 [https://notepad-plus-plus.org/downloads/v8.5.3/](https://notepad-plus-plus.org/downloads/v8.5.3/)
@@ -28,7 +31,9 @@ Before we can do anything with Qiime2, we need to get our data into a format it 
 what this section is for.
 
 ### 1.1_make-mapping.sh
-The mapping file is a list of files with sample IDs for Qiime2 to import. So, we need to make one before analyzing our raw data.
+
+The mapping file is a list of files with sample IDs for Qiime2 to import. So, we
+need to make one before analyzing our raw data.
 
 1. Move into your `QIIME2_pipeline-updated` folder
 
@@ -36,19 +41,20 @@ The mapping file is a list of files with sample IDs for Qiime2 to import. So, we
 What command did you use to move into the `QIIME2_pipeline-updated` folder?
 :::
 
-2. Open your 1.1_make-mapping.sh script, either with Putty/Terminal, using `nano 1.1_make-mapping.sh` or, through Cyberduck, by right-clicking on it and choosing Edit With and then a text
-editor.
+2. Open your `1.1_make-mapping.sh` script, either with Putty/Terminal, using `nano
+   1.1_make-mapping.sh` or, through Cyberduck, by right-clicking on it and choosing
+   Edit With and then a text editor.
 
-3. Set the working directory to your main data folder (the folder containing the `raw_data`
-folder)
+3. Set the working directory to your main data folder (the folder containing the
+   `raw_data` folder)
 
 ``` bash
 workdir = # your main data folder
 ```
 
 ::: {.callout-tip}
-In Putty, which command can you use to print your working directory and why might this
-be helpful when setting a working directory in a script?
+In Putty, which command can you use to print your working directory and why might
+this be helpful when setting a working directory in a script?
 :::
 
 4. Submit the script to the cluster
@@ -58,40 +64,51 @@ sbatch 1.1_make-mapping.sh
 ```
 
 ::: {.callout-tip}
-sbatch needs to be able to find the job file. So, the above command works if you’re in the
-QIIME2_pipeline folder but, you can submit from the main data folder too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`. Don’t forget the folder that you submit from will contain the `.o` log file.
+`sbatch` needs to be able to find the job file. So, the above command works if
+you're in the `QIIME2_pipeline` folder but, you can submit from the main data folder
+too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`. Don't forget
+the folder that you submit from will contain the `.o` log file.
 :::
 
-This should make a `mapping.csv` file in the folder you specified for “workdir”. The `mapping.csv` file should contain three columns: `sample-id`, `absolute-filepath`, and `direction`.
+This should make a `mapping.csv` file in the folder you specified for "workdir". The
+`mapping.csv` file should contain three columns: `sample-id`, `absolute-filepath`,
+and `direction`.
 
 ### 1.2_raw_reads_import.sh
+
 This script uses the mapping file that you copied to import your data into Qiime2.
 
-1. Move into your QIIME2_pipeline folder
+1. Move into your `QIIME2_pipeline` folder
 
-2. Open your `1.2_raw_reads_import.sh` script either with Putty/Terminal, using `nano 1.2_raw_reads_import.sh` or through Cyberduck, by right-clicking on it and choosing Edit With and then a text editor.
+2. Open your `1.2_raw_reads_import.sh` script either with Putty/Terminal, using
+   `nano 1.2_raw_reads_import.sh` or through Cyberduck, by right-clicking on it and
+   choosing Edit With and then a text editor.
 
 ::: {.callout-tip}
-Do you prefer to use nano or a text-editor such as Notepad++ to edit scripts? If you have a
-preference, why do you have this preference?
+Do you prefer to use `nano` or a text-editor such as Notepad++ to edit scripts? If
+you have a preference, why do you have this preference?
 :::
 
-3. Set the working directory to your main data folder (the location of your mapping file)
+3. Set the working directory to your main data folder (the location of your mapping
+   file)
 
 ::: {.callout-tip}
 For example, `workdir=/home/stenley/bin-600/`
 :::
 
 ::: {.callout-warning}
-Important: Your working directory is going to look different than this one because your
-user directory will be named differently and the other directories you have have different
-names than the directories in this path.
+Important: Your working directory is going to look different than this one because
+your user directory will be named differently and the other directories you have
+have different names than the directories in this path.
 :::
 
 ![](images/tutorial-images-2/2-2_0.png)
 
-For the `--type` flag, we almost always use: `SampleData[PairedEndSequencesWithQuality]`, but
-refer to documentation if you are working with something different. You know you have Paired End sequences if you have R1 and R2 files, and you know if you have quality information if the extension is either `.fastq` or `.fastq.gz`. To see all available types do:
+For the `--type` flag, we almost always use:
+`SampleData[PairedEndSequencesWithQuality]`, but refer to documentation if you are
+working with something different. You know you have Paired End sequences if you have
+R1 and R2 files, and you know if you have quality information if the extension is
+either `.fastq` or `.fastq.gz`. To see all available types do:
 
 ``` bash
 conda activate qiime2-2022.11
@@ -109,30 +126,48 @@ What outputs can you expect to see from script 1.2? What files were used as the 
 sbatch 1.2_raw_reads_import.sh
 ```
 
-`sbatch` needs to be able to find the job file. So, the above command works if you’re in the
-QIIME2_pipeline folder. But, you can submit from the main data folder too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`.
+`sbatch` needs to be able to find the job file. So, the above command works if
+you're in the `QIIME2_pipeline` folder. But, you can submit from the main data
+folder too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`.
 
 ::: {.callout-warning}
-Don’t forget the folder that you submit from will contain the .o log file 
+Don't forget the folder that you submit from will contain the `.o` log file
 :::
 
-6. Check status of job with squeue or watch squeue 
+6. Check status of job with `squeue` or `watch squeue` 
 
 ::: {.callout-warning}
-This script can take a while. A `.o` file with the job number will be created once it’s finished. If you use `watch squeue`, you can use <kbd>CTRL</kbd> + <kbd>c</kbd> to exit that screen.
+This script can take a while. A `.o` file with the job number will be created once
+it's finished. If you use `watch squeue`, you can use <kbd>CTRL</kbd> + <kbd>c</kbd>
+to exit that screen.
 :::
 
 ## Quality Checking and Filtering
 
-Before figuring out what bacterial taxa your sequences represent, you will first need to make sure that you are only submitting high quality sequences for analysis. Reads from the sequencing instrument can vary in quality, so it is important to ensure that the reads you are working with are of high quality to help guarantee good downstream results. The quality of the Illumina MiSeq platform is great; however, it is still prone to errors (less than 1%). We perform quality filtering to remove low quality sequences and to truncate sequences when they begin dropping below a specified quality score. Retention of this data could otherwise lead to erroneous conclusions from downstream analyses.
+Before figuring out what bacterial taxa your sequences represent, you will first
+need to make sure that you are only submitting high quality sequences for analysis.
+Reads from the sequencing instrument can vary in quality, so it is important to
+ensure that the reads you are working with are of high quality to help guarantee
+good downstream results. The quality of the Illumina MiSeq platform is great;
+however, it is still prone to errors (less than 1%). We perform quality filtering to
+remove low quality sequences and to truncate sequences when they begin dropping
+below a specified quality score. Retention of this data could otherwise lead to
+erroneous conclusions from downstream analyses.
 
-Sequences are received in the “fastq” format. This format includes both the sequences themselves, as well as the quality of each base pair in those sequences, as shown below:
+Sequences are received in the "fastq" format. This format includes both the
+sequences themselves, as well as the quality of each base pair in those sequences,
+as shown below:
 
 ![](images/tutorial-images-2/2-2_1.png)
 
-The first line includes the unique sequence ID followed by the nucleotide sequence. The quality scores of each position are listed after the plus sign, where each character represents an ASCII-encoded quality score. These characters can also be used to calculate the quality of the sequence as a whole.
+The first line includes the unique sequence ID followed by the nucleotide sequence.
+The quality scores of each position are listed after the plus sign, where each
+character represents an ASCII-encoded quality score. These characters can also be
+used to calculate the quality of the sequence as a whole.
 
-To look at what one of our `.fastq` text files looks like, choose one of the file names and use the `zcat` and head commands to view the first 10 lines in it. For instance, in the `raw_data` folder: 
+To look at what one of our `.fastq` text files looks like, choose one of the file
+names and use the `zcat` and `head` commands to view the first 10 lines in it. For
+instance, in the `raw_data` folder: 
 
 ``` bash
 zcat Chris_1C_S181_R1_001.fastq.gz | head
@@ -142,30 +177,46 @@ zcat Chris_1C_S181_R1_001.fastq.gz | head
 
 We use this script to get quality information for the raw data.
 
-1. Open the script using nano or Cyberduck
+1. Open the script using `nano` or Cyberduck
 
-2. Set the working directory to your main data folder. This script needs the `paired-end-demux.qza` file produced from the last one, and that should be in your main data folder. If you don’t see the `paired-end-demux.qza` file file in Cyberduck, try hitting the refresh button towards the top of the window. You could also use ls to see if that file exists.
+2. Set the working directory to your main data folder. This script needs the
+   `paired-end-demux.qza` file produced from the last one, and that should be in
+   your main data folder. If you don't see the `paired-end-demux.qza` file in
+   Cyberduck, try hitting the refresh button towards the top of the window. You
+   could also use `ls` to see if that file exists.
 
-3. Before closing the script, note the flags and their values. In Qiime2, flags that begin with `--i` denote files used as input for the command. Likewise, `--o` flags denote flags specifying the names of output files. All filenames for viewable files generated by our pipeline begin with “VIEWABLE_”. So, if you decide to change the names of output files at any point during this tutorial or in the future, you will have to edit those flags and flags in subsequent scripts appropriately.
+3. Before closing the script, note the flags and their values. In Qiime2, flags
+   that begin with `--i` denote files used as input for the command. Likewise,
+   `--o` flags denote flags specifying the names of output files. All filenames
+   for viewable files generated by our pipeline begin with "VIEWABLE_". So, if you
+   decide to change the names of output files at any point during this tutorial or
+   in the future, you will have to edit those flags and flags in subsequent
+   scripts appropriately.
 
-4. Submit the script to the cluster with `sbatch 2_quality_check.sh`. `sbatch` needs to be able to find the job file. So, the above command works if you’re in the QIIME2_pipeline folder.
+4. Submit the script to the cluster with `sbatch 2_quality_check.sh`. `sbatch`
+   needs to be able to find the job file. So, the above command works if you're in
+   the `QIIME2_pipeline` folder.
+
 5. Check status of job with `squeue` or `watch squeue`.
 
 ::: {.callout-warning}
-This script can take a while. .out and .err files with the job number will be created once it’s finished. If you use watch `squeue`, you can use <kbd>Control</kbd> + <kbd>c</kbd> to exit that screen.
+This script can take a while. `.out` and `.err` files with the job number will be
+created once it's finished. If you use `watch squeue`, you can use <kbd>Control</kbd>
++ <kbd>c</kbd> to exit that screen.
 :::
 
 ::: {.callout-note}
 What output can we expect from this script?
 :::
 
-6. Download the output `qzv` files.
+6. Download the output `.qzv` files.
 
-7. Go to [view.qiime2.org](view.qiime2.org) and then drag and drop the downloaded VIEWABLE files into the
-Drag and drop area (you have to do one at a time).
+7. Go to [view.qiime2.org](view.qiime2.org) and then drag and drop the downloaded
+   VIEWABLE files into the Drag and drop area (you have to do one at a time).
 
-8. It’ll bring you to an Overview page (shown below), which will have information about the
-number of sequences per sample. If you scroll down further than I did, you’ll see the number of sequences for each sample.
+8. It'll bring you to an Overview page (shown below), which will have information
+   about the number of sequences per sample. If you scroll down further than I did,
+   you'll see the number of sequences for each sample.
 
 ![](images/tutorial-images-2/2-2_2.png)
 
@@ -173,30 +224,31 @@ number of sequences per sample. If you scroll down further than I did, you’ll 
 
 ![](images/tutorial-images-2/2-2_3.png)
 
-The x-axis shows the position of the base, and the y-axis shows the average Phred score at that
-position.
+The x-axis shows the position of the base, and the y-axis shows the average Phred
+score at that position.
 
-A Phred quality score (more generally known as a “quality” or “Q” score) is a measure of
-accuracy for a base in a sequence; they indicate the probability that a base call is correct.
-For example, if a base has a Phred score of 20, the chance that this base call is correct is 99%.
-Phred scores are calculated with a logarithm, so a Phred score of 30 indicates that the
-probability of a correct base call is 99.9% for a certain position. The average Phred score of a
-sequence is sometimes used to evaluate its quality. Usually, an average above 30 is considered
-very good quality.
+A Phred quality score (more generally known as a "quality" or "Q" score) is a
+measure of accuracy for a base in a sequence; they indicate the probability that a
+base call is correct. For example, if a base has a Phred score of 20, the chance
+that this base call is correct is 99%. Phred scores are calculated with a logarithm,
+so a Phred score of 30 indicates that the probability of a correct base call is
+99.9% for a certain position. The average Phred score of a sequence is sometimes
+used to evaluate its quality. Usually, an average above 30 is considered very good
+quality.
 
-Review the two text files that are created as well. Generally, I would recommend looking at the
-Hi_EE columns in each to see at what position it reaches 0.5 and 1.0 and then use the position
-immediately before it. Chances are those positions will be different between the R1 and R2 files.
-In script 3, you’ll see there’s different flags to specify them.
+Review the two text files that are created as well. Generally, I would recommend
+looking at the Hi_EE columns in each to see at what position it reaches 0.5 and
+1.0 and then use the position immediately before it. Chances are those positions
+will be different between the R1 and R2 files. In script 3, you'll see there's
+different flags to specify them.
 
 ![](images/tutorial-images-2/2-2_4.png)
 
 ::: {.callout-tip}
-Update 4/6/2023:
-Instead of those two text files, an additional visualization
-(VIEWABLE_ee_paired-end-demux.qzv) is created
-The fastq_eestats tab has the information that was in the text files, with the Forward
-Reads table above the Reverse Reads table.
+Update 4/6/2023: Instead of those two text files, an additional visualization
+(`VIEWABLE_ee_paired-end-demux.qzv`) is created. The fastq_eestats tab has the
+information that was in the text files, with the Forward Reads table above the
+Reverse Reads table.
 :::
 
 ::: {.callout-note}
@@ -205,99 +257,103 @@ Based on the view of this file how would you describe the overall quality of the
 
 ### 3_dada_denoise.sh
 
-We will filter by length and expected error.
-Average expected error is the percentage of bases expected to be incorrect per 100 bases. So
-by using an expected error of 1, we are allowing one base of each 100 bases to be incorrect, for
-an expected error of 0.5, we are allowing one base of every 200 bases to be incorrect, and so
-on.
+We will filter by length and expected error. Average expected error is the
+percentage of bases expected to be incorrect per 100 bases. So by using an
+expected error of 1, we are allowing one base of each 100 bases to be incorrect,
+for an expected error of 0.5, we are allowing one base of every 200 bases to be
+incorrect, and so on.
 
-Typically, an average expected error of 0.5 is considered very good sequence quality.
+Typically, an average expected error of 0.5 is considered very good sequence
+quality.
 
-1. As with the other two scripts, open and edit it with nano or Cyberduck.
+1. As with the other two scripts, open and edit it with `nano` or Cyberduck.
 
-2. Save and submit the script with sbatch
+2. Save and submit the script with `sbatch`
 
-Here are a list of flags for the qiime dada2 denoise-paired command:
+Here are a list of flags for the `qiime dada2 denoise-paired` command:
 
 ![](images/tutorial-images-2/2-2_5.png)
 
-A lot of the commands that we run in the tutorial up until alpha diversity essentially just have
-flags for input and output, and if they do have other flags, it’s not necessary to change them.
+A lot of the commands that we run in the tutorial up until alpha diversity
+essentially just have flags for input and output, and if they do have other flags,
+it's not necessary to change them.
 
-Still, if you are ever curious about a Qiime2 command, you can see its flags by activating the
-Qiime2 environment (conda activate qiime2-2022.11) and then typing the command name
-followed by “--help”, e.g. qiime dada2 denoise-paired --help.
+Still, if you are ever curious about a Qiime2 command, you can see its flags by
+activating the Qiime2 environment (`conda activate qiime2-2022.11`) and then typing
+the command name followed by `--help`, e.g. `qiime dada2 denoise-paired --help`.
 
-I’ll also note that whenever you see --p-n-threads, it should match ppn at the top of the script
-(refer back to the Anatomy of a Script section if you have trouble finding that). The higher those
-are, the faster the script will run.
+I'll also note that whenever you see `--p-n-threads`, it should match `ppn` at the
+top of the script (refer back to the Anatomy of a Script section if you have
+trouble finding that). The higher those are, the faster the script will run.
 
-However, our cluster doesn’t have infinite resources, so if you’re doing this in a workshop
-setting, please do not exceed 10 ppn.
+However, our cluster doesn't have infinite resources, so if you're doing this in a
+workshop setting, please do not exceed 10 ppn.
 
 ::: {.callout-note}
 What files are created by this script? What files were used as the input?
 :::
 
-Let’s go through the VIEWABLE output from this script…
+Let's go through the VIEWABLE output from this script…
 
-Note: You’ll have two sets of these, and what I’ll be showing are screenshots from different data.
-All of these files are viewable by downloading them to your computer (See the “Using
-Cyberduck” section if you’re having trouble) and then dragging and dropping them onto the box
-at [view.qiime2.org](view.qiime2.org).
+Note: You'll have two sets of these, and what I'll be showing are screenshots from
+different data. All of these files are viewable by downloading them to your computer
+(See the "Using Cyberduck" section if you're having trouble) and then dragging and
+dropping them onto the box at [view.qiime2.org](view.qiime2.org).
 
 Going by the order of their creation, we have `VIEWABLE_denoising-stats.qzv` first.
 
 ![](images/tutorial-images-2/2-2_6.png)
 
-The first column has the sample ids. The “input” column gives the number of raw sequences per
-sample, so this column tells you how many sequences you started with.
+The first column has the sample ids. The "input" column gives the number of raw
+sequences per sample, so this column tells you how many sequences you started with.
 
-All the other columns give sequence counts (or percents) after each stage of the Dada2 filtering
-process. Besides the “input” column, the other ones you’ll want to note are the “non-chimeric”
-columns.
+All the other columns give sequence counts (or percents) after each stage of the
+Dada2 filtering process. Besides the "input" column, the other ones you'll want to
+note are the "non-chimeric" columns.
 
-Those columns give information about how much data were retained after all of the filtering
-steps. The numbers in the ‘non-chimeric’ column here are equal to the total number of Amplicon
-Sequence Variants (ASVs) in the sample, i.e. the total number of sequences retained. See
-[here](https://www.nature.com/articles/ismej2017119) for more information about ASVs. But, for a brief
-description, they are basically OTUs clustered at 100% similarity, as all sequences assigned to
-the same ASV are identical. Anyway, the ‘percentage of input non-chimeric’ column has the
-amount of sequences retained as a percent of the total initial number.
+Those columns give information about how much data were retained after all of the
+filtering steps. The numbers in the 'non-chimeric' column here are equal to the
+total number of Amplicon Sequence Variants (ASVs) in the sample, i.e. the total
+number of sequences retained. See [here](https://www.nature.com/articles/ismej2017119)
+for more information about ASVs. But, for a brief description, they are basically
+OTUs clustered at 100% similarity, as all sequences assigned to the same ASV are
+identical. Anyway, the 'percentage of input non-chimeric' column has the amount of
+sequences retained as a percent of the total initial number.
 
-So, looking at the above, the topmost sample (A1) had 14,090 raw sequences, and 9,151
-remained after filtering, merging, and chimera removal. Those 8,452 sequences were all
-assigned to ASVs. So, 64.95% of the data were retained.
+So, looking at the above, the topmost sample (A1) had 14,090 raw sequences, and
+9,151 remained after filtering, merging, and chimera removal. Those 8,452
+sequences were all assigned to ASVs. So, 64.95% of the data were retained.
 
-Generally, we want to retain at least half the sequences in nearly all of our samples. The CSO
-data has pretty poor quality, so if you’re using that data, since this is just a learning experience,
-the very large data loss is alright.
+Generally, we want to retain at least half the sequences in nearly all of our
+samples. The CSO data has pretty poor quality, so if you're using that data, since
+this is just a learning experience, the very large data loss is alright.
 
-Next, we’ll look at the `VIEWABLE_unfiltered_table.qzv` file.
+Next, we'll look at the `VIEWABLE_unfiltered_table.qzv` file.
 
 ![](images/tutorial-images-2/2-2_7.png)
 
-It gives information about the number of ASVs per sample (remember this is equivalent to the
-values in the non-chimeric column for the previous visualization) and the frequency of ASVs.
+It gives information about the number of ASVs per sample (remember this is
+equivalent to the values in the non-chimeric column for the previous visualization)
+and the frequency of ASVs.
 
-The Overview tab provides summary statistics and histograms for both. The Table summary
-section tells you how many total samples you have, the number of unique ASVs, and the total
-number of ASVs in all the samples.
+The Overview tab provides summary statistics and histograms for both. The Table
+summary section tells you how many total samples you have, the number of unique
+ASVs, and the total number of ASVs in all the samples.
 
 
 ![](images/tutorial-images-2/2-2_8.png)
 
-The Interactive Sample Detail tab gives the ASVs counts for each sample, with the samples
-ordered by decreasing frequency. One useful function here is the Sampling Depth Slider (shown
-in the dark blue rectangle).
+The Interactive Sample Detail tab gives the ASVs counts for each sample, with the
+samples ordered by decreasing frequency. One useful function here is the Sampling
+Depth Slider (shown in the dark blue rectangle).
 
-You can see in the above picture that I have it set to a depth of 50,479. And, in the sentence
-below that, Qiime2 says how many and what percentage of samples and ASVs would be
-retained if I subsampled (rarefied) at that depth.
+You can see in the above picture that I have it set to a depth of 50,479. And, in
+the sentence below that, Qiime2 says how many and what percentage of samples and
+ASVs would be retained if I subsampled (rarefied) at that depth.
 
-So, for the CSO data, at that depth, 302,874 ASVs and 6 samples would be retained. This
-would probably not be a good depth to use for these data because most of our samples would
-be excluded.
+So, for the CSO data, at that depth, 302,874 ASVs and 6 samples would be retained.
+This would probably not be a good depth to use for these data because most of our
+samples would be excluded.
 
 ::: {.callout-note}
 What sampling depth do you think would be a good one to pick for your data? Why did you pick
@@ -306,8 +362,8 @@ this?
 
 ![](images/tutorial-images-2/2-2_9.png)
 
-The Feature Detail tab lists the ASVs by decreasing total Frequency. It also says how many
-samples each is found in.
+The Feature Detail tab lists the ASVs by decreasing total Frequency. It also says
+how many samples each is found in.
 
 Speaking of ASVs, the last visualization for this script for us to talk about is
 `VIEWABLE_rep-seqs.qzv`.
@@ -317,15 +373,15 @@ Speaking of ASVs, the last visualization for this script for us to talk about is
 One representative sequence from each ASV is present in this file.
 
 Basic stats are given for these sequences. The Seven-Number Summary table shows the
-proportion of sequences that are that length or shorter, with the proportion in the header and the
-length in the row.
+proportion of sequences that are that length or shorter, with the proportion in the
+header and the length in the row.
 
 The sequences themselves are viewable in the table towards the bottom.
 
 ## Phylogenetic and Taxonomic Information
 
-At this point, we have our ASV table, but we don’t know which bacteria are actually in our
-samples or how similar the ASVs are to each other.
+At this point, we have our ASV table, but we don't know which bacteria are actually
+in our samples or how similar the ASVs are to each other.
 
 The scripts in this section address both of these issues.
 
@@ -335,61 +391,69 @@ We use a pre-trained classifier to determine which bacteria are present in our d
 
 This is the first script that can make use of a metadata file.
 
-If you don’t have a metadata file at this point, you could either make one with just a column for
-sample ids, or you could just comment out this command and flags.
+If you don't have a metadata file at this point, you could either make one with just
+a column for sample ids, or you could just comment out this command and flags.
 
-If you do have a metadata file, you may wish to validate it first with https://keemei.qiime2.org/. Keep in mind, 
-Keemei will only tell you if there’s any formatting errors; it cannot tell you if the sample id’s in your data match the id’s 
-in your metadata file
+If you do have a metadata file, you may wish to validate it first with
+https://keemei.qiime2.org/. Keep in mind, Keemei will only tell you if there's any
+formatting errors; it cannot tell you if the sample id's in your data match the
+id's in your metadata file.
 
-1. Open the script and edit it with the nano command or Cyberduck
+1. Open the script and edit it with the `nano` command or Cyberduck
 
-2. Set the working directory to your main data folder Check that the name of the qza file with your representative sequences matches what’s
-after the --i-reads flag. If it doesn’t, change what’s after the flag so the names match. Make sure the value of --p-n-jobs matches ppn at the top of the script.
+2. Set the working directory to your main data folder. Check that the name of the
+   `.qza` file with your representative sequences matches what's after the
+   `--i-reads` flag. If it doesn't, change what's after the flag so the names
+   match. Make sure the value of `--p-n-jobs` matches `ppn` at the top of the
+   script.
 
-3. Save and submit the script with sbatch
+3. Save and submit the script with `sbatch`
 
-4. Open the .o log file associated with your job number and check that no errors occurred.
+4. Open the `.o` log file associated with your job number and check that no errors
+   occurred.
 
 5. Check to see that the expected output files were created
 
-6. Take a look at the VIEWABLE_taxonomy.qzv file
+6. Take a look at the `VIEWABLE_taxonomy.qzv` file
 
-7. As before, download it, then drag and drop it onto Qiime2’s website.
+7. As before, download it, then drag and drop it onto Qiime2's website.
 
 ![](images/tutorial-images-2/2-2_11.png)
 
-You’ll see a table with three columns.
+You'll see a table with three columns.
 
 1. The first column gives the names of the ASVs
 
 2. The second gives the assigned taxonomy
 
-3. The third reports how confident the classifier is that it’s right about the ASVs identities
+3. The third reports how confident the classifier is that it's right about the
+   ASVs identities
 
-4. Next, let’s look at the VIEWABLE_taxa-bar-plots.qzv file
+4. Next, let's look at the `VIEWABLE_taxa-bar-plots.qzv` file
 
-5. Again, download it, then drag and drop it onto Qiime2’s website.
+5. Again, download it, then drag and drop it onto Qiime2's website.
 
 ![](images/tutorial-images-2/2-2_12.png)
 
-As you can see, it creates a bar plot of the relative abundances, with each sample having a total
-sum of 100. If you mouse over one of the bar segments, the relative abundance will be shown
-for that bacteria in that sample, as seen with Betaproteobacteriales above.
+As you can see, it creates a bar plot of the relative abundances, with each sample
+having a total sum of 100. If you mouse over one of the bar segments, the relative
+abundance will be shown for that bacteria in that sample, as seen with
+*Betaproteobacteriales* above.
 
-You can change the taxonomic level with the drop down box under Taxonomic Level. In the
-above picture, orders are shown.
+You can change the taxonomic level with the drop down box under Taxonomic Level. In
+the above picture, orders are shown.
 
 ::: {.callout-tip}
 What level would you filter the table by if you wanted to look at the species level?
 :::
 
-The color palette is also editable, as is how the samples are sorted by. I chose to sort mine by
-the “Day” column in my metadata file so samples from the same day are next to each other, with
-gaps between samples from different days.
+The color palette is also editable, as is how the samples are sorted by. I chose to
+sort mine by the "Day" column in my metadata file so samples from the same day are
+next to each other, with gaps between samples from different days.
 
-By default, the barplot is generated without referring to a metadata file, so you can sort by the
-abundance of a given taxa but not by any of your metadata groupings.
+By default, the barplot is generated without referring to a metadata file, so you
+can sort by the abundance of a given taxa but not by any of your metadata
+groupings.
 
 ::: {.callout-note}
 What was the purpose of this script and how did it achieve what it was supposed to do?
@@ -397,22 +461,24 @@ What was the purpose of this script and how did it achieve what it was supposed 
 
 ### 5_alpha_diversity.sh
 
-We use this script to generate a phylogenetic tree, so this tree shows how closely related we
-think our ASVs are to each other.
+We use this script to generate a phylogenetic tree, so this tree shows how closely
+related we think our ASVs are to each other.
 
-If you’re curious about how this script works,see the “Generate a tree for phylogenetic diversity
-analyses” section [here](https://docs.qiime2.org/2019.7/tutorials/moving-pictures/).
+If you're curious about how this script works, see the "Generate a tree for
+phylogenetic diversity analyses" section
+[here](https://docs.qiime2.org/2019.7/tutorials/moving-pictures/).
 
-Basically, the representative ASV sequences are aligned, in other words similarities between
-sequences are determined. Those alignments are then used as the basis for determining the
-phylogeny.
+Basically, the representative ASV sequences are aligned, in other words similarities
+between sequences are determined. Those alignments are then used as the basis for
+determining the phylogeny.
 
-1. Open the script and edit it with the nano command or Cyberduck
+1. Open the script and edit it with the `nano` command or Cyberduck
 
-2. Set the working directory to your main data folder. Check that the name of the qza file with your representative sequences matches what’s
-after the --i-reads flag. If it doesn’t, change what’s after the flag so the names match
+2. Set the working directory to your main data folder. Check that the name of the
+   `.qza` file with your representative sequences matches what's after the `--i-reads`
+   flag. If it doesn't, change what's after the flag so the names match
 
-3. Save and submit the script with sbatch
+3. Save and submit the script with `sbatch`
 
 ::: {.callout-note}
 What are the viewable output files in this script if there are any?
@@ -420,53 +486,56 @@ What are the viewable output files in this script if there are any?
 
 ## Downstream Analysis Preparation
 
-The 6.0 script can only be one when at least one negative control is present.
+The 6.0 script can only be run when at least one negative control is present.
 
-The 6.1 script doesn’t yield any new information, but it does put all the necessary files into
-folders for alpha and beta diversity analysis in addition to providing a few input folders for other
-types of analyses.
+The 6.1 script doesn't yield any new information, but it does put all the necessary
+files into folders for alpha and beta diversity analysis in addition to providing a
+few input folders for other types of analyses.
 
 ### 6.0_decontam.sh
 
-One of the greatest things about bacteria is they’re basically everywhere. One of the worst
-things about bacteria is, they’re basically everywhere.
+One of the greatest things about bacteria is they're basically everywhere. One of
+the worst things about bacteria is, they're basically everywhere.
 
-Contamination is often a concern when analyzing bacterial genetic data. Contamination refers to
-bacteria that are in your data now but didn’t originate from your samples. So, these bacteria
-could have gotten in through vectors, such as the reagents used, the air, etc.
+Contamination is often a concern when analyzing bacterial genetic data.
+Contamination refers to bacteria that are in your data now but didn't originate from
+your samples. So, these bacteria could have gotten in through vectors, such as the
+reagents used, the air, etc.
 
-Because of the potential for contamination, negative controls are often sequenced along with
-samples.
+Because of the potential for contamination, negative controls are often sequenced
+along with samples.
 
 :::{.callout-warning}
-If you don’t have negative controls or your negative controls had very few sequences (<500),
-you can skip this script.
+If you don't have negative controls or your negative controls had very few sequences
+(<500), you can skip this script.
 :::
 
-1. Open the script with nano or Cyberduck
+1. Open the script with `nano` or Cyberduck
 
 2. Change the working directory to your main data folder
 
-3. Specify the name of your .qza table
-- input=
+3. Specify the name of your `.qza` table
+   - `input=`
 
 4. Specify the name of the metadata file
-- meta=
+   - `meta=`
 
-5. Specify the column in the metadata file that says whether a sample is a negative or not
-- column=
+5. Specify the column in the metadata file that says whether a sample is a negative
+   or not
+   - `column=`
 
 6. Specify the value in that column for samples that are negatives
-- value=
+   - `value=`
 
-7. Specify the name of the final decontaminated qza table
-- output=
+7. Specify the name of the final decontaminated `.qza` table
+   - `output=`
 
-8. Specify the name of the table containing the list of ASVs filtered out as contaminants
-- contam=
+8. Specify the name of the table containing the list of ASVs filtered out as
+   contaminants
+   - `contam=`
 
 9. Save and submit the script
-- Use the output qza table (decontam-table.qza by default) with script 6.0
+   - Use the output `.qza` table (`decontam-table.qza` by default) with script 6.1
 
 ::: {.callout-note}
 What is the purpose of running this script? Do you always use this script? When do you use it
@@ -475,49 +544,53 @@ and when do you not?
 
 ### Filtering Guidelines
 
-The next script (6.1) is used for filtering our data based on number of sequences, but before we
-do that, it’d be good to talk about some general guidelines for filtering.
+The next script (6.1) is used for filtering our data based on number of sequences,
+but before we do that, it'd be good to talk about some general guidelines for
+filtering.
 
-We typically filter out samples that contain less than 1,000 sequences because it’s unlikely that
-the sequences present are accurate representations of the communities they originated from.
+We typically filter out samples that contain less than 1,000 sequences because it's
+unlikely that the sequences present are accurate representations of the
+communities they originated from.
 
-1. View the VIEWABLE_unfiltered_table.qzv file again using view.qiime2.org
-● If script 6.0 was run, refer to the summarized-$output text file instead (where output is
-whatever you specified that variable as in script 6.0)
+1. View the `VIEWABLE_unfiltered_table.qzv` file again using view.qiime2.org
+   - If script 6.0 was run, refer to the `summarized-$output` text file instead
+     (where output is whatever you specified that variable as in script 6.0)
 
 2. Click on the Interactive Sample Detail tab (shown below in the orange rectangle)
 
 ![](images/tutorial-images-2/2-2_13.png)
 
-3. This will show you all the samples and the number of sequences in each in descending
-order
+3. This will show you all the samples and the number of sequences in each in
+   descending order
 
 4. Look at this table and choose the minimum number of sequences you want your
-samples to have
+   samples to have
 
 ::: {.callout-tip}
 I would recommend filtering out samples that have less than 1,000 sequences
 :::
 
 ::: {.callout-note}
-How many samples have less than 1000 sequences? What file did you look at to find this
-information?
+How many samples have less than 1000 sequences? What file did you look at to find
+this information?
 :::
 
 ### A Quick Note about Variables
 
-6.0 and 6.1 are set up a little differently compared to the previous scripts. Instead of specifying
-options next to flags in the commands themselves, you set the value of variables to what you
-want them to be and these variables are used in the commands.
+6.0 and 6.1 are set up a little differently compared to the previous scripts. Instead
+of specifying options next to flags in the commands themselves, you set the value
+of variables to what you want them to be and these variables are used in the
+commands.
 
 ![](images/tutorial-images-2/2-2_14.png)
 
-You can see in the above example: I’m filtering out all samples that have less than 1,000
-sequences; my metadata file is named meta.txt; my table file is table.qza; my taxonomy file is
-taxonomy.qza, and lastly, my rooted tree file is rooted-tree.qza.
+You can see in the above example: I'm filtering out all samples that have less than
+1,000 sequences; my metadata file is named `meta.txt`; my table file is `table.qza`;
+my taxonomy file is `taxonomy.qza`, and lastly, my rooted tree file is
+`rooted-tree.qza`.
 
-The section in the purple rectangle is creating variables with those values which are then used
-later in the script.
+The section in the purple rectangle is creating variables with those values which
+are then used later in the script.
 
 ::: {.callout-note}
 There are no spaces between the variable’s name, the equal sign, and the value.
@@ -529,22 +602,27 @@ You can see the benefits of using variables in the below picture…
 
 The tree variable is being used five times.
 
-Chances are your tree file is also named “rooted-tree.qza”, but if it weren’t and we didn’t use
-variables in this script, you would have to specify the name of your tree file five times, instead of
-just once. So, using variables can save you a lot of time.
+Chances are your tree file is also named `rooted-tree.qza`, but if it weren't and we
+didn't use variables in this script, you would have to specify the name of your tree
+file five times, instead of just once. So, using variables can save you a lot of
+time.
 
-You’ll also notice that \$tree is in orange. Depending on your text editor, it might not have any
-special formatting, but the dollar sign in front of “tree” is what tells the cluster to get the value of
-the tree variable instead of looking for a file literally named “tree.”
+You'll also notice that `$tree` is in orange. Depending on your text editor, it
+might not have any special formatting, but the dollar sign in front of "tree" is
+what tells the cluster to get the value of the tree variable instead of looking for
+a file literally named "tree."
 
-As an example, for me, cd $workdir is equivalent to cd /home/see/16S_tutorial/data.
-But, cd workdir would have the cluster look for a file actually named “workdir”.
+As an example, for me, `cd $workdir` is equivalent to `cd
+/home/see/16S_tutorial/data`. But, `cd workdir` would have the cluster look for a
+file actually named "workdir".
 
-We’ve actually been using variables this entire time. When you’ve specified the value for
-workdir, the workdir variable was then used to change to your working directory.
+We've actually been using variables this entire time. When you've specified the
+value for workdir, the workdir variable was then used to change to your working
+directory.
 
-Putting spaces in these lines is a very easy mistake to make, and from experience, I can say it’s
-pretty hard to tell you made it if you just glance through the script before submitting.
+Putting spaces in these lines is a very easy mistake to make, and from experience, I
+can say it's pretty hard to tell you made it if you just glance through the script
+before submitting.
 
 ::: {.callout-note}
 In the above picture which value is the variable?
@@ -552,132 +630,141 @@ In the above picture which value is the variable?
 
 ### A Quick Note on Normalization
 
-Normalization basically refers to modifying the counts for our samples to make them more
-comparable to each other.
+Normalization basically refers to modifying the counts for our samples to make them
+more comparable to each other.
 
-Consider a situation in which one sample has 5,000 sequences (Sample A) and another 15,000
-(Sample B). We may find that Sample B has a lot more species of bacteria than Sample A, but
-this could just be because Sample B had more data available, whether because PCR worked
-better for it or whatever other reason.
+Consider a situation in which one sample has 5,000 sequences (Sample A) and another
+15,000 (Sample B). We may find that Sample B has a lot more species of bacteria
+than Sample A, but this could just be because Sample B had more data available,
+whether because PCR worked better for it or whatever other reason.
 
-One way to make the samples more comparable would be to randomly select 4,000 sequences
-from A and 4,000 from B and then see if B still has more species than A. In fact, subsampling
-like this is a pretty common normalization strategy called rarefaction. And, we will use it for our
-alpha diversity analyses (don’t worry, if you don’t recognize that term, we’ll talk about it later).
+One way to make the samples more comparable would be to randomly select 4,000
+sequences from A and 4,000 from B and then see if B still has more species than A.
+In fact, subsampling like this is a pretty common normalization strategy called
+rarefaction. And, we will use it for our alpha diversity analyses (don't worry, if
+you don't recognize that term, we'll talk about it later).
 
-Another common normalization strategy that we’ll be using is Cumulative Sum Scaling, or CSS
-normalization. The CSS technique corrects bias in the assessment of differential abundance of
-our data by dividing raw counts by the cumulative sum of counts up to a certain percentile
-determined by our data. We use data normalized with CSS for beta diversity analyses, while we
-use rarefactions to normalize data for alpha diversity.
+Another common normalization strategy that we'll be using is Cumulative Sum Scaling,
+or CSS normalization. The CSS technique corrects bias in the assessment of
+differential abundance of our data by dividing raw counts by the cumulative sum of
+counts up to a certain percentile determined by our data. We use data normalized with
+CSS for beta diversity analyses, while we use rarefactions to normalize data for
+alpha diversity.
 
 ### 6.1_format_data.sh
 
-Now, that you have a bit more background information about filtering and variables, we are
-ready to start on script 6.1.
+Now, that you have a bit more background information about filtering and variables,
+we are ready to start on script 6.1.
 
-In addition to filtering out low abundance samples and Mitochondria and Chloroplasts, this script
-exports the rooted tree, table, and taxonomy qza files.
+In addition to filtering out low abundance samples and Mitochondria and Chloroplasts,
+this script exports the rooted tree, table, and taxonomy `.qza` files.
 
-It also creates folders for use with alpha and beta diversity analysis, biomarker analysis, and R.
+It also creates folders for use with alpha and beta diversity analysis, biomarker
+analysis, and R.
 
-1. Open the script with the nano command or Cyberduck
+1. Open the script with the `nano` command or Cyberduck
 
 2. Change the working directory to your main data folder
 
-3. Choose the minimum number of sequences a sample needs to be retained
-If you want to keep all of your sequences, use 0
-    - cutoff=
+3. Choose the minimum number of sequences a sample needs to be retained. If you
+   want to keep all of your sequences, use 0
+   - `cutoff=`
 
 4. Specify the names of your metadata, table, taxonomy, and tree files
-    - meta=
-    - table=
-    - taxonomy=
-    - tree=
-    - IF YOU RAN DECONTAM (6.0), table SHOULD BE “decontam-table.qza”
-      - Without quotation marks
+   - `meta=`
+   - `table=`
+   - `taxonomy=`
+   - `tree=`
+   - IF YOU RAN DECONTAM (6.0), table SHOULD BE `decontam-table.qza` (without
+     quotation marks)
 
-5. Save script and then submit it with sbatch
+5. Save script and then submit it with `sbatch`
 
-6. Check the .o and .err log files
+6. Check the `.o` and `.err` log files
 
-7. Check that the alpha_div, ancom, beta_div, exported-feature-table, and R folders were
-created
-    - alpha_div folder should contain your metadata file, rooted-tree.qza file,
-filtered_feature-table.qza, and a VIEWABLE file for that table.
-    - ancom folder should contain your metadata file and filtered_feature-table.qza.
-    - beta_div folder should contain your metadata file, rooted-tree.qza file, and
-norm_feature-table.qza.
-    - R folder should contain your metadata file (like all the other folders), rooted_tree.nwk file,
-unnorm_R_table-with-taxonomy.txt file, and norm_R_table-with-taxonomy.txt
-      - You can do a lot with R, like random forest analysis, partial squares discriminant
-analysis, etc. For starters though, I recommend looking into the Phyloseq
-package.
-      - You can use R on the cluster, but it’s easier to make nice plots if you use it on
-your own laptop
-        - To do that, you’ll want to download R and then R Studio
-      - Analyses with R are, unfortunately, not included with this tutorial.
-        - With that being said, feel free to contact JCS at chensjr16@juniata.edu if
-there’s any specific analyses you’re interested in doing with R.
-    - The exported-feature-table folder should have taxonomy.tsv, feature-table.biom,
-VIEWABLE_chloroplast-mitochondria_filtered-\$table.qzv, and summarized_feature-table.txt files
-      - The VIEWABLE file contains the sequence counts per sample after mitochondria
-and chloroplasts are removed; the summarized_feature-table.txt contains the
-sequence counts only for the samples retained after filtering with the sequence
-number cutoff.
-      - There should also be three additional biom files:
-norm_filtered_$cutoff.feature-table.biom, norm_table-with-taxonomy.biom, and
-unnorm_table-with-taxonomy.biom
-        - The first file was imported for use with Qiime2’s beta diversity commands
-        - The other two were exported to the R folder
+7. Check that the `alpha_div`, `ancom`, `beta_div`, `exported-feature-table`, and
+   `R` folders were created
+   - `alpha_div` folder should contain your metadata file, `rooted-tree.qza` file,
+     `filtered_feature-table.qza`, and a VIEWABLE file for that table.
+   - `ancom` folder should contain your metadata file and
+     `filtered_feature-table.qza`.
+   - `beta_div` folder should contain your metadata file, `rooted-tree.qza` file,
+     and `norm_feature-table.qza`.
+   - `R` folder should contain your metadata file (like all the other folders),
+     `rooted_tree.nwk` file, `unnorm_R_table-with-taxonomy.txt` file, and
+     `norm_R_table-with-taxonomy.txt`
+     - You can do a lot with R, like random forest analysis, partial squares
+       discriminant analysis, etc. For starters though, I recommend looking into
+       the Phyloseq package.
+     - You can use R on the cluster, but it's easier to make nice plots if you use
+       it on your own laptop
+       - To do that, you'll want to download R and then R Studio
+     - Analyses with R are, unfortunately, not included with this tutorial.
+       - With that being said, feel free to contact JCS at chensjr16@juniata.edu
+         if there's any specific analyses you're interested in doing with R.
+   - The `exported-feature-table` folder should have `taxonomy.tsv`,
+     `feature-table.biom`, `VIEWABLE_chloroplast-mitochondria_filtered-$table.qzv`,
+     and `summarized_feature-table.txt` files
+     - The VIEWABLE file contains the sequence counts per sample after mitochondria
+       and chloroplasts are removed; the `summarized_feature-table.txt` contains
+       the sequence counts only for the samples retained after filtering with the
+       sequence number cutoff.
+     - There should also be three additional biom files:
+       `norm_filtered_$cutoff.feature-table.biom`,
+       `norm_table-with-taxonomy.biom`, and `unnorm_table-with-taxonomy.biom`
+       - The first file was imported for use with Qiime2's beta diversity commands
+       - The other two were exported to the `R` folder
 
 ::: {.callout-note}
 What directories did script 6.1 create and what folders do they all contain?
 :::
 
 ::: {.callout-warning}
-Before moving on, check that your alpha_div, beta_div, and ancom folders have the
-following files.
+Before moving on, check that your `alpha_div`, `beta_div`, and `ancom` folders have
+the following files.
 
 ![](images/tutorial-images-2/2-2_16.png)
 :::
 
 ## Alpha Diversity Analysis
 
-First of all, let’s talk about what alpha diversity actually is. We’ve mentioned it a couple times,
-but we haven’t actually defined it. Basically, alpha diversity just refers to within sample diversity.
+First of all, let's talk about what alpha diversity actually is. We've mentioned it
+a couple times, but we haven't actually defined it. Basically, alpha diversity just
+refers to within sample diversity.
 
-So, imagine, we have two samples, A and B. A has 30 different ASVs and B has 70 different
-ASVs. We could say that B has higher alpha diversity, because it has more different ASVs, and
-indeed, this is actually a measure of alpha diversity, called “observed.”
+So, imagine, we have two samples, A and B. A has 30 different ASVs and B has 70
+different ASVs. We could say that B has higher alpha diversity, because it has
+more different ASVs, and indeed, this is actually a measure of alpha diversity,
+called "observed."
 
-However, perhaps, A has 5,000 sequences, while B has 10,000, around twice as many. So, you
-can see then, at least for this metric, B might just have higher diversity because it has more
-sequences. So, we can use a normalization strategy to better compare these two samples.
-For instance, we could randomly pick 4,000 sequences from A and 4,000 from B. This is called
-rarefying the data. So, we could re-word the previous sentence as: we could rarefy A and B at a
-depth of 4,000 sequences.
+However, perhaps, A has 5,000 sequences, while B has 10,000, around twice as many.
+So, you can see then, at least for this metric, B might just have higher diversity
+because it has more sequences. So, we can use a normalization strategy to better
+compare these two samples. For instance, we could randomly pick 4,000 sequences
+from A and 4,000 from B. This is called rarefying the data. So, we could re-word
+the previous sentence as: we could rarefy A and B at a depth of 4,000 sequences.
 
-We could then see how many different features are in those sub-samples. Now, of course, you
-probably wouldn’t get the same exact number if you were to repeat this process, so we repeat it
-a certain number of times (as defined by the --p-iterations flag) and end up averaging the
-results.
+We could then see how many different features are in those sub-samples. Now, of
+course, you probably wouldn't get the same exact number if you were to repeat this
+process, so we repeat it a certain number of times (as defined by the
+`--p-iterations` flag) and end up averaging the results.
 
-What’s more, we do this at multiple depths, with the minimum being defined by --p-min-depth
-and the maximum by --p-max-depth. This allows us to see how alpha diversity, as defined by
-our different metrics, changes as we use more and more sequences, which is actually really
-important. We can plot the alpha diversity as the y axis and number of sequences as an x axis
-to show how that diversity changes with respect to depth. These plots are called rarefaction
-curves.
+What's more, we do this at multiple depths, with the minimum being defined by
+`--p-min-depth` and the maximum by `--p-max-depth`. This allows us to see how
+alpha diversity, as defined by our different metrics, changes as we use more and
+more sequences, which is actually really important. We can plot the alpha diversity
+as the y axis and number of sequences as an x axis to show how that diversity
+changes with respect to depth. These plots are called rarefaction curves.
 
-One common criticism of rarefaction as a normalization strategy is the fact that you’re not using
-a lot of your data. But, by sampling at multiple depths, we can see if the slope of the alpha
-diversity metrics levels off as we approach our maximum depth. If it does, then we probably
-used enough of our data to capture a good approximation of the actual alpha diversity present in
-our samples. However, if the slope is still rather steep, a higher maximum should be used.
+One common criticism of rarefaction as a normalization strategy is the fact that
+you're not using a lot of your data. But, by sampling at multiple depths, we can
+see if the slope of the alpha diversity metrics levels off as we approach our
+maximum depth. If it does, then we probably used enough of our data to capture a
+good approximation of the actual alpha diversity present in our samples. However, if
+the slope is still rather steep, a higher maximum should be used.
 
-Still, this loss of data is the reason that we only use rarefaction for alpha diversity, instead of for
-both alpha and beta diversity analyses.
+Still, this loss of data is the reason that we only use rarefaction for alpha
+diversity, instead of for both alpha and beta diversity analyses.
 
 ::: {.callout-note}
 In your own words describe what Alpha diversity is Give an example.
@@ -685,52 +772,58 @@ In your own words describe what Alpha diversity is Give an example.
 
 ### 7.1_alpha_rarefactions.sh
 
-This script rarefies our data at multiple depths, multiple times for each depth, and creates
-viewable rarefaction plots so we can see if we chose a sufficiently high depth.
+This script rarefies our data at multiple depths, multiple times for each depth, and
+creates viewable rarefaction plots so we can see if we chose a sufficiently high
+depth.
 
-You might want to look at the VIEWABLE_filtered_\$cutoff.feature-table.qzv file or the
-summarized_feature-table.txt file in the alpha_div folder
+You might want to look at the `VIEWABLE_filtered_$cutoff.feature-table.qzv` file
+or the `summarized_feature-table.txt` file in the `alpha_div` folder
 
-Qiime2 needs a minimum and maximum depth. It will choose ten intermediary depths to sample
-at as well.
+Qiime2 needs a minimum and maximum depth. It will choose ten intermediary depths
+to sample at as well.
 
-Your maximum depth should be a little less than the smallest number of sequences possessed
-by your samples, at least the first time you run this script.
+Your maximum depth should be a little less than the smallest number of sequences
+possessed by your samples, at least the first time you run this script.
 
-But, you may find that a higher depth is needed to accurately reflect your samples’ alpha
-diversity.
+But, you may find that a higher depth is needed to accurately reflect your
+samples' alpha diversity.
 
 You can set your minimum depth to a tenth of that.
 
-1. Change your working directory to your alpha_div folder
+1. Change your working directory to your `alpha_div` folder
 
-2. Check that the value of --m-metadata-file matches the name of your metadata file
+2. Check that the value of `--m-metadata-file` matches the name of your metadata
+   file
 
 3. Change the values for the other flags as desired
 
 ![](images/tutorial-images-2/2-2_17.png)
 
-4. You can see additional alpha diversity metrics [here](https://forum.qiime2.org/t/alpha-and-beta-diversity-explanations-and-commands/2282) 
-under the Alpha Diversity Analysis section.
+4. You can see additional alpha diversity metrics
+   [here](https://forum.qiime2.org/t/alpha-and-beta-diversity-explanations-and-commands/2282)
+   under the Alpha Diversity Analysis section.
 
-4. Save and submit the script
+5. Save and submit the script
 
-5. Review the .o and .err log files to see if there were any errors
+6. Review the `.o` and `.err` log files to see if there were any errors
 
-6. Open the resulting visualization file
-    - Look at the --o-visualization flag again if you’re having trouble finding it
-      - It should have that name and be in your alpha_div folder if the script worked
+7. Open the resulting visualization file
+   - Look at the `--o-visualization` flag again if you're having trouble finding it
+   - It should have that name and be in your `alpha_div` folder if the script
+     worked
 
 ![](images/tutorial-images-2/2-2_18.png)
 
-These are rarefaction curves. The sequencing depth is the x axis, and the alpha diversity metric
-is the y axis.
+These are rarefaction curves. The sequencing depth is the x axis, and the alpha
+diversity metric is the y axis.
 
-Qiime2 lets you easily switch between the different metrics you used (by using the box under
-Metric) and the metadata column (by using the box under Sample Metadata Column).
+Qiime2 lets you easily switch between the different metrics you used (by using the
+box under Metric) and the metadata column (by using the box under Sample Metadata
+Column).
 
-If you scroll down further, you’ll see a legend saying what categories the different colors
-correspond to. Here is the legend for the rarefaction plot shown above.
+If you scroll down further, you'll see a legend saying what categories the
+different colors correspond to. Here is the legend for the rarefaction plot shown
+above.
 
 ![](images/tutorial-images-2/2-2_19.png)
 
@@ -760,10 +853,557 @@ But after we do that, we need to get those averages into Qiime2. And, this scrip
 3. Specify the maximum rarefaction depth (max= from last script)
     - max=
 
-4. Check that the value of --input-path for the qiime tools export command matches the
+4. Check that the value of `--input-path` for the `qiime tools export` command matches the
 name of the visualization file for the alpha rarefactions plot
 
 5. Save and submit the script
 
-6. Check the .o log file for errors and check the q2_alpha folder, within the alpha_div folder,
-for one .qza file for each metric
+6. Check the `.o` log file for errors and check the `q2_alpha` folder, within the `alpha_div` folder,
+for one `.qza` file for each metric
+
+### 7.3_alpha_div_significance.sh
+We can see if alpha diversity varies by categorical groups.
+For instance, if we had an experiment in which some samples were treated with antibiotics and
+others weren’t, we would probably expect the control group to have higher alpha diversity than
+the treatment group.
+We can use this script to see if alpha diversity does differ based on our metadata if you have
+categorical metadata groups.
+1. Change the working directory to your `alpha_div` folder
+
+2. Specify the name of your metadata file
+   - `meta=`
+   - You don't have to change any of them, but here are the flags for the `qiime diversity
+     alpha-group-significance` command
+
+![](images/tutorial-images-2/2-2_20.png)
+
+3. Save and submit the script
+4. Check the log file for errors
+5. The alpha_sig_results folder within your alpha_div folder should contain one VIEWABLE
+qzv file for each alpha diversity metric
+6. Look at the VIEWABLE files
+
+![](images/tutorial-images-2/2-2_21.png)
+
+Only categorical columns can be used for this analysis. But, it’ll list any columns that were
+excluded at the top in a yellow rectangle, and it’ll say why they were excluded.
+
+Below that will be boxplots. You can change the metadata category the visualization shows for
+the plots and the PERMANOVA results by using the box under “Column.”
+
+The formatted_alpha folder (from 7.2) within the alpha_div folder contains the data used to
+make these boxplots if you want to remake them using [ggplot2](http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization#change-box-plot-fill-colors) in R.
+
+Beneath the boxplots are the results of the PERMANOVA tests. PERMANOVA test were
+performed for all groups together, shown in the Kruskal-Wallis (all groups) section, and for each set of two groups, shown in the Kruskal-Wallis (pairwise) section.
+
+![](images/tutorial-images-2/2-2_22.png)
+
+The p-value column is usually the one we pay the most attention to. A p-value is the probability that you would get your data just due to chance if there were no differences between the
+groups.
+
+Generally, a p-value of 0.05 or lower is considered significant, as in, if the p-value is less than or equal to 0.05, that’s good evidence that there is a real difference as the odds of getting our data just due to chance is very low.
+
+::: {.callout-note}
+Choose one of your alpha diversity measures and give a brief explanation of its meaning. Is it
+significant?
+:::
+
+### 7.4_alpha_div_correlation.sh
+
+We can also see if alpha diversity varies with numerical metadata using this script if you have
+any numerical metadata.
+
+1. Open the script
+
+2. Change the working directory to your `alpha_div` folder
+
+3. Specify the name of your metadata file
+   - `meta=`
+   - You don't have to change any of them, but here are the flags for the `qiime diversity
+     alpha-correlation` command
+
+![](images/tutorial-images-2/2-2_23.png)
+
+4. Save and submit the script
+
+5. Check the `.o` log file for errors
+
+6. The `alpha_corr_results` folder within your `alpha_div` folder should contain one
+VIEWABLE `.qzv` file for each alpha diversity metric
+
+7. Look at the VIEWABLE files
+
+![](images/tutorial-images-2/2-2_24.png)
+
+The output here is pretty similar to 7.3.
+
+The excluded metadata columns are shown in the yellow rectangle at the top.
+
+Instead of a boxplot, the graphic is a dot plot, with the metadata column value as the x-axis and
+the alpha diversity metric value as the y-axis
+
+## Beta Diversity
+Beta diversity is how different samples are from each other, so between sample diversity, rather than within sample diversity.
+
+As an illustration, imagine that we have two 16S samples, and we wanted to see how different
+they were from each other. Well, we could make a number line for abundance of *E. coli* in them,
+and then we’d have two points on a number line. Well, what if we added another bacteria, say
+*Pseudomonas aeruginosa*.
+
+Theoretically, we could go through every bacteria present in both samples and see how different
+their abundances are between the samples.
+
+The various metrics for beta diversity use more complicated formulas than that to determine
+how different samples are from each other.
+
+See the metrics under Beta Diversity Analysis section [here](https://forum.qiime2.org/t/alpha-and-beta-diversity-explanations-and-commands/2282) for all available metrics.
+
+We typically use the weight unnormalized unifrac metric, which takes into account phylogeny
+and abundance.
+
+### A Quick Note on Distance Matrices
+
+We make and then use a distance matrix for our beta diversity analyses, based on the CSS
+normalized table.
+
+A distance matrix shows how different, so how distant, samples are from each other.
+
+![](images/tutorial-images-2/2-2_25.png)
+
+In this distance matrix, B and C are more similar to each other than either is to A. A is more
+different from C (12) than it is from B (10).
+
+We can use a distance matrix to create plots, like PCoA and NMDS, to visualize how similar
+samples are to each other.
+
+These visualizations are called ordinations. They try to show the distances between samples as
+accurately as possible using only 2 or 3 dimensions.
+
+::: {.callout-note}
+Give a brief description of Beta diversity Provide an example.
+Compare and contrast Alpha and beta diversity. How are they similar and how are they
+different?
+
+Based on the Image below what are the alpha and beta diversity measures.
+
+![](images/tutorial-images-2/2-2_26.png)
+:::
+
+### 8.1_beta_input.sh
+
+The statistical tests for beta diversity use a distance matrix to see if beta diversity varies with
+categorical and numerical metadata. This script calculates the distance matrix and creates
+PCoA coordinates based on them.
+
+1. Open the script
+
+2. Change the working directory to your `beta_div` folder
+
+3. Save and submit the script
+   - You don't have to change anything else in the script but here are the flags, in case you
+     want to change anything
+   - `qiime diversity beta-phylogenetic` or `qiime diversity beta` (if you use a
+     non-phylogenetic metric)
+
+![](images/tutorial-images-2/2-2_27.png)
+
+   - `qiime diversity pcoa`
+
+![](images/tutorial-images-2/2-2_28.png)
+
+Where will the output files be located (assuming the script worked)? Also, did JCS make a typo
+in the workdir line or was he just testing you? Note: if you say he made a typo, he will fail you.
+
+4. Check that the output files have been created
+
+### 8.2_beta_div_significance.sh
+
+Like 7.3, you can only use this script if you have categorical metadata.
+
+This script will run PERMANOVA for all groups in a category overall and pairwise. These tests
+allow you to see if samples in the same group are significantly more different from samples in
+other groups than they are from each other.
+
+1. Set the working directory to where the output from the previous script was created
+   - It should be `[VARIABLE]=[DIRECTORY]`
+
+2. Change the name of the metadata file to match yours
+   - `meta=`
+
+3. List the categories that you want to use for the PERMANOVA tests in the columns
+   variable
+
+![](images/tutorial-images-2/2-2_29.png)
+
+   - Each category should be on a new line, and all of them should be within the parentheses
+   - For the purposes of this tutorial, you can just use the Location and Site columns
+     You do NOT need to use a third categorical column
+
+4. Save and submit the script
+
+5. Look at the output
+
+![](images/tutorial-images-2/2-2_30.png)
+
+This is a PCoA plot. Samples that are closer to each other are more similar. Each axis captures
+a certain amount of the variation among the samples. The first axis is always the most
+important, followed by the second, and then the third.
+
+You can color samples by a metadata category. The plot above is colored by the categorical
+column “Day”. The colors used are from the Classic QIIME Colors palette. You can change the
+colors for each group by clicking on the colored box next to the category it denotes.
+
+![](images/tutorial-images-2/2-2_31.png)
+
+Looking at the box in green, the topmost box “scatter:” is used to specify which metadata
+column to use to color the points. The next box is the colors. Here, we use the Red-Purple
+gradient. In the blue box, check the “Continuous values” box as shown for the colors to be used
+as a gradient, instead of having a different color for each value.
+
+Next, we’ll look at the results of the PERMANOVA tests
+
+![](images/tutorial-images-2/2-2_32.png)
+
+The topmost section gives the results of the PERMANOVA test that considered if samples in all
+of the groups were more similar to each other than samples in any of the other groups.
+
+![](images/tutorial-images-2/2-2_33.png)
+
+The middle part shows boxplots of the distances for samples in each group from the group
+given in the title. Based on this plot then, samples in the Day_5 group seem to be the most
+different from the Day_1 group. If you look back at the first PCoA picture, you’ll see the one
+Day_1 sample (red) is pretty far from the Day 5 samples (purple), so this result makes sense.
+
+![](images/tutorial-images-2/2-2_34.png)
+
+The lowest part of this visualization shows the results of the pairwise PERMANOVA tests.
+
+::: {.callout-note}
+If we use a cutoff of 0.05 for significance (α=0.05), how many of the pairwise comparisons
+above are significant?
+:::
+
+### 8.3_beta_div_correlation.sh
+
+As with alpha diversity, beta diversity can also be correlated with numerical metadata. And, this
+script is used to do that.
+
+1. Copy the scripts with: `cp -R /home/see/tutorial_data/8.3_scripts`
+
+2. Copy the metadata with: `cp /home/see/tutorial_data/metadata/*.txt`
+
+3. Open the script
+
+4. Change the working directory
+
+5. Specify the name of your metadata file (leave it as is for these scripts)
+
+6. Leave the columns as is
+
+7. Save and submit the script
+
+Again, here's a list of the flags for the commands.
+
+- `qiime emperor plot`
+![](images/tutorial-images-2/2-2_35.png)
+- `qiime diversity beta-correlation`
+![](images/tutorial-images-2/2-2_36.png)
+
+8. View the outputs
+The metadata file has a lot of missing values, so that’s why we’re using five of those in this
+case. The commands we use for these scripts can’t tolerate missing values, evidently.
+
+The timepoint script is a bit different. We can force timepoint to be an axis since we’re
+representing it with numbers, but it’s actually categorical, not continuous, e.g. there is no 3.14
+timepoint, nor could there have been. So, we use the stats command from 8.2 for that one.
+
+Anyway, let’s look at the PCoA visualization
+
+![](images/tutorial-images-2/2-2_37.png)
+
+pH is now used as the first axis, and what was the first axis is now plotted where the second
+axis was.
+
+You can use this to see if beta diversity is positively or negatively correlated with metadata. If it’s
+negatively correlated, we would expect samples to be closer together at higher values of the
+numerical metadata.
+
+Next, we’ll look at the results of the correlation command for the different columns.
+
+![](images/tutorial-images-2/2-2_38.png)
+
+As before, the yellow box lists sample id’s that were excluded.
+
+The results of the statistical test are shown. The p-value is very high (0.719), so according to the
+Mantel test, there is a high probability that there is no correlation between pH and the distances
+between samples based on their bacterial composition.
+
+Spearman rho is the strength of the correlation, ranging from -1 to 1.
+
+The last type of visualization for this script is for the results of the bioenv command
+
+![](images/tutorial-images-2/2-2_39.png)
+
+Bio-Env correlates multiple numerical metadata columns with the distances based on the
+bacterial community. In the above picture, you can see the strongest correlation is achieved by a
+combination of CONDUCTIVITY, TEMP, SALINITY, and TDS.
+
+## Differential Abundance Analysis
+
+In addition to knowing if alpha and beta diversity differ according to categorical metadata, it
+would also be nice to know if any bacteria are more abundant in certain categories compared to
+others.
+
+There are a variety of programs and tests to determine that. But, for the purpose of this tutorial
+we will use ANCOM.
+
+### 9_diff_abundance.sh
+
+First off, you need to have metadata for all samples in the table; if you don’t, those samples
+need to be removed before running ANCOM.
+ANCOM assumes less than 25% of the features differ between groups. If you expect more than
+25% are different, don’t use ANCOM.
+
+It also can’t tolerate frequencies of 0, but we can use another Qiime2 command (qiime
+composition add-pseudocount) to account for that limitation.
+
+We also run this on a collapsed table, using the qiime taxa collapse command, to make sure all
+ASVs used on this analysis are identified to the same level.
+
+1. Open your metadata file in the `ancom` folder with Cyberduck
+
+2. Check the column(s) that you want to use
+   - If any samples in the table have missing values, they will need to be removed before
+     running ANCOM
+   - We use the `qiime feature-table filter-samples` command in this script to keep only the
+     samples present in the metadata
+   - For the purposes of this tutorial, you can just use the Location column
+
+3. Delete the rows for any samples with missing data for the column(s) that you’ll be using
+
+![](images/tutorial-images-2/2-2_40.png)
+
+4. Save the metadata file
+
+5. Change the working directory to your ancom folder
+
+6. Specify the name of your metadata file
+
+7. Like the beta diversity scripts, specify the columns you want to use with ANCOM
+
+8. Specify the level you want to collapse at
+   - `level=`
+   - We usually use 7 for species level analyses
+
+9. Check that the values for the `qiime taxa collapse` command's `--i-table` and `--i-taxonomy`
+flags match your file names
+
+10. Save and submit the script
+
+- `qiime taxa collapse`
+
+![](images/tutorial-images-2/2-2_41.png)
+
+- `qiime feature-table filter-samples`
+
+![](images/tutorial-images-2/2-2_42.png)
+
+- `qiime composition add-pseudocount`
+
+![](images/tutorial-images-2/2-2_43.png)
+
+- `qiime composition ancom`
+
+![](images/tutorial-images-2/2-2_44.png)
+
+11. Look at the resulting visualization files
+
+![](images/tutorial-images-2/2-2_45.png)
+
+::: {.callout-note}
+Based on your volcano plot generated how many different taxa are differenitally abundant.
+What does differentially abundant mean? Describe in your own words.
+:::
+
+Let's break this down a little bit. W is the number of sub-hypotheses that were rejected. Each
+sub-hypothesis is testing whether the ratio of one bacteria, let's say *E. coli*, to another bacteria,
+let's say *P. aeruginosa*, is the same in one group as it is in another. So, the setup would look
+something like this
+
+**Formula Here**
+
+So, the value of W for the ASV representing *E. coli* would be the number of times the
+null hypothesis is rejected for that ASV. In other words, the number of times the ratio of
+that ASV to another differs between groups.
+
+The null hypotheses for the two ASVs shown in the table were rejected 2982 for both.
+
+The clr value is the difference between the log abundance between that ASV (point) and
+the average log abundance of all ASVs.
+
+The lower part of the visualization shows the abundances of the enriched ASVs (the
+ASVs in the table above) for each group.
+
+![](images/tutorial-images-2/2-2_46.png)
+
+It shows the abundances for each quartile in each group. However, in this example,
+Day_1 only had one sample (you would probably not want to use a group with only 1
+sample in actual analyses), so that’s why all the values are the same for each
+percentile. These ASVs were probably not found in the other groups, so the
+pseudo-count command set their abundances to 1, which is why the percentile values
+for those are all 1.
+
+BioBakery’s [LEfSe](https://bitbucket.org/biobakery/biobakery/wiki/lefse) and the [Aldex2](https://library.qiime2.org/plugins/q2-aldex2/24/) Qiime2 plugin are alternative methods for
+determining differential abundance.
+
+## LEfSe - Biomarker Analysis
+Previously, we used ANCOM to determine which bacteria were differentially abundant. [LEfSe](https://bitbucket.org/biobakery/biobakery/wiki/lefse) is
+another tool to do that.
+
+::: {.callout-note}
+Why You Would Use It: You want to see which, if any, bacteria differ significantly in abundance
+among categorical metadata groups.
+:::
+
+### LEfSe Installation
+
+1. Create LEfSe environment
+   - Alternatively: `conda create --name lefse --file /home/see/YML_Files/lefsepkgs.txt`
+2. Create input formatting environment
+   - `conda create -n tidyverse -y -c conda-forge r-tidyverse r-optparse r-funrar r-plyr`
+
+LEFSe scripts are located in: `QIIME2_pipeline/other_scripts/lefse_scripts`
+
+### 1_LEfSe_generic_summarize_taxa.sh
+
+This script lets you choose the taxonomic level you want to use for LEfSe analyses; we usually
+use 7 for species. It uses that level to create formatted input files for the next script.
+
+1. Open script
+
+2. Set the working directory to your `ancom` folder
+   - `workdir=`
+
+3. Specify metadata file
+   - `meta=`
+
+4. Specify categorical metadata columns that you want to use for LEfSe
+   - `columns=`
+
+5. Specify level to summarize at, e.g. 7 for species, 6 for genus, etc.
+   - `level=`
+
+6. Specify name of table to use
+   - `table=`
+
+7. Specify name of taxonomy file to use
+   - `taxonomy=`
+
+8. Specify column header for metadata column containing sample id's
+   - `id=`
+
+9. Save and submit the script
+
+10. Check that a `lefse_` text file was created for each column
+
+There should also be a `LEFSE_intermediate_files` folder that contains three files (one `.biom` file
+and two `.txt`'s that were generated during the course of running the script). These files are no
+longer needed, but they are there if you want to look at them.
+
+### 2_LEfSe_run.sh
+
+This script performs the LEfSe analysis and creates output visualizations, in png form. The
+x-axis for the bar plot visualization will be the log(LDA) score, which is a measure of enrichment.
+
+Importantly, this script also performs CPM normalization on the data. That’s basically the same
+as relative abundance, except all the counts in a sample sum to 1,000,000, instead of 1 or 100.
+
+LEfSe performs Kruskal-Wallis tests to determine significant differences in abundance based on
+the metadata group and then uses Linear Discriminant Analysis to get a measure of how much
+its abundance differs.
+
+1. Open script
+
+2. Set the working directory to your `ancom` folder
+   - `workdir=`
+
+3. Specify the minimum LDA score for a taxon to be considered enriched
+   - `lda=`
+   - We usually use a cutoff of 2
+
+4. Change the values of the other variables as desired
+
+5. Save and submit the script
+
+6. Check that the `initial_figures` and `results_res` folders contain two files per sample
+   - The `initial_figures` folder should have a cladogram and a bar plot for each comparison
+
+![](images/tutorial-images-2/2-2_47.png)
+
+This is an example bar plot from LEfSe. The colors indicate the group that is enriched in, and
+the x-axis indicates the strength of that enrichment.
+
+![](images/tutorial-images-2/2-2_48.png)
+
+Here’s a cladogram. It doesn’t show the LDA scores, but it shows the phylogenetic relationships
+among the enriched taxa.
+
+   - The `results_res` folder contains the files that these figures are based on.
+   - For each sample, it'll have a `.res` file at the level you specified for the cutoff and
+     another with a cutoff of 0.
+
+You may have noticed that some of the names are missing in the above figures. That's because
+those bacteria were not identified to species level, or even less specific levels in some cases.
+
+But, you can change the names in the `.res` file using Excel and then use the edited file to
+re-make the figures.
+
+I recommend deleting all unenriched taxa to make the cladogram look better.
+
+1. Select all the data
+
+2. Go to Sort & Filter (in the Home bar towards the far right)
+
+3. Sort by Column C to bring all the enriched features to the top of the table
+
+4. Delete everything below the enriched features (all the rows without values in Column C)
+
+You can change the names of the features (taxa) too by altering the cells in Column A. Periods
+separate the different taxonomic levels. The bar plot and cladograms both just show the last
+(most specific) one.
+
+Save altered `.res` file(s), with the prefix `ed_` (no quotation marks in the actual name).
+
+### 3_LEfSe_redo_figures.sh
+
+This script uses the edited (ed_*) .res files to remake the figures.
+
+1. Make sure your edited .res files being with ed_
+
+2. Open the script
+
+3. Set the working directory to the ancom folder (or wherever you have the edited files)
+
+4. Change the values of the variables as you desire
+
+5. Save and submit the script
+
+6. Check that the `edited_figures` folder has a bar plot and cladogram for each `.res` file
+
+![](images/tutorial-images-2/2-2_49.png)
+
+You can see that I changed the unidentified taxa to their most specific taxonomic level, with
+Qiime2’s level prefix at the start and an abbreviation for the traditional taxonomic levels at the
+end, e.g. sp for species and g for genus.
+
+::: {.callout-note}
+Do you think LEfSe would work with a column for patient sex that used “1” to represent female
+and “2” to represent male?
+:::
+
+If you want to recreate the LEfSe figures with different colors, you can copy the script at:
+`/home/see/lefse_scripts/4_LEfSe_colors.sh`
+
+Change the value of the `d1` variable to match the name of your `.res` file, and the values after the
+`colors` flag to match the hex codes of the colors you want to use.

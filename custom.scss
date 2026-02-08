@@ -33,9 +33,9 @@ h2 {
     font-size: 1.4rem;
     font-weight: 600;
 }
-h3 { margin-top: 1.5em; font-size: 1.2rem; font-weight: 500; }
-h4 { margin-top: 1.5em; font-size: 1.1rem; }
-h5 { margin-top: 1.5em; font-size: 1rem; }
+h3 { margin-top: 1.5em; font-size: 1.2rem; font-weight: 700; }
+h4 { margin-top: 1.5em; font-size: 1.1rem; font-weight: 700; }
+h5 { margin-top: 1.5em; font-size: 1rem; font-weight: 700; }
   
 .quarto-section-identifier {
     color: #6C6C6C;
@@ -84,46 +84,6 @@ pre.sourceCode #code-annotation-line-highlight,
     width: 100% !important;
     margin-left: 0 !important;
 }
-  
-/*-
-
-#quarto-document-content {
-    p {
-        font-family: "Times New Roman", Times, serif !important;
-        font-size: 1.05rem !important;
-    }
-    ul {
-        font-family: "Times New Roman", Times, serif !important;
-        font-size: 1.05rem !important;
-    }
-    ol {
-        font-family: "Times New Roman", Times, serif !important;
-        font-size: 1.05rem !important;
-    }
-    li {
-        font-family: "Times New Roman", Times, serif !important;
-        font-size: 1.05rem !important;
-    }
-}
-
-#quarto-document-content summary details,
-#quarto-document-content details p,
-#quarto-document-content details,
-#quarto-document-content .callout p,
-#quarto-document-content .callout span,
-#quarto-document-content .callout-header p,
-#quarto-document-content .callout-header span,
-#quarto-document-content .callout-body p,
-#quarto-document-content .callout-body span {
-    line-height: 1.5 !important;
-    margin-top: 0.5rem !important;
-    font-family: "Source Sans Pro", sans-serif !important;
-    font-size: 0.9rem !important;
-    color: lighten(#373a3c, 10%) !important;
-}
-
--*/
-/* Sidebars --------- */
 
 #quarto-margin-sidebar {
     padding-top: 2rem !important;
