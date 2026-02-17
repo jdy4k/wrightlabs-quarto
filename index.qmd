@@ -1,5 +1,6 @@
 ---
 title: "Wright Labs Tutorial Book"
+toc: false
 page-navigation: 
   next: false
 ---
@@ -20,14 +21,7 @@ Learn how to work with Juniata College's Cluster computing infrastructure. This 
 
 ### [16s Tutorial](chapter2-0.qmd)
 
-Coming soon! This tutorial will cover 16S rRNA sequencing analysis workflows.
+Learn how to (summary)
 
-[View Overview →](chapter2-0.qmd)
-
----
-
-### [Shotgun MT/MG Tutorial](chapter3-0.qmd)
-
-Coming soon! This tutorial will cover shotgun metagenomics and metatranscriptomics analysis.
-
-[View Overview →](chapter3-0.qmd)
+ 1.  ...
+ 2.  ...

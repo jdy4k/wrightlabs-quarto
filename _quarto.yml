@@ -29,12 +29,7 @@ website:
           - href: chapter2-2.qmd
             text: Qiime2 Basics
           - href: chapter2-3.qmd
-            text: JC Qiime2 Pipeline                        
-      
-      - section: Shotgun MT/MG Tutorial
-        contents:
-          - href: chapter3-0.qmd
-            text: Overview
+            text: JC Qiime2 Pipeline                         
   page-footer:
     left: |
       Tutorials written by Wright Labs.

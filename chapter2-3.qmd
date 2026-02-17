@@ -35,6 +35,8 @@ what this section is for.
 The mapping file is a list of files with sample IDs for Qiime2 to import. So, we
 need to make one before analyzing our raw data.
 
+::: {.indent}
+
 1. Move into your `QIIME2_pipeline-updated` folder
 
 ::: {.callout-tip}
@@ -46,12 +48,11 @@ What command did you use to move into the `QIIME2_pipeline-updated` folder?
    Edit With and then a text editor.
 
 3. Set the working directory to your main data folder (the folder containing the
-   `raw_data` folder)
+   `raw_data` folder) 
 
 ``` bash
 workdir = # your main data folder
 ```
-
 ::: {.callout-tip}
 In Putty, which command can you use to print your working directory and why might
 this be helpful when setting a working directory in a script?
@@ -69,6 +70,7 @@ you're in the `QIIME2_pipeline` folder but, you can submit from the main data fo
 too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`. Don't forget
 the folder that you submit from will contain the `.o` log file.
 :::
+:::
 
 This should make a `mapping.csv` file in the folder you specified for "workdir". The
 `mapping.csv` file should contain three columns: `sample-id`, `absolute-filepath`,
@@ -77,6 +79,8 @@ and `direction`.
 ### 1.2_raw_reads_import.sh
 
 This script uses the mapping file that you copied to import your data into Qiime2.
+
+::: {.indent}
 
 1. Move into your `QIIME2_pipeline` folder
 
@@ -102,7 +106,45 @@ your user directory will be named differently and the other directories you have
 have different names than the directories in this path.
 :::
 
-![](images/tutorial-images-2/2-2_0.png)
+<!-- ![](images/tutorial-images-2/2-2_0.png) -->
+
+``` bash
+#!/bin/bash
+
+#SBATCH --cpus-per-task=1
+#SBATCH -J qiime2_import
+#SBATCH --output=R-%x.%j.out
+#SBATCH --error=R-%x.%j.err
+#SBATCH --partition=batch-high,batch-medium,batch-low
+
+#=======================================================#
+#   Imports raw fastq reads into a QIIME2 artifact.
+#
+#   June 29, 2018
+#=======================================================#
+
+# Set your working directory to your main data directory
+workdir = /home/thomase/bin-600/
+
+# Set the name of the Qiime2 environment to use
+qiime=qiime2-2022.11
+
+cd $workdir
+
+source ~/.bashrc
+conda activate $qiime
+
+## before running script make a mapping file as described in the 
+## tutorial. This is important because it points to the forward and 
+## reverse read which will be imported.
+
+# Imports data based on mapping file
+qiime tools import \
+  --type 'SampleData[PairedEndSequencesWithQuality]' \
+  --input-path mapping.csv \
+  --output-path paired-end-demux.qza \
+  --input-format PairedEndFastqManifestPhred33
+```
 
 For the `--type` flag, we almost always use:
 `SampleData[PairedEndSequencesWithQuality]`, but refer to documentation if you are
@@ -112,7 +154,9 @@ either `.fastq` or `.fastq.gz`. To see all available types do:
 
 ``` bash
 conda activate qiime2-2022.11
-### OR
+```
+or,
+``` bash
 qiime tools import --show-importable-types
 ```
 
@@ -134,11 +178,12 @@ folder too if you want, using `sbatch QIIME2_pipeline/1_raw_reads_import.sh`.
 Don't forget the folder that you submit from will contain the `.o` log file
 :::
 
-6. Check status of job with `squeue` or `watch squeue` 
+6. Check status of job with `squeue` or `watch squeue`
+:::
 
 ::: {.callout-warning}
 This script can take a while. A `.o` file with the job number will be created once
-it's finished. If you use `watch squeue`, you can use <kbd>CTRL</kbd> + <kbd>c</kbd>
+it's finished. If you use `watch squeue`, you can use <kbd>CTRL</kbd> + <kbd>C</kbd>
 to exit that screen.
 :::
 
@@ -177,6 +222,8 @@ zcat Chris_1C_S181_R1_001.fastq.gz | head
 
 We use this script to get quality information for the raw data.
 
+::: {.indent}
+
 1. Open the script using `nano` or Cyberduck
 
 2. Set the working directory to your main data folder. This script needs the
@@ -201,8 +248,8 @@ We use this script to get quality information for the raw data.
 
 ::: {.callout-warning}
 This script can take a while. `.out` and `.err` files with the job number will be
-created once it's finished. If you use `watch squeue`, you can use <kbd>Control</kbd>
-+ <kbd>c</kbd> to exit that screen.
+created once it's finished. If you use `watch squeue`, you can use <kbd>CTRL</kbd>
++ <kbd>C</kbd> to exit that screen.
 :::
 
 ::: {.callout-note}
@@ -221,6 +268,7 @@ What output can we expect from this script?
 ![](images/tutorial-images-2/2-2_2.png)
 
 9. Click on the Interactive Quality Plot tab (shown in the gold rectangle above).
+:::
 
 ![](images/tutorial-images-2/2-2_3.png)
 
@@ -266,13 +314,42 @@ incorrect, and so on.
 Typically, an average expected error of 0.5 is considered very good sequence
 quality.
 
+::: {.indent}
+
 1. As with the other two scripts, open and edit it with `nano` or Cyberduck.
 
 2. Save and submit the script with `sbatch`
+:::
 
 Here are a list of flags for the `qiime dada2 denoise-paired` command:
 
-![](images/tutorial-images-2/2-2_5.png)
+<!-- ![](images/tutorial-images-2/2-2_5.png) -->
+
+::: {.flags .indent}
+
+`--i-demultiplexed-seqds`: Qiime2 artifact containing paired end sequences with quality info
+
+`--p-trim-left-f`: Number of bases to trim at the beginning of the R1 reads
+
+`--p-trim-left-r`: Number of bases to trim at the beginning of the R2 reads
+
+`--p-trunc-len-f`: Position of last base to keep for the R1 reads
+
+`--p-trunc-len-r`: Position of last base to keep for the R2 reads
+
+`--o-table`: Name of Qiime2 artifact output table
+
+`--o-representative-sequences`: Name of Qiime2 artifact for the ASV's representative sequences
+
+`--o-denoising-stats`: Name of Qiime2 artifact for the dada2 filtering stats
+
+`--p-n-threads`: Number of threads to use (should match ppn at the top of the script)
+
+`--p-max-ee-f`: Max expected error for the R1 reads (usually use 0.5 or 1.0)
+
+`--p-max-ee-r`: Max expected error for the R2 reads (usually use 0.5 or 1.0)
+
+:::
 
 A lot of the commands that we run in the tutorial up until alpha diversity
 essentially just have flags for input and output, and if they do have other flags,
@@ -399,6 +476,8 @@ https://keemei.qiime2.org/. Keep in mind, Keemei will only tell you if there's a
 formatting errors; it cannot tell you if the sample id's in your data match the
 id's in your metadata file.
 
+::: {.indent}
+
 1. Open the script and edit it with the `nano` command or Cyberduck
 
 2. Set the working directory to your main data folder. Check that the name of the
@@ -417,10 +496,13 @@ id's in your metadata file.
 6. Take a look at the `VIEWABLE_taxonomy.qzv` file
 
 7. As before, download it, then drag and drop it onto Qiime2's website.
+:::
 
 ![](images/tutorial-images-2/2-2_11.png)
 
 You'll see a table with three columns.
+
+::: {.indent}
 
 1. The first column gives the names of the ASVs
 
@@ -432,6 +514,7 @@ You'll see a table with three columns.
 4. Next, let's look at the `VIEWABLE_taxa-bar-plots.qzv` file
 
 5. Again, download it, then drag and drop it onto Qiime2's website.
+:::
 
 ![](images/tutorial-images-2/2-2_12.png)
 
@@ -472,6 +555,8 @@ Basically, the representative ASV sequences are aligned, in other words similari
 between sequences are determined. Those alignments are then used as the basis for
 determining the phylogeny.
 
+::: {.indent}
+
 1. Open the script and edit it with the `nano` command or Cyberduck
 
 2. Set the working directory to your main data folder. Check that the name of the
@@ -479,6 +564,7 @@ determining the phylogeny.
    flag. If it doesn't, change what's after the flag so the names match
 
 3. Save and submit the script with `sbatch`
+:::
 
 ::: {.callout-note}
 What are the viewable output files in this script if there are any?
@@ -510,32 +596,29 @@ If you don't have negative controls or your negative controls had very few seque
 (<500), you can skip this script.
 :::
 
+::: {.indent}
+
 1. Open the script with `nano` or Cyberduck
 
 2. Change the working directory to your main data folder
 
-3. Specify the name of your `.qza` table
-   - `input=`
+3. Specify the name of your `.qza` table (`input=`)
 
-4. Specify the name of the metadata file
-   - `meta=`
+4. Specify the name of the metadata file (`meta=`)
 
 5. Specify the column in the metadata file that says whether a sample is a negative
-   or not
-   - `column=`
+   or not (`column=`)
 
-6. Specify the value in that column for samples that are negatives
-   - `value=`
+6. Specify the value in that column for samples that are negatives (`value=`)
 
-7. Specify the name of the final decontaminated `.qza` table
-   - `output=`
+7. Specify the name of the final decontaminated `.qza` table (`output=`)
 
 8. Specify the name of the table containing the list of ASVs filtered out as
-   contaminants
-   - `contam=`
+   contaminants (`contam=`)
 
 9. Save and submit the script
    - Use the output `.qza` table (`decontam-table.qza` by default) with script 6.1
+:::
 
 ::: {.callout-note}
 What is the purpose of running this script? Do you always use this script? When do you use it
@@ -552,6 +635,8 @@ We typically filter out samples that contain less than 1,000 sequences because i
 unlikely that the sequences present are accurate representations of the
 communities they originated from.
 
+::: {.indent}
+
 1. View the `VIEWABLE_unfiltered_table.qzv` file again using view.qiime2.org
    - If script 6.0 was run, refer to the `summarized-$output` text file instead
      (where output is whatever you specified that variable as in script 6.0)
@@ -565,6 +650,7 @@ communities they originated from.
 
 4. Look at this table and choose the minimum number of sequences you want your
    samples to have
+:::
 
 ::: {.callout-tip}
 I would recommend filtering out samples that have less than 1,000 sequences
@@ -582,7 +668,39 @@ of specifying options next to flags in the commands themselves, you set the valu
 of variables to what you want them to be and these variables are used in the
 commands.
 
-![](images/tutorial-images-2/2-2_14.png)
+<!-- ![](images/tutorial-images-2/2-2_14.png) -->
+
+``` bash
+#!/bin/bash
+
+#PBS -l nodes=1:ppn10
+#PBS -N Q2_export_data
+#PBS -j oe
+
+#========================================================================#
+# Export ASV table and filter it
+# Makes alpha_div, beta_div, lefse, R, and exported-feature-table folders
+# Change names of table, taxonomy, and tree files to match yours
+#
+# Novemeber 5, 2019
+#========================================================================#
+
+# Set working directory to your main data directory 
+# (folder with metadata, table, taxonomy, and tree files)
+workdir = /home/USERNAME/16S_tutorial/data
+
+cd $workdir
+
+# Set sequence count cutoff set it to 0 if you don't want
+# to filter the table at all
+cutoff=1000
+
+# Specify name of files
+meta=meta.txt
+table=table.qza
+taxonomy=taxonomy.qza
+tree=rooted-tree.qza
+```
 
 You can see in the above example: I'm filtering out all samples that have less than
 1,000 sequences; my metadata file is named `meta.txt`; my table file is `table.qza`;
@@ -598,7 +716,23 @@ There are no spaces between the variable’s name, the equal sign, and the value
 
 You can see the benefits of using variables in the below picture…
 
-![](images/tutorial-images-2/2-2_15.png)
+<!-- ![](images/tutorial-images-2/2-2_15.png) -->
+
+``` bash
+#Export tree
+
+qiime tools export \
+  --input-path $tree \
+  --output-path R
+
+mv R/tree.nwk R/rooted_tree.nwk #rename the file
+
+cp $tree alpha_div
+mv alpha_div/$tree alpha_div/rooted-tree.qza
+
+cp $tree beta_div
+mv beta_div/$tree beta_div/rooted-tree.qza
+```
 
 The tree variable is being used five times.
 
@@ -662,6 +796,8 @@ this script exports the rooted tree, table, and taxonomy `.qza` files.
 It also creates folders for use with alpha and beta diversity analysis, biomarker
 analysis, and R.
 
+::: {.indent}
+
 1. Open the script with the `nano` command or Cyberduck
 
 2. Change the working directory to your main data folder
@@ -714,6 +850,7 @@ analysis, and R.
        `norm_table-with-taxonomy.biom`, and `unnorm_table-with-taxonomy.biom`
        - The first file was imported for use with Qiime2's beta diversity commands
        - The other two were exported to the `R` folder
+:::
 
 ::: {.callout-note}
 What directories did script 6.1 create and what folders do they all contain?
@@ -790,6 +927,8 @@ samples' alpha diversity.
 
 You can set your minimum depth to a tenth of that.
 
+::: {.indent}
+
 1. Change your working directory to your `alpha_div` folder
 
 2. Check that the value of `--m-metadata-file` matches the name of your metadata
@@ -797,7 +936,26 @@ You can set your minimum depth to a tenth of that.
 
 3. Change the values for the other flags as desired
 
-![](images/tutorial-images-2/2-2_17.png)
+<!-- ![](images/tutorial-images-2/2-2_17.png) -->
+
+::: {.flags .indent}
+
+`--i-table`: path to feature table
+
+`--i-phylogeny`: path to tree (for phylogenetic measures)
+
+`--p-max-depth`: maximum rarefaction depth
+
+`--p-min-depth`: minimum rarefaction depth
+
+`--p-iterations`: number of times to sample at each depth
+
+`--m-metadata-file`: name of metadata file
+
+`--0-visualization`: name of output file
+
+`--p-metrics`: metrics to calculate, each metric needs a separate flag on a separate line
+:::
 
 4. You can see additional alpha diversity metrics
    [here](https://forum.qiime2.org/t/alpha-and-beta-diversity-explanations-and-commands/2282)
@@ -811,6 +969,7 @@ You can set your minimum depth to a tenth of that.
    - Look at the `--o-visualization` flag again if you're having trouble finding it
    - It should have that name and be in your `alpha_div` folder if the script
      worked
+:::
 
 ![](images/tutorial-images-2/2-2_18.png)
 
@@ -821,11 +980,14 @@ Qiime2 lets you easily switch between the different metrics you used (by using t
 box under Metric) and the metadata column (by using the box under Sample Metadata
 Column).
 
-If you scroll down further, you'll see a legend saying what categories the
-different colors correspond to. Here is the legend for the rarefaction plot shown
-above.
-
+::: {.column-margin}
 ![](images/tutorial-images-2/2-2_19.png)
+
+This is what the legend should look like.
+:::
+
+If you scroll down further, you'll see a legend (see image to right) 
+saying what categories the different colors correspond to. 
 
 ::: {.callout-note}
 Based on the above image, which day had the lowest alpha diversity, and roughly, what is its
@@ -846,6 +1008,8 @@ average for each metric.
 
 But after we do that, we need to get those averages into Qiime2. And, this script does that.
 
+::: {.indent}
+
 1. Open up the script
 
 2. Change the working directory to your alpha_div folder
@@ -860,6 +1024,7 @@ name of the visualization file for the alpha rarefactions plot
 
 6. Check the `.o` log file for errors and check the `q2_alpha` folder, within the `alpha_div` folder,
 for one `.qza` file for each metric
+:::
 
 ### 7.3_alpha_div_significance.sh
 We can see if alpha diversity varies by categorical groups.
@@ -868,6 +1033,9 @@ others weren’t, we would probably expect the control group to have higher alph
 the treatment group.
 We can use this script to see if alpha diversity does differ based on our metadata if you have
 categorical metadata groups.
+
+::: {.indent}
+
 1. Change the working directory to your `alpha_div` folder
 
 2. Specify the name of your metadata file
@@ -875,13 +1043,24 @@ categorical metadata groups.
    - You don't have to change any of them, but here are the flags for the `qiime diversity
      alpha-group-significance` command
 
-![](images/tutorial-images-2/2-2_20.png)
+<!-- ![](images/tutorial-images-2/2-2_20.png) -->
+
+::: {.flags .indent}
+
+`--alpha-diversity`: path alpha diversity results file
+
+`--m-metadata-file`: path to metadata file
+
+`--o-Visualization`: name of visualization containing boxplots and PERMANOVA results
+:::
 
 3. Save and submit the script
 4. Check the log file for errors
-5. The alpha_sig_results folder within your alpha_div folder should contain one VIEWABLE
-qzv file for each alpha diversity metric
+5. The `alpha_sig_results` folder within your `alpha_div` folder should contain one VIEWABLE
+`.qzv` file for each alpha diversity metric
+
 6. Look at the VIEWABLE files
+:::
 
 ![](images/tutorial-images-2/2-2_21.png)
 
@@ -914,6 +1093,8 @@ significant?
 We can also see if alpha diversity varies with numerical metadata using this script if you have
 any numerical metadata.
 
+::: {.indent}
+
 1. Open the script
 
 2. Change the working directory to your `alpha_div` folder
@@ -923,7 +1104,18 @@ any numerical metadata.
    - You don't have to change any of them, but here are the flags for the `qiime diversity
      alpha-correlation` command
 
-![](images/tutorial-images-2/2-2_23.png)
+<!-- ![](images/tutorial-images-2/2-2_23.png) -->
+
+::: {.flags .indent}
+
+`--i-alpha-diversity`: path to alpha diversity results file
+
+`ーm-metadata-file`: path to metadata file
+
+`--p-method`: correlation method to use (choose "spearman" or "pearson")
+
+`--o0-visualization`: name of visualization containing boxplots and PERMANOVA results
+:::
 
 4. Save and submit the script
 
@@ -933,6 +1125,7 @@ any numerical metadata.
 VIEWABLE `.qzv` file for each alpha diversity metric
 
 7. Look at the VIEWABLE files
+:::
 
 ![](images/tutorial-images-2/2-2_24.png)
 
@@ -969,7 +1162,19 @@ normalized table.
 
 A distance matrix shows how different, so how distant, samples are from each other.
 
-![](images/tutorial-images-2/2-2_25.png)
+<!-- ![](images/tutorial-images-2/2-2_25.png) -->
+
++-----+-----+-----+-----+
+|     |A    |B    |C    |
++=====+=====+=====+=====+
+|**A**|0    |10   |12   |
++-----+-----+-----+-----+
+|**B**|10   |0    |2    |
++-----+-----+-----+-----+
+|**C**|12   |2    |0    |
++-----+-----+-----+-----+
+
+: Sample distance matrix.
 
 In this distance matrix, B and C are more similar to each other than either is to A. A is more
 different from C (12) than it is from B (10).
@@ -996,6 +1201,8 @@ The statistical tests for beta diversity use a distance matrix to see if beta di
 categorical and numerical metadata. This script calculates the distance matrix and creates
 PCoA coordinates based on them.
 
+::: {.indent}
+
 1. Open the script
 
 2. Change the working directory to your `beta_div` folder
@@ -1006,16 +1213,37 @@ PCoA coordinates based on them.
    - `qiime diversity beta-phylogenetic` or `qiime diversity beta` (if you use a
      non-phylogenetic metric)
 
-![](images/tutorial-images-2/2-2_27.png)
+<!-- ![](images/tutorial-images-2/2-2_27.png) -->
+
+::: {.flags .indent}
+
+`--i-table`: path to feature table
+
+`--i-phylogeny`: path to tree (for qiime diversity beta-phylogenetic)
+
+`--p-metric`: metric to use
+
+`--o-distance-matrix`: name of resulting distance matrix
+:::
 
    - `qiime diversity pcoa`
 
-![](images/tutorial-images-2/2-2_28.png)
+<!-- ![](images/tutorial-images-2/2-2_28.png) -->
+
+::: {.flags .indent}
+
+`--i-distance-matrix`: path to distance matrix
+
+`--p-number-of-dimensions`: number of dimensions to use
+
+`--o-pcoa`: name of artifact file containing PCoA coordinates
+:::
+
+4. Check that the output files have been created
 
 Where will the output files be located (assuming the script worked)? Also, did JCS make a typo
 in the workdir line or was he just testing you? Note: if you say he made a typo, he will fail you.
-
-4. Check that the output files have been created
+:::
 
 ### 8.2_beta_div_significance.sh
 
@@ -1024,6 +1252,8 @@ Like 7.3, you can only use this script if you have categorical metadata.
 This script will run PERMANOVA for all groups in a category overall and pairwise. These tests
 allow you to see if samples in the same group are significantly more different from samples in
 other groups than they are from each other.
+
+::: {.indent}
 
 1. Set the working directory to where the output from the previous script was created
    - It should be `[VARIABLE]=[DIRECTORY]`
@@ -1034,7 +1264,19 @@ other groups than they are from each other.
 3. List the categories that you want to use for the PERMANOVA tests in the columns
    variable
 
-![](images/tutorial-images-2/2-2_29.png)
+<!-- ![](images/tutorial-images-2/2-2_29.png) -->
+
+::: {.indent}
+``` bash
+# Specify columns to test by, new line for each column
+# Pairwise PERMANOVA will be performed for each of these categories
+columns=(
+  Classification
+  Grade
+  Gender
+)
+```
+:::
 
    - Each category should be on a new line, and all of them should be within the parentheses
    - For the purposes of this tutorial, you can just use the Location and Site columns
@@ -1043,6 +1285,7 @@ other groups than they are from each other.
 4. Save and submit the script
 
 5. Look at the output
+:::
 
 ![](images/tutorial-images-2/2-2_30.png)
 
@@ -1089,6 +1332,8 @@ above are significant?
 As with alpha diversity, beta diversity can also be correlated with numerical metadata. And, this
 script is used to do that.
 
+::: {.indent}
+
 1. Copy the scripts with: `cp -R /home/see/tutorial_data/8.3_scripts`
 
 2. Copy the metadata with: `cp /home/see/tutorial_data/metadata/*.txt`
@@ -1106,13 +1351,50 @@ script is used to do that.
 Again, here's a list of the flags for the commands.
 
 - `qiime emperor plot`
-![](images/tutorial-images-2/2-2_35.png)
+<!-- ![](images/tutorial-images-2/2-2_35.png) -->
+
+::: {.flags .indent}
+
+`--i-pcoa`: path to artifact file with PCoA coordinates
+
+`--i-distance-matrix`: path to distance matrix
+
+`--m-metadata-file`: path to metadata file
+
+`--o-visualization`: name of visualization containing boxplots and PERMANOVA results
+
+:::
+
 - `qiime diversity beta-correlation`
-![](images/tutorial-images-2/2-2_36.png)
+<!-- ![](images/tutorial-images-2/2-2_36.png) -->
+
+::: {.flags .indent}
+
+`--i-pcoa`: path to artifact file with PCoA coordinates
+
+`--i-distance-matrix`: path to distance matrix
+
+`--m-metadata-file`: path to metadata file
+
+`--o-visualization`: name of visualization containing boxplots and PERMANOVA results
+
+`--p-method`: method to use for correlations ("spearman" or "pearson")
+
+`--o-metadata-distance-matrix`: name of metadata distance matrix
+
+`--o-mantel-scatter-visualization`: name of visualization containing scatterplot and the stats test results
+
+`--p-label1`: label for axis plotting the values of the bacterial distance matrix
+
+`--p-label2`: Iabel for the axis plotting the values of the metadata distance matrix
+
+:::
 
 8. View the outputs
-The metadata file has a lot of missing values, so that’s why we’re using five of those in this
-case. The commands we use for these scripts can’t tolerate missing values, evidently.
+:::
+
+The metadata file has a lot of missing values, so that's why we're using five of those in this
+case. The commands we use for these scripts can't tolerate missing values, evidently.
 
 The timepoint script is a bit different. We can force timepoint to be an axis since we’re
 representing it with numbers, but it’s actually categorical, not continuous, e.g. there is no 3.14
@@ -1171,6 +1453,8 @@ composition add-pseudocount) to account for that limitation.
 We also run this on a collapsed table, using the qiime taxa collapse command, to make sure all
 ASVs used on this analysis are identified to the same level.
 
+::: {.indent}
+
 1. Open your metadata file in the `ancom` folder with Cyberduck
 
 2. Check the column(s) that you want to use
@@ -1203,21 +1487,59 @@ flags match your file names
 
 - `qiime taxa collapse`
 
-![](images/tutorial-images-2/2-2_41.png)
+<!-- ![](images/tutorial-images-2/2-2_41.png) -->
+
+::: {.flags .indent}
+
+`--i-table`: path to feature table
+
+`--i-taxonomy`: path to taxonomy file
+
+`--p-level`: level to collapse at
+
+`--o-collapsed-table`: name of collapsed table
+:::
 
 - `qiime feature-table filter-samples`
 
-![](images/tutorial-images-2/2-2_42.png)
+<!-- ![](images/tutorial-images-2/2-2_42.png) -->
 
+::: {.flags .indent}
+
+`--i-table`: path to feature table
+
+`--m-metadata-file`: path to metadata file
+
+`--o-filtered-table`: name of filtered table
+:::
 - `qiime composition add-pseudocount`
 
-![](images/tutorial-images-2/2-2_43.png)
+<!-- ![](images/tutorial-images-2/2-2_43.png) -->
+
+::: {.flags .indent}
+
+`--i-table`: path to feature table
+
+`--o-composition-table`: name of composition table
+:::
 
 - `qiime composition ancom`
 
-![](images/tutorial-images-2/2-2_44.png)
+<!-- ![](images/tutorial-images-2/2-2_44.png) -->
+
+::: {.flags .indent}
+
+`--i-table`: path to table to use
+
+`--m-metadata-file`: path to metadata file
+
+`--m-metadata-column`: name of categorical metadata column to use
+
+`--o-visualization`: name of visualization containing volcano plot
+:::
 
 11. Look at the resulting visualization files
+:::
 
 ![](images/tutorial-images-2/2-2_45.png)
 
@@ -1271,7 +1593,7 @@ among categorical metadata groups.
 1. Create LEfSe environment
    - Alternatively: `conda create --name lefse --file /home/see/YML_Files/lefsepkgs.txt`
 2. Create input formatting environment
-   - `conda create -n tidyverse -y -c conda-forge r-tidyverse r-optparse r-funrar r-plyr`
+   - `conda create -n tidyverse -y -c conda-forge r-tidyverse r-optparse` `r-funrar r-plyr`
 
 LEFSe scripts are located in: `QIIME2_pipeline/other_scripts/lefse_scripts`
 
@@ -1279,6 +1601,8 @@ LEFSe scripts are located in: `QIIME2_pipeline/other_scripts/lefse_scripts`
 
 This script lets you choose the taxonomic level you want to use for LEfSe analyses; we usually
 use 7 for species. It uses that level to create formatted input files for the next script.
+
+::: {.indent}
 
 1. Open script
 
@@ -1306,6 +1630,7 @@ use 7 for species. It uses that level to create formatted input files for the ne
 9. Save and submit the script
 
 10. Check that a `lefse_` text file was created for each column
+:::
 
 There should also be a `LEFSE_intermediate_files` folder that contains three files (one `.biom` file
 and two `.txt`'s that were generated during the course of running the script). These files are no
@@ -1322,6 +1647,8 @@ as relative abundance, except all the counts in a sample sum to 1,000,000, inste
 LEfSe performs Kruskal-Wallis tests to determine significant differences in abundance based on
 the metadata group and then uses Linear Discriminant Analysis to get a measure of how much
 its abundance differs.
+
+::: {.indent}
 
 1. Open script
 
@@ -1346,12 +1673,13 @@ the x-axis indicates the strength of that enrichment.
 
 ![](images/tutorial-images-2/2-2_48.png)
 
-Here’s a cladogram. It doesn’t show the LDA scores, but it shows the phylogenetic relationships
+Here's a cladogram. It doesn't show the LDA scores, but it shows the phylogenetic relationships
 among the enriched taxa.
 
    - The `results_res` folder contains the files that these figures are based on.
    - For each sample, it'll have a `.res` file at the level you specified for the cutoff and
      another with a cutoff of 0.
+:::
 
 You may have noticed that some of the names are missing in the above figures. That's because
 those bacteria were not identified to species level, or even less specific levels in some cases.
@@ -1361,6 +1689,8 @@ re-make the figures.
 
 I recommend deleting all unenriched taxa to make the cladogram look better.
 
+::: {.indent}
+
 1. Select all the data
 
 2. Go to Sort & Filter (in the Home bar towards the far right)
@@ -1368,6 +1698,7 @@ I recommend deleting all unenriched taxa to make the cladogram look better.
 3. Sort by Column C to bring all the enriched features to the top of the table
 
 4. Delete everything below the enriched features (all the rows without values in Column C)
+:::
 
 You can change the names of the features (taxa) too by altering the cells in Column A. Periods
 separate the different taxonomic levels. The bar plot and cladograms both just show the last
@@ -1379,7 +1710,9 @@ Save altered `.res` file(s), with the prefix `ed_` (no quotation marks in the ac
 
 This script uses the edited (ed_*) .res files to remake the figures.
 
-1. Make sure your edited .res files being with ed_
+::: {.indent}
+
+1. Make sure your edited `.res` files begin with `ed_`
 
 2. Open the script
 
@@ -1390,6 +1723,7 @@ This script uses the edited (ed_*) .res files to remake the figures.
 5. Save and submit the script
 
 6. Check that the `edited_figures` folder has a bar plot and cladogram for each `.res` file
+:::
 
 ![](images/tutorial-images-2/2-2_49.png)
 
