@@ -108,6 +108,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -1427,8 +1456,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Let’s break this down a little bit. W is the number of sub-hypotheses that were rejected. Each sub-hypothesis is testing whether the ratio of one bacteria, let’s say <em>E. coli</em>, to another bacteria, let’s say <em>P. aeruginosa</em>, is the same in one group as it is in another. So, the setup would look something like this</p>
-<p><strong>Formula Here</strong></p>
+<p>Let’s break this down a little bit. W is the number of sub-hypotheses that were rejected. Each sub-hypothesis is testing whether the ratio of one bacteria, let’s say <em>E. coli</em>, to another bacteria, let’s say <em>P. aeruginosa</em>, is the same in one group as it is in another. So, the setup would look something like this,</p>
+<p><span class="math inline">\(H_0(_{E.\ coli/P. aeruginosa}) = \text{mean}\left(\log\left(\frac{\text{Day1}_{E.\ coli}}{\text{Day1}_{P.\ aeruginosa}}\right)\right) = \text{mean}\left(\log\left(\frac{\text{Day2}_{E.\ coli}}{\text{Day2}_{P.\ aeruginosa}}\right)\right)\)</span></p>
 <p>So, the value of W for the ASV representing <em>E. coli</em> would be the number of times the null hypothesis is rejected for that ASV. In other words, the number of times the ratio of that ASV to another differs between groups.</p>
 <p>The null hypotheses for the two ASVs shown in the table were rejected 2982 for both.</p>
 <p>The clr value is the difference between the log abundance between that ASV (point) and the average log abundance of all ASVs.</p>
