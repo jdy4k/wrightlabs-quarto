@@ -1551,9 +1551,9 @@ What does differentially abundant mean? Describe in your own words.
 Let's break this down a little bit. W is the number of sub-hypotheses that were rejected. Each
 sub-hypothesis is testing whether the ratio of one bacteria, let's say *E. coli*, to another bacteria,
 let's say *P. aeruginosa*, is the same in one group as it is in another. So, the setup would look
-something like this
+something like this,
 
-**Formula Here**
+$H_0(_{E.\ coli/P. aeruginosa}) = \text{mean}\left(\log\left(\frac{\text{Day1}_{E.\ coli}}{\text{Day1}_{P.\ aeruginosa}}\right)\right) = \text{mean}\left(\log\left(\frac{\text{Day2}_{E.\ coli}}{\text{Day2}_{P.\ aeruginosa}}\right)\right)$
 
 So, the value of W for the ASV representing *E. coli* would be the number of times the
 null hypothesis is rejected for that ASV. In other words, the number of times the ratio of

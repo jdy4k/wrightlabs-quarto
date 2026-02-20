@@ -394,7 +394,9 @@ focus on these two:
 
 ``` bash {.no-copy}
 cp [OPTION] ... [-T] SOURCE DESK
-  ### OR ###
+```
+or,
+``` bash {.no-copy}
 cp [OPTION] ... SOURCE ... DIRECTORY
 ```
 
@@ -454,7 +456,9 @@ The first lines of `mv --help` read:
 
 ``` bash {.no-copy}
 mv [OPTION]… [-T] SOURCE DEST
-  ### OR  ###
+```
+or,
+``` bash {.no-copy}
 mv [OPTION]… SOURCE… DIRECTORY
 ```
 

@@ -4,4 +4,5 @@ title: "16s Tutorial"
 
 Summary TBD
 
-Tutorial is done is on next page (button below)
+Tutorial starts on next page (press next page button below of go to 
+`Programs & Data Aquisition` in the table of contents to the left)

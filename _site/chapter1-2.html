@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-273aad1b5488c198ae718523b76c6123.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a535b0cfc55955e23676dbcffba1b583.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -617,9 +617,9 @@ Why might gzip be useful for large data files like the genetic data in our 16S s
 <section id="using-cp-to-copy-files" class="level2">
 <h2 class="anchored" data-anchor-id="using-cp-to-copy-files">Using <code>cp</code> to copy files</h2>
 <p>There are three ways to use the <code>cp</code> command to copy files. We will focus on these two:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... <span class="pp">[-</span><span class="ss">T</span><span class="pp">]</span> SOURCE DESK</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">### OR </span><span class="al">###</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... SOURCE ... DIRECTORY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... <span class="pp">[-</span><span class="ss">T</span><span class="pp">]</span> SOURCE DESK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or,</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span> ... SOURCE ... DIRECTORY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -634,16 +634,16 @@ Which of those parameters are not optional and why does that make sense?
 </div>
 </div>
 <p>Copy the file you downloaded into a new file called <code>seqs.tar.gz</code>:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> simm.tar.gz seqs.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> simm.tar.gz seqs.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Make a new directory within your <code>/linux_practice</code> folder called <code>/downloads</code> by typing:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then copy <code>seqs.tar.gz</code> into it:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> seqs.tar.gz downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> seqs.tar.gz downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Move to your new directory and make sure the file copied successfully:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> downloads</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> downloads</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Go back up one directory by typing:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then use <code>ls</code> to view the files. You should see that the <code>seqs.tar.gz</code> file is in both locations.</p>
 <div class="callout callout-style-simple callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -662,13 +662,13 @@ Warning
 <section id="using-mv-to-move-and-rename-files" class="level2">
 <h2 class="anchored" data-anchor-id="using-mv-to-move-and-rename-files">Using <code>mv</code> to move and rename files</h2>
 <p>The process of moving files is very similar to that for copying them The first lines of <code>mv --help</code> read:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… <span class="pp">[-</span><span class="ss">T</span><span class="pp">]</span> SOURCE DEST</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">### OR  </span><span class="al">###</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… SOURCE… DIRECTORY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… <span class="pp">[-</span><span class="ss">T</span><span class="pp">]</span> SOURCE DEST</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or,</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… SOURCE… DIRECTORY</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Move the original file you downloaded in the <code>downloads</code> directory:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> simm.tar.gz downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> simm.tar.gz downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You also have two copies of the <code>seqs.tar.gz</code> file, one in your current directory and one in the <code>/downloads</code> directory that you copied there previously. Use <code>mv</code> to move the remaining copy into the <code>/downloads</code> folder with:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> seqs.tar.gz downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> seqs.tar.gz downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -684,9 +684,9 @@ What happens when you move two files with the same name into one directory?
 </div>
 <p>Just like copying, moving can also overwrite files. The file you just moved into the <code>/downloads</code> directory has replaced the one you copied earlier.</p>
 <p>In Linux, renaming files is the same as moving them. Go into the <code>/downloads</code> folder:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then change <code>simm.tar.gz</code> to <code>also_simm.fastq.gz</code></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> simm.tar.gz also_simm.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> simm.tar.gz also_simm.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -710,7 +710,7 @@ Answer
 <section id="using-rm-to-remove-files" class="level2">
 <h2 class="anchored" data-anchor-id="using-rm-to-remove-files">Using <code>rm</code> to remove files</h2>
 <p>The command <code>rm</code> has the same function as deleting files in Windows or MacOs.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… <span class="pp">[</span><span class="ss">FILE</span><span class="pp">]</span>…</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="pp">[</span><span class="ss">OPTION</span><span class="pp">]</span>… <span class="pp">[</span><span class="ss">FILE</span><span class="pp">]</span>…</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -725,7 +725,7 @@ Remove one of the files in your <code>/downloads</code> directory and write the 
 </div>
 </div>
 <p>Change out of your <code>/downloads</code> directory and into your lastname directory:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>By default, <code>rm</code> only removes files, not directories. This is done to ensure that the user certainly wants to remove an entire directory. So use the <code>-r</code> flag to <strong>r</strong>ecursively remove the <code>/downloads</code> folder and everything within it. But use caution, as once you remove something, it cannot be retrieved (i.e.&nbsp;there is no trash directory that store deleted files).</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -745,24 +745,24 @@ Knowing this, try to remove the downloads directory and all of the files listed 
 <section id="using-top-to-view-system-resources" class="level2">
 <h2 class="anchored" data-anchor-id="using-top-to-view-system-resources">Using <code>top</code> to view system resources</h2>
 <p>Every program discussed so far helps you move and change files. With the <code>top</code> command, you can view all of the programs running on the Cluster. Try typing it now and take note of what programs are running:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This provides a summary of the amount of load your system is under, and a list of the processes that are using the most CPU and memory. It should look something like this,</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span> <span class="at">-</span> 13:48:46 up  1:26,  1 user,  load average: 0.31, 0.26, 0.27</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Tasks:</span> 356 total, 1 running, 355 sleep, 0 d-sleep, 0 stopped, 0 zombie</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="ex">%Cpu</span><span class="er">(</span><span class="ex">s</span><span class="kw">)</span><span class="bu">:</span>  0.2 us,  0.2 sy,  0.0 ni, 99.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="ex">MiB</span> Mem :  15910.9 total,   9179.9 free,   3924.1 used,   3129.3 buff/cache</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="ex">MiB</span> Swap:   4096.0 total,   4096.0 free,      0.0 used.  11986.8 avail Mem</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="ex">PID</span>     USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="ex">146309</span>  user      20   0   45960  42156  10528 S   1.0   0.3   0:13.52 nvim</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="ex">2136</span>    user      20   0    7668   3632   3156 S   0.3   0.0   0:01.58 dbus</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="ex">4798</span>    user      20   0   33.0g 321624 203520 S   0.3   2.0   0:58.65 firefox</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="ex">9909</span>    user      20   0   69756  66084  13024 S   0.3   0.4   1:23.23 nvim</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="ex">13966</span>   user      20   0 1365696  64524  41540 S   0.3   0.4   0:02.32 ueberzug</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       root      20   0   22876  13784   9748 S   0.0   0.1   0:00.84 systemd</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span>       root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span>       root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span>     ...       ...  ...     ...    ...  ... ... ...   ...   ...     ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash no-copy code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span> <span class="at">-</span> 13:48:46 up  1:26,  1 user,  load average: 0.31, 0.26, 0.27</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Tasks:</span> 356 total, 1 running, 355 sleep, 0 d-sleep, 0 stopped, 0 zombie</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="ex">%Cpu</span><span class="er">(</span><span class="ex">s</span><span class="kw">)</span><span class="bu">:</span>  0.2 us,  0.2 sy,  0.0 ni, 99.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="ex">MiB</span> Mem :  15910.9 total,   9179.9 free,   3924.1 used,   3129.3 buff/cache</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="ex">MiB</span> Swap:   4096.0 total,   4096.0 free,      0.0 used.  11986.8 avail Mem</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="ex">PID</span>     USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="ex">146309</span>  user      20   0   45960  42156  10528 S   1.0   0.3   0:13.52 nvim</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="ex">2136</span>    user      20   0    7668   3632   3156 S   0.3   0.0   0:01.58 dbus</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="ex">4798</span>    user      20   0   33.0g 321624 203520 S   0.3   2.0   0:58.65 firefox</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="ex">9909</span>    user      20   0   69756  66084  13024 S   0.3   0.4   1:23.23 nvim</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="ex">13966</span>   user      20   0 1365696  64524  41540 S   0.3   0.4   0:02.32 ueberzug</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>       root      20   0   22876  13784   9748 S   0.0   0.1   0:00.84 systemd</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span>       root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span>       root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span>     ...       ...  ...     ...    ...  ... ... ...   ...   ...     ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

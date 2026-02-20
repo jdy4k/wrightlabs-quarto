@@ -21,7 +21,4 @@ Learn how to work with Juniata College's Cluster computing infrastructure. This 
 
 ### [16s Tutorial](chapter2-0.qmd)
 
-Learn how to (summary)
-
- 1.  ...
- 2.  ...
+Learn how to use scripts on the cluster to run 16S analysis.
